@@ -1,6 +1,6 @@
 # _Datapoint for Python_
 
-_This is a Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
+_A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
 known as [Datapoint](http://www.metoffice.gov.uk/datapoint)._
 
 __Disclaimer: This module is in no way part of the datapoint project/service.
@@ -8,40 +8,83 @@ This module is intended to simplify the use of Datapoint for small Python projec
 No support for this module is provided by the Met Office and may break as the Datapoint service grows/evolves.
 The author will make reasonable efforts to keep it up to date and fully featured.__
 
-## Project Setup
+## Installation
 
-_How do I, as a developer, start working on the project?_
+```Bash
+$ pip install datapoint
+```
 
-1. _What dependencies does it have (where are they expressed) and how do I install them?_
-2. _How can I see the project working before I change anything?_
+You will also require a [Datapoint API key](http://www.metoffice.gov.uk/datapoint/API).
+## Example Usage
 
-## Deploying
+```Python
+#!/usr/bin/env python
 
-### _How to setup the deployment environment_
+import datapoint
 
-- _Required heroku addons, packages, or chef recipes._
-- _Required environment variables or credentials not included in git._
-- _Monitoring services and logging._
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
-### _How to deploy_
+site = conn.get_nearest_site(-0.124626, 51.500728)
+print site.name
 
-## Troubleshooting & Useful Tools
+forecast = conn.get_forecast_for_site(site.id, "3hourly")
 
-_Examples of common tasks_
+for day in forecast.days:
+print "\n%s" % day.date
+    for timestep in day.timesteps:
+        print timestep.name
+        print timestep.weather.text
+        print "%s%s%s" % (timestep.temperature.value,
+                          u'\xb0', #Unicode character for degree symbol
+                          timestep.temperature.units)
 
-> e.g.
->
-> - How to make curl requests while authenticated via oauth.
-> - How to monitor background jobs.
-> - How to run the app through a proxy.
+```
+
+Example output
+```
+London
+
+2014-07-16Z
+360
+Sunny day
+16°C
+540
+Sunny day
+22°C
+720
+Partly cloudy (day)
+24°C
+900
+Cloudy
+26°C
+1080
+Cloudy
+25°C
+1260
+Partly cloudy (night)
+23°C
+
+...
+```
+
+## Features
+ * List forecast sites
+ * Get nearest forecast site from lon and lat
+ * Get the following 5 day forecast types for any site
+  * Daily (Two timesteps, midday and midnight UTC)
+  * 3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
+
+### Future Enhancements
+ * Observations for any site
+ * Ensure correct typecasting on returned data
+ * [Capabilities](http://www.metoffice.gov.uk/datapoint/product/uk-3hourly-site-specific-forecast/detailed-documentation#5,000 UK locations three hourly forecasts capabilities feed) (List available data without actually retrieving data)
+ * Text forecasts
+ * And more...
 
 ## Contributing changes
 
-- _Internal git workflow_
-- _Pull request guidelines_
-- _Tracker project_
-- _Google group_
-- _irc channel_
-- _"Please open github issues"_
+Please feel free to submit issues and pull requests.
 
 ## License
+
+[MIT Licence](http://opensource.org/licenses/MIT)
