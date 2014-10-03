@@ -30,7 +30,7 @@ print site.name
 forecast = conn.get_forecast_for_site(site.id, "3hourly")
 
 for day in forecast.days:
-print "\n%s" % day.date
+    print "\n%s" % day.date
     for timestep in day.timesteps:
         print timestep.name
         print timestep.weather.text
