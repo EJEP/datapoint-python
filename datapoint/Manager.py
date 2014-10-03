@@ -170,7 +170,7 @@ class Manager(object):
         "Day" and "Night".
 
         A frequency of "3hourly" will return 8 timesteps:
-        0, 180, 360 ... 1260 (minutes since midnight)
+        0, 180, 360 ... 1260 (minutes since midnight UTC)
         """
         data = self.__call_api(site_id, {"res":frequency})
         params = data['SiteRep']['Wx']['Param']
