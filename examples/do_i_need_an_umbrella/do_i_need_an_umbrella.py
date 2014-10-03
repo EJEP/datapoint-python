@@ -17,7 +17,7 @@ forecast = conn.get_forecast_for_site(site.id, "3hourly")
 
 # Loop through all the timesteps in day 0 (today)
 for timestep in forecast.days[0].timesteps:
-    # Check to see if the change of rain is more than 20% at any point
+    # Check to see if the chance of rain is more than 20% at any point
     if timestep.precipitation.value > 20:
         umbrella = True
 
