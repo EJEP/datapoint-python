@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import datapoint
+
+# Create umbrella variable to use later
+umbrella = False
+
+# Create datapoint connection
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
+
+# Get nearest site and print out its name
+site = conn.get_nearest_site(-0.124626, 51.500728)
+print site.name
+
+# Get a forecast for the nearest site
+forecast = conn.get_forecast_for_site(site.id, "3hourly")
+
+# Loop through all the timesteps in day 0 (today)
+for timestep in forecast.days[0].timesteps:
+    # Check to see if the change of rain is more than 20% at any point
+    if timestep.precipitation.value > 20:
+        umbrella = True
+
+# Print out the results
+if umbrella == True:
+    print "Looks like rain! Better take an umbrella."
+else: 
+    print "Don't worry you don't need an umbrella today."
