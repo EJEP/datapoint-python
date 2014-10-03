@@ -1,3 +1,6 @@
+import datetime
+import pytz
+
 class Forecast(object):
     def __init__(self, api_key=""):
         self.api_key = api_key
@@ -12,3 +15,18 @@ class Forecast(object):
         self.elevation = None
         self.days = []
 
+    def now(self):
+        """
+        Function to return the forecast for the current timestep
+        """
+        now = None
+        d = datetime.datetime.now(pytz.timezone("UTC"))
+        msm = (d - d.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 60
+        if self.days[0].date == d.strftime("%Y-%m-%dZ"):
+            for timestep in self.days[0].timesteps:
+                if timestep.name > msm:
+                    break
+                now = timestep
+            return now
+        else:
+            return False
