@@ -5,5 +5,5 @@ class Element(object):
         self.value = value
         self.units = units
 
-        # For elements whichcan also have a text value
+        # For elements which can also have a text value
         self.text = None
