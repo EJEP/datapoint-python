@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""
+This example checks whether it is due to rain at any point
+today and then decide if we need to take an umbrella.
+"""
 
 import datapoint
 

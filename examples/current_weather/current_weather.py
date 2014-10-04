@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""
+This is a simple example which will pring out the current weather and
+temperature for our location.
+"""
 
 import datapoint
 
