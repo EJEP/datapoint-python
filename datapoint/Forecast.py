@@ -1,5 +1,4 @@
 import datetime
-import pytz
 
 class Forecast(object):
     def __init__(self, api_key=""):
@@ -20,7 +19,7 @@ class Forecast(object):
         Function to return the forecast for the current timestep
         """
         now = None
-        d = datetime.datetime.now(pytz.timezone("UTC"))
+        d = datetime.datetime.utcnow()
         msm = (d - d.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 60
         if self.days[0].date == d.strftime("%Y-%m-%dZ"):
             for timestep in self.days[0].timesteps:
