@@ -199,7 +199,10 @@ class Manager(object):
                 else:
                     cur_elements = ELEMENTS['Default']
 
-                new_timestep.name = int(timestep['$'])
+                if frequency == 'daily':
+                    new_timestep.name = timestep['$']
+                elif frequency == '3hourly':
+                    new_timestep.name = int(timestep['$'])
 
                 new_timestep.weather = \
                     Element(cur_elements['W'],
