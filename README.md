@@ -1,4 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/datapoint.svg)](http://badge.fury.io/py/datapoint)
+[![PyPi version](https://pypip.in/v/datapoint/badge.png)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi downloads](https://pypip.in/d/datapoint/badge.png)](https://pypi.python.org/pypi/datapoint/)
 # _Datapoint for Python_
 
 _A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
