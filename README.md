@@ -1,5 +1,4 @@
 [![PyPI version](https://badge.fury.io/py/datapoint.svg)](http://badge.fury.io/py/datapoint)
-
 # _Datapoint for Python_
 
 _A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
@@ -71,17 +70,10 @@ Partly cloudy (night)
 
 ## Features
  * List forecast sites
- * Get nearest forecast site from lon and lat
+ * Get nearest forecast site from longitude and latitiude
  * Get the following 5 day forecast types for any site
   * Daily (Two timesteps, midday and midnight UTC)
   * 3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
-
-### Future Enhancements
- * Observations for any site
- * Ensure correct typecasting on returned data
- * [Capabilities](http://www.metoffice.gov.uk/datapoint/product/uk-3hourly-site-specific-forecast/detailed-documentation#5,000 UK locations three hourly forecasts capabilities feed) (List available data without actually retrieving data)
- * Text forecasts
- * And more...
 
 ## Contributing changes
 
