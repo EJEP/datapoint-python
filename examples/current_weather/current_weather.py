@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-This is a simple example which will pring out the current weather and
+This is a simple example which will print out the current weather and
 temperature for our location.
 """
 

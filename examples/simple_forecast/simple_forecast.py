@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 This example will print out a simple forecast for the next 5 days.
-It will allow is to explore the day, timestep and element objects.
+It will allow us to explore the day, timestep and element objects.
 """
 
 import datapoint
