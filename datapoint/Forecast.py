@@ -16,7 +16,7 @@ class Forecast(object):
 
     def now(self):
         """
-        Function to return the forecast for the current timestep
+        Function to return just the current timestep from this forecast
         """
         now = None
         d = datetime.datetime.utcnow()
