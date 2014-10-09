@@ -12,7 +12,7 @@ import datapoint.profile
 
 def connection(profile_name='default', api_key=None):
     """Connect to DataPoint with the given API key profile name."""
-    if api_key == None:
+    if api_key is None:
         profile_fname = datapoint.profile.API_profile_fname(profile_name)
         if not os.path.exists(profile_fname):
             raise ValueError('Profile not found in {}. Please install your API \n'

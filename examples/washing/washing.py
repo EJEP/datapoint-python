@@ -50,7 +50,7 @@ for day in forecast.days:
                 best_day = day.date
 
 # If best_day is still None then there are no good days
-if best_day == None:
+if best_day is None:
     print "Better use the tumble dryer"
 
 # Otherwise print out the day
