@@ -20,7 +20,7 @@ best_day = None
 best_day_score = 0 # For simplicity the score will be temperature + wind speed
 
 # Create datapoint connection
-conn = datapoint.connection()
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site and print out its name
 site = conn.get_nearest_site(-0.124626, 51.500728)

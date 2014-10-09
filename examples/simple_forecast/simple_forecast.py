@@ -7,7 +7,7 @@ It will allow us to explore the day, timestep and element objects.
 import datapoint
 
 # Create datapoint connection
-conn = datapoint.connection()
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site and print out its name
 site = conn.get_nearest_site(-0.124626, 51.500728)

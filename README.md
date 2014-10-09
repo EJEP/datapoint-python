@@ -28,7 +28,7 @@ You will also require a [Datapoint API key](http://www.metoffice.gov.uk/datapoin
 
 import datapoint
 
-conn = datapoint.connection()
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 site = conn.get_nearest_site(-0.124626, 51.500728)
 print site.name
