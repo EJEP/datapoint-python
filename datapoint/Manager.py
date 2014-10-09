@@ -260,3 +260,4 @@ class Manager(object):
             forecast.days.append(new_day)
 
         return forecast
+
