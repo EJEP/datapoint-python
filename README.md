@@ -3,7 +3,6 @@
 [![PyPi downloads](https://pypip.in/d/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
 [![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
 [![Development Status](https://pypip.in/status/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
-[![License](https://pypip.in/license/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
 
 
 _A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
@@ -86,4 +85,4 @@ Please feel free to submit issues and pull requests.
 
 ## License
 
-[MIT Licence](http://opensource.org/licenses/MIT)
+Currently under decision. 
