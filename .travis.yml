@@ -2,6 +2,8 @@ language: python
 python:
   - "2.6"
   - "2.7"
+env:
+  - secure: "PEOM40L5TK78GFQyt2I2PgOFf8QYGcP0YZmgMhacuKnCI0Lr3wztXucWtxeVpXeuDDe12d349FumQrg6ard8T69ZZYe25eJ5lR9ZMyVOzFJ9Ew3XhoEgWBgKFRNjEkhFU+/reYWRBkYHyFImLe9d8wq1I2UMQ6z2189PLKfBtIg=" 
 # command to install dependencies
 install:
   - pip install .
@@ -9,5 +11,6 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script: 
-  - nosetests -w tests
+  - nosetests -w tests/unit
+  - nosetests -w tests/integration
   - pylint -E datapoint
