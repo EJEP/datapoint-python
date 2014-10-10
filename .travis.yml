@@ -20,4 +20,3 @@ deploy:
   on:
     tags: true
     repo: jacobtomlinson/datapoint-python
-    branch: master
