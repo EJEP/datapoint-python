@@ -105,6 +105,10 @@ class Manager(object):
         return units
 
     def _weather_to_text(self, code):
+        if not isinstance(code, (int, long)):
+            raise ValueError("Weather code must be an integer")
+        if code < 0 or code > 30:
+            raise ValueError("Weather code outof bounds, should be 0-30")
         text = WEATHER_CODES[str(code)]
         return text
 
