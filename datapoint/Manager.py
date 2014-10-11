@@ -76,7 +76,8 @@ class Manager(object):
             params = dict()
         payload = {'key': self.api_key}
         payload.update(params)
-        req = requests.get("%s/%s" % (API_URL, path), params=payload)
+        url = "%s/%s" % (API_URL, path)
+        req = requests.get(url, params=payload)
         data = req.json()
         self.call_response = data
         if req.status_code != 200:
@@ -106,7 +107,7 @@ class Manager(object):
 
     def _weather_to_text(self, code):
         if not isinstance(code, (int, long)):
-            raise ValueError("Weather code must be an integer")
+            raise ValueError("Weather code must be an integer not", type(code))
         if code < 0 or code > 30:
             raise ValueError("Weather code outof bounds, should be 0-30")
         text = WEATHER_CODES[str(code)]
@@ -212,7 +213,7 @@ class Manager(object):
                     Element(cur_elements['W'],
                             timestep[cur_elements['W']],
                             self._get_wx_units(params, cur_elements['W']))
-                new_timestep.weather.text = self._weather_to_text(timestep[cur_elements['W']])
+                new_timestep.weather.text = self._weather_to_text(int(timestep[cur_elements['W']]))
 
                 new_timestep.temperature = \
                     Element(cur_elements['T'],
