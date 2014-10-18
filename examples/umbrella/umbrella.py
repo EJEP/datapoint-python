@@ -28,5 +28,5 @@ for timestep in forecast.days[0].timesteps:
 # Print out the results
 if umbrella == True:
     print "Looks like rain! Better take an umbrella."
-else: 
+else:
     print "Don't worry you don't need an umbrella today."
