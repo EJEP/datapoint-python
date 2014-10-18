@@ -1,6 +1,6 @@
 # _DataPoint for Python_
-[![PyPi version](https://pypip.in/v/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
-[![PyPi downloads](https://pypip.in/d/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi version](https://pypip.in/version/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi downloads](https://pypip.in/download/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Development Status](https://pypip.in/status/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Build Status](https://travis-ci.org/jacobtomlinson/datapoint-python.svg?branch=master)](https://travis-ci.org/jacobtomlinson/datapoint-python)
