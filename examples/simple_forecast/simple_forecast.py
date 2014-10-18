@@ -27,4 +27,3 @@ for day in forecast.days:
         print "%s%s%s" % (timestep.temperature.value,
                           u'\xb0', #Unicode character for degree symbol
                           timestep.temperature.units)
-

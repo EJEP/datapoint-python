@@ -35,7 +35,7 @@ for day in forecast.days:
     # Get the 'Day' timestep
     if day.timesteps[0].name == 'Day':
         timestep = day.timesteps[0]
-        
+
         # If precipitation, wind speed and gust are less than their threshold
         if timestep.precipitation.value < MAX_PRECIPITATION and \
            timestep.wind_speed.value < MAX_WIND and \
@@ -60,4 +60,3 @@ else:
     # Get the day of the week from the datetime object
     best_day_formatted = datetime.datetime.strftime(best_day_raw, "%A")
     print "%s is the best day with a score of %s" % (best_day_formatted, best_day_score)
-
