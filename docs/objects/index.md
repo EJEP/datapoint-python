@@ -1,3 +1,3 @@
 # Objects
 
-To be completed.
+DataPoint for Python makes use of objects for basically everything.

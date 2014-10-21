@@ -2,8 +2,9 @@ site_name: DataPoint for Python
 theme: readthedocs
 pages:
 - [index.md, Main]
+- [install.md, "Installation"]
 - [getting-started.md, "Getting Started"]
-- [objects/index.md, "Objects", "Manager"]
+- [objects/index.md, "Objects"]
 - [objects/manager.md, "Objects", "Manager"]
 - [objects/site.md, "Objects", "Site"]
 - [objects/forecast.md, "Objects", "Forecast"]

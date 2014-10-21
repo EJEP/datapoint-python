@@ -1,16 +1,14 @@
 # Welcome to DataPoint for Python
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+This project is [hosted on GitHub](https://github.com/jacobtomlinson/datapoint-python).
 
-## Commands
+## Table of Contents
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+* [Installation](install.md)
+* [Getting Started](getting-started.md)
+* [Objects](objects/index.md)
+    * [Manager](objects/manager.md)
+    * [Site](objects/site.md)
+    * [Forecast](objects/forecast.md)
+    * [Day](objects/day.md)
+    * [Timestep](objects/timestep.md)
+    * [Element](objects/element.md)
