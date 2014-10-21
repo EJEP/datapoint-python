@@ -1,10 +1,12 @@
 site_name: DataPoint for Python
+theme: readthedocs
 pages:
 - [index.md, Main]
-- [getting-started.md, Getting Started]
-- [objects/manager.md, Object - Manager]
-- [objects/site.md, Object - Site]
-- [objects/forecast.md, Object - Forecast]
-- [objects/day.md, Object - Day]
-- [objects/timestep.md, Object - Timestep]
-- [objects/element.md, Object - Element]
+- [getting-started.md, "Getting Started"]
+- [objects/index.md, "Objects", "Manager"]
+- [objects/manager.md, "Objects", "Manager"]
+- [objects/site.md, "Objects", "Site"]
+- [objects/forecast.md, "Objects", "Forecast"]
+- [objects/day.md, "Objects", "Day"]
+- [objects/timestep.md, "Objects", "Timestep"]
+- [objects/element.md, "Objects", "Element"]

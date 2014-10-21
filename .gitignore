@@ -77,3 +77,6 @@ target/
 
 # vi/vim
 *.swp
+
+# mkdocs
+site/
