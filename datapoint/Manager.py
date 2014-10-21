@@ -3,6 +3,7 @@ Datapoint python module
 """
 
 import datetime
+from time import time
 
 import requests
 
@@ -68,6 +69,12 @@ class Manager(object):
         self.api_key = api_key
         self.call_response = None
 
+        # The list of sites changes infrequently so limit to requesting it
+        # every hour.
+        self.sites_last_update = 0
+        self.sites_last_request = None
+        self.sites_update_time = 3600
+
     def __call_api(self, path, params=None):
         """
         Call the datapoint api using the requests module
@@ -117,30 +124,36 @@ class Manager(object):
         """
         This function returns a list of Site object.
         """
-        data = self.__call_api("sitelist/")
-        sites = list()
-        for jsoned in data['Locations']['Location']:
-            site = Site()
-            site.name = jsoned['name']
-            site.id = jsoned['id']
-            site.latitude = jsoned['latitude']
-            site.longitude = jsoned['longitude']
+        if (time() - self.sites_last_update) > self.sites_update_time:
+            self.sites_last_update = time()
+            data = self.__call_api("sitelist/")
+            sites = list()
+            for jsoned in data['Locations']['Location']:
+                site = Site()
+                site.name = jsoned['name']
+                site.id = jsoned['id']
+                site.latitude = jsoned['latitude']
+                site.longitude = jsoned['longitude']
 
-            if 'region' in jsoned:
-                site.region = jsoned['region']
+                if 'region' in jsoned:
+                    site.region = jsoned['region']
 
-            if 'elevation' in jsoned:
-                site.elevation = jsoned['elevation']
+                if 'elevation' in jsoned:
+                    site.elevation = jsoned['elevation']
 
-            if 'unitaryAuthArea' in jsoned:
-                site.elevation = jsoned['unitaryAuthArea']
+                if 'unitaryAuthArea' in jsoned:
+                    site.elevation = jsoned['unitaryAuthArea']
 
-            if 'nationalPark' in jsoned:
-                site.elevation = jsoned['nationalPark']
+                if 'nationalPark' in jsoned:
+                    site.elevation = jsoned['nationalPark']
 
-            site.api_key = self.api_key
+                site.api_key = self.api_key
 
-            sites.append(site)
+                sites.append(site)
+            self.sites_last_request = sites
+        else:
+            sites = self.sites_last_request
+
         return sites
 
     def get_nearest_site(self, longitude=False, latitude=False):
@@ -265,4 +278,3 @@ class Manager(object):
             forecast.days.append(new_day)
 
         return forecast
-
