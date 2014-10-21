@@ -1,5 +1,6 @@
 site_name: DataPoint for Python
 pages:
+- [index.md, Main]
 - [getting-started.md, Getting Started]
 - [objects/manager.md, Object - Manager]
 - [objects/site.md, Object - Site]
