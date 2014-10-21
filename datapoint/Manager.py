@@ -85,7 +85,10 @@ class Manager(object):
         payload.update(params)
         url = "%s/%s" % (API_URL, path)
         req = requests.get(url, params=payload)
-        data = req.json()
+        try:
+            data = req.json()
+        except ValueError:
+            raise Exception("DataPoint has not returned any data, this could be due to an incorrect API key")
         self.call_response = data
         if req.status_code != 200:
             msg = [data[m] for m in ("message", "error_message", "status") \
