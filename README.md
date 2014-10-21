@@ -4,6 +4,7 @@
 [![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Development Status](https://pypip.in/status/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Build Status](https://travis-ci.org/jacobtomlinson/datapoint-python.svg?branch=master)](https://travis-ci.org/jacobtomlinson/datapoint-python)
+[![Documentation Status](https://readthedocs.org/projects/datapoint-python/badge/?version=latest)](https://readthedocs.org/projects/datapoint-python/)
 
 
 _A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API

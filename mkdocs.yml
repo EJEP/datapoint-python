@@ -1,1 +1,9 @@
-site_name: My Docs
+site_name: DataPoint for Python
+pages:
+- [getting-started.md, Getting Started]
+- [objects/manager.md, Object - Manager]
+- [objects/site.md, Object - Site]
+- [objects/forecast.md, Object - Forecast]
+- [objects/day.md, Object - Day]
+- [objects/timestep.md, Object - Timestep]
+- [objects/element.md, Object - Element]

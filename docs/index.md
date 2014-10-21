@@ -1,5 +1,4 @@
-# Welcome to MkDocs
-
+# Welcome to DataPoint for Python
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 
 ## Commands
