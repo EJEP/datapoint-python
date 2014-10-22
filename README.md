@@ -1,9 +1,9 @@
 # _DataPoint for Python_
-[![PyPi version](https://pypip.in/version/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
-[![PyPi downloads](https://pypip.in/download/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
-[![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
-[![Development Status](https://pypip.in/status/datapoint/badge.svg)](https://pypi.python.org/pypi/datapoint/)
-[![Build Status](https://travis-ci.org/jacobtomlinson/datapoint-python.svg?branch=master)](https://travis-ci.org/jacobtomlinson/datapoint-python)
+[![PyPi version](https://pypip.in/version/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi downloads](https://pypip.in/download/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
+[![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
+[![Development Status](https://pypip.in/status/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
+[![Build Status](http://img.shields.io/travis/jacobtomlinson/datapoint-python.svg?style=flat)](https://travis-ci.org/jacobtomlinson/datapoint-python)
 [![Documentation Status](https://readthedocs.org/projects/datapoint-python/badge/?version=latest)](https://readthedocs.org/projects/datapoint-python/)
 
 
@@ -15,6 +15,13 @@ This module is intended to simplify the use of DataPoint for small Python projec
 No support for this module is provided by the Met Office and may break as the DataPoint service grows/evolves.
 The author will make reasonable efforts to keep it up to date and fully featured.__
 
+## Features
+ * List forecast sites
+ * Get nearest forecast site from longitude and latitiude
+ * Get the following 5 day forecast types for any site
+  * Daily (Two timesteps, midday and midnight UTC)
+  * 3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
+
 ## Installation
 
 ```Bash
@@ -22,6 +29,13 @@ $ pip install DataPoint
 ```
 
 You will also require a [DataPoint API key](http://www.metoffice.gov.uk/datapoint/API).
+
+For more installation methods see the [installation guide](http://datapoint-python.readthedocs.org/en/latest/install/).
+
+## Documentation
+
+Detailed documentation for this project is available on [Read the Docs](http://datapoint-python.readthedocs.org/en/latest).
+
 ## Example Usage
 
 ```Python
@@ -50,13 +64,6 @@ London - Heavy rain
 ```
 
 See [examples directory](https://github.com/jacobtomlinson/datapoint-python/tree/master/examples) for more in depth examples.
-
-## Features
- * List forecast sites
- * Get nearest forecast site from longitude and latitiude
- * Get the following 5 day forecast types for any site
-  * Daily (Two timesteps, midday and midnight UTC)
-  * 3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
 
 ## Contributing changes
 
