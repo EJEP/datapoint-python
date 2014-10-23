@@ -1,5 +1,5 @@
 site_name: DataPoint for Python
-theme: readthedocs
+theme: spacelab
 pages:
 - ['index.md', 'Main']
 - ['README.md', 'About']
