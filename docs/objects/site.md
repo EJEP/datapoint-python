@@ -1,20 +1,45 @@
 # Site
 
 ####Attributes
-#####api_key
-type: string
-#####name
-type: unicode string
-#####id
-type: unicode string
-#####elevation
-type: unicode string
-#####latitude
-type: unicode string
-#####longitude
-type: unicode string
-#####nationalPark
-type: unicode string
-#####region
-type: unicode string
-#####uniaryAuthArea
+
+<table>
+<tr>
+<td><b>attribute</b></td>
+<td><b>type</b></td>
+</tr>
+<tr>
+<td><b>api_key</b></td>
+<td>string</td>
+</tr>
+<tr>
+<td><b>name</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>id</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>elevation</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>latitude</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>longitude</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>nationalPark</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>region</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>unitaryAuthArea</b></td>
+<td>unicode</td>
+</tr>
