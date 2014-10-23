@@ -1,5 +1,3 @@
-# Installation
-
 DataPoint for Python can be installed like any other Python module.
 
 It is available on [PyPI][1] and the source is available on [GitHub][2].

@@ -1,9 +1,5 @@
-# Getting Started
-
 Getting started with DataPoint for Python is simple and you can write a simple
 script which prints out data in just 6 lines of Python.
-
-But before we write any Python you're going to need an API key.
 
 ## API Key
 
@@ -24,7 +20,7 @@ And create a connection to DataPoint:
 conn = datapoint.connection(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 ```
 
-This creates a [Manager Object](objects/manager.md) which manages our connection
+This creates a [Manager Object](objects.md#manager) which manages our connection
 and interacts with DataPoint for us, we'll discuss Manager Objects in depth later
 but for now you just need to know that it looks after your API key and has a load
 of methods to return data from DataPoint.
@@ -34,7 +30,7 @@ of methods to return data from DataPoint.
 So now that we have our Manager Object with a connection to DataPoint we can request
 some data. Our goal is to request some forecast data but first we need to know the
 site ID for the location we want data for. Luckily the Manager Object has a method
-to return a [Site Object](objects/site.md), which contains the ID among other things,
+to return a [Site Object](objects.md#site), which contains the ID among other things,
 from a specified longitude and latitude.
 
 We can simply request a Site Object like so:
@@ -46,7 +42,7 @@ site = conn.get_nearest_site(-0.124626, 51.500728)
 For now we're just going to use this object to get us our forecast but you'll find
 more information about what the Site Object contains later.
 
-Let's call another of the Manager Object's methods to give us a [Forecast Object](objects/forecast.md)
+Let's call another of the Manager Object's methods to give us a [Forecast Object](objects.md#forecast)
 for our site:
 
 ```
@@ -58,7 +54,7 @@ also a forecast type of "3hourly". We'll discuss the forecast types later on.
 
 This Forecast Object which has been returned to us contains lots of information
 which we will cover in a later section, right now we're just going to get the
-[Timestep Object](objects/timestep.md) which represents right this minute:
+[Timestep Object](objects.md#timestep) which represents right this minute:
 
 ```
 current_timestep = forecast.now()

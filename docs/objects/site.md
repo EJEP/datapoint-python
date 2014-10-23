@@ -1,3 +1,0 @@
-# Site
-
-To be completed.

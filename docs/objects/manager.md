@@ -1,3 +1,0 @@
-# Manager
-
-To be completed.
