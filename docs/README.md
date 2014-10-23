@@ -1,5 +1,4 @@
-# Welcome to DataPoint for Python
-This project is [hosted on GitHub](https://github.com/jacobtomlinson/datapoint-python).
+# [DataPoint for Python](https://github.com/jacobtomlinson/datapoint-python) Documentation
 
 ## Table of Contents
 
