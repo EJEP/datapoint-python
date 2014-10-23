@@ -1,11 +1,5 @@
 # Forecast
 
-####Methods
-
-#####now()
-Get the current timestep from this forecast<br>
-returns: Timestep (or False)
-
 ####Attributes
 
 <table>
@@ -53,3 +47,10 @@ returns: Timestep (or False)
 <td><b>days</b></td>
 <td>list of Day objects</td>
 </tr>
+</table>
+
+####Methods
+
+#####now()
+Get the current timestep from this forecast<br>
+returns: Timestep (or False)
