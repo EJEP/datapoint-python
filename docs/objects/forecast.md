@@ -3,7 +3,7 @@
 ####Methods
 
 #####now()
-Get the current timestep from this forecast
+Get the current timestep from this forecast<br>
 returns: Timestep (or False)
 
 ####Attributes
