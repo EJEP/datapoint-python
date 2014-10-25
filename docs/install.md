@@ -4,10 +4,20 @@ It is available on [PyPI][1] and the source is available on [GitHub][2].
 
 ## Pip
 
-[Pip][3] makes Python package installation simple. Just fire up your terminal and run:
+[Pip][3] makes Python package installation simple. For the latest stable version just fire up your terminal and run:
 
 ```
 pip install datapoint
+```
+
+or for the very latest code from the repository's master branch run:
+
+```
+pip install git+git://github.com/jacobtomlinson/datapoint-python.git@master
+```
+and to upgrade it in the future:
+```
+pip install git+git://github.com/jacobtomlinson/datapoint-python.git@master --upgrade
 ```
 
 ## Easy Install
