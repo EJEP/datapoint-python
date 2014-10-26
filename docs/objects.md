@@ -127,7 +127,7 @@ An object with properties of a single forecast and a list of Day objects.
 </tr>
 <tr>
 <td><b>data_date</b></td>
-<td>unicode</td>
+<td>datetime</td>
 </tr>
 <tr>
 <td><b>continent</b></td>
@@ -186,7 +186,7 @@ An object with properties of a single day and a list of Timestep objects.
 </tr>
 <tr>
 <td><b>date</b></td>
-<td>unicode</td>
+<td>datetime</td>
 </tr>
 <tr>
 <td><b>timesteps</b></td>
@@ -209,6 +209,14 @@ in the form of Element objects.
 <tr>
 <td><b>api_key</b></td>
 <td>string</td>
+</tr>
+<tr>
+<td><b>name</b></td>
+<td>string</td>
+</tr>
+<tr>
+<td><b>date</b></td>
+<td>datetime</td>
 </tr>
 <tr>
 <td><b>weather</b></td>

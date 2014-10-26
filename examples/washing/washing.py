@@ -9,7 +9,7 @@ them and print out the best.
 """
 
 import datapoint
-import datetime
+from datetime import datetime
 
 # Set thresholds
 MAX_WIND = 31 # in mph. We don't want the washing to blow away
@@ -55,8 +55,6 @@ if best_day is None:
 
 # Otherwise print out the day
 else:
-    # Convert the date from a string into a datetime object
-    best_day_raw = datetime.datetime.strptime(best_day, "%Y-%m-%dZ")
     # Get the day of the week from the datetime object
-    best_day_formatted = datetime.datetime.strftime(best_day_raw, "%A")
+    best_day_formatted = datetime.strftime(best_day, "%A")
     print "%s is the best day with a score of %s" % (best_day_formatted, best_day_score)

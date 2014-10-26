@@ -7,6 +7,7 @@ setup(name='datapoint',
       install_requires=[
           "requests >= 2.3.0",
           "appdirs",
+          "pytz",
       ],
       description='Python interface to the Met Office\'s Datapoint API',
       long_description='''

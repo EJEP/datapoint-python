@@ -2,8 +2,10 @@
 Datapoint python module
 """
 
-import datetime
+from datetime import datetime
+from datetime import timedelta
 from time import time
+import pytz
 
 import requests
 
@@ -14,6 +16,7 @@ from .Timestep import Timestep
 from .Element import Element
 
 API_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
+DATE_FORMAT = "%Y-%m-%dZ"
 ELEMENTS = {
     "Day":
         {"U":"U", "V":"V", "W":"W", "T":"Dm", "S":"S", "Pp":"PPd",
@@ -197,7 +200,7 @@ class Manager(object):
         params = data['SiteRep']['Wx']['Param']
 
         forecast = Forecast()
-        forecast.data_date = data['SiteRep']['DV']['dataDate']
+        forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
         forecast.continent = data['SiteRep']['DV']['Location']['continent']
         forecast.country = data['SiteRep']['DV']['Location']['country']
         forecast.name = data['SiteRep']['DV']['Location']['name']
@@ -208,17 +211,22 @@ class Manager(object):
 
         for day in data['SiteRep']['DV']['Location']['Period']:
             new_day = Day()
-            new_day.date = day['value']
+            new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
             for timestep in day['Rep']:
                 new_timestep = Timestep()
 
                 if timestep['$'] == "Day":
                     cur_elements = ELEMENTS['Day']
+                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
+                                        + timedelta(hours=12)
                 elif timestep['$'] == "Night":
                     cur_elements = ELEMENTS['Night']
+                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
                 else:
                     cur_elements = ELEMENTS['Default']
+                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
+                                        + timedelta(minutes=int(timestep['$']))
 
                 if frequency == 'daily':
                     new_timestep.name = timestep['$']

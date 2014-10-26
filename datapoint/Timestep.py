@@ -3,6 +3,7 @@ class Timestep(object):
         self.api_key = api_key
 
         self.name = None
+        self.date = None
         self.weather = None
         self.temperature = None
         self.feels_like_temperature = None

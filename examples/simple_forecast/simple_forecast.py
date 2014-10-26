@@ -22,7 +22,7 @@ for day in forecast.days:
 
     # Loop through time steps and print out info
     for timestep in day.timesteps:
-        print timestep.name
+        print timestep.date
         print timestep.weather.text
         print "%s%s%s" % (timestep.temperature.value,
                           u'\xb0', #Unicode character for degree symbol
