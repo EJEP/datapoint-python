@@ -4,6 +4,7 @@ Datapoint python module
 
 from datetime import datetime
 from datetime import timedelta
+import sys
 from time import time
 import pytz
 
@@ -14,6 +15,10 @@ from .Forecast import Forecast
 from .Day import Day
 from .Timestep import Timestep
 from .Element import Element
+
+if (sys.version_info > (3, 0)):
+    long = int
+
 
 API_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
 DATE_FORMAT = "%Y-%m-%dZ"
