@@ -1,4 +1,4 @@
-# _DataPoint for Python_
+  # _DataPoint for Python_
 [![PyPi version](https://pypip.in/version/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
 [![PyPi downloads](https://pypip.in/download/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
 [![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
