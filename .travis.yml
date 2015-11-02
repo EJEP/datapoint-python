@@ -42,7 +42,7 @@ script:
   fi
 - pylint -E datapoint
 - conda build --py $TRAVIS_PYTHON_VERSION .
-- conda info datapoint-python
+
 # deploy:
 #   provider: pypi
 #   user: jacob.tomlinson
