@@ -19,15 +19,17 @@ install:
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
 # TODO: Switch to own channel
-- conda config --add channels IOOS # Appdirs py27, py33, py34, py35
+- conda config --add channels IOOS  # Appdirs py27, py33, py34, py35
+- conda config --add channels pypi  # Needed for requests 2.3.0 for py3.5
 - conda update -q conda
 - conda info -a
 
 - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 - conda install -n test-environment --file requirements.txt
-- conda install -n test-environment pylint pip nose
+- conda install -n test-environment pylint nose conda-build
+- conda build .
+- conda install -n test-environment --use-local datapoint-python
 - source activate test-environment
-- pip install -e .
 
 script:
 - nosetests -w tests/unit
