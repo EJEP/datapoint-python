@@ -39,7 +39,7 @@ engine:
 #   - echo "before_script!"
 ## Put your main computations here!  
 script:
-  - conda build .
+  - conda build --py all .
 ## This will run after the script regardless of the result of script
 ## BINSTAR_BUILD_RESULT=[succcess|failure] 
 # after_script:
