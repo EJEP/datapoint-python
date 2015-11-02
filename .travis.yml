@@ -14,7 +14,7 @@ install:
   else
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   fi
-- bash miniconda-sh -b -p $HOME/miniconda
+- bash miniconda.sh -b -p $HOME/miniconda
 - export PATh=$HOME/miniconda/bin:$PATH
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
@@ -23,7 +23,8 @@ install:
 - conda info -a
 
 - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
-- conda install -f requirements.txt
+- source activate test-envrionment
+- conda install --file requirements.txt
 - conda install pylint
 - pip install .
 
