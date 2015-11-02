@@ -25,7 +25,8 @@ install:
 - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 - source activate test-environment
 - conda install --file requirements.txt
-- conda install pylint
+- conda install pylint pip
+- which pip
 - pip install -e .
 
 script:
