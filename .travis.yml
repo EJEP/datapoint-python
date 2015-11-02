@@ -18,7 +18,8 @@ install:
 - export PATH=$HOME/miniconda/bin:$PATH
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
-- conda config --add channels faph  # TODO: Switch to own channel
+# TODO: Switch to own channel
+- conda config --add channels IOOS # Appdirs py27, py33, py34, py35
 - conda update -q conda
 - conda info -a
 
