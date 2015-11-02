@@ -2,23 +2,43 @@ language: python
 python:
 - '2.6'
 - '2.7'
+- '3.3'
 - '3.4'
-env:
-- secure: PEOM40L5TK78GFQyt2I2PgOFf8QYGcP0YZmgMhacuKnCI0Lr3wztXucWtxeVpXeuDDe12d349FumQrg6ard8T69ZZYe25eJ5lR9ZMyVOzFJ9Ew3XhoEgWBgKFRNjEkhFU+/reYWRBkYHyFImLe9d8wq1I2UMQ6z2189PLKfBtIg=
+- '3.5'
+# env:
+# - secure: PEOM40L5TK78GFQyt2I2PgOFf8QYGcP0YZmgMhacuKnCI0Lr3wztXucWtxeVpXeuDDe12d349FumQrg6ard8T69ZZYe25eJ5lR9ZMyVOzFJ9Ew3XhoEgWBgKFRNjEkhFU+/reYWRBkYHyFImLe9d8wq1I2UMQ6z2189PLKfBtIg=
 install:
+- sudo apt-get update
+- if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+    wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
+  else
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  fi
+- bash miniconda-sh -b -p $HOME/miniconda
+- export PATh=$HOME/miniconda/bin:$PATH
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda config -add channels faph  # TODO: Switch to own channel
+- conda update -q conda
+- conda info -a
+
+- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
+- conda install -f requirements.txt
+- conda install pylint
 - pip install .
-- pip install pylint
-- pip install -r requirements.txt
+
 script:
 - nosetests -w tests/unit
-- nosetests -w tests/integration
+- if [[ "$API_KEY" != "" ]]; then
+    nosetests -w tests/integration
+  fi
 - pylint -E datapoint
-deploy:
-  provider: pypi
-  user: jacob.tomlinson
-  password:
-    secure: lxlsbRqzo7XTAtjbU8KlkEdB/foHJgtQ1lYBa147k0x4PTaoicGUffmqWOO6P8+qU3sBZTMxeMIyyNWY3aS9k1JrFi7UYkLxSTI50BG/atNPiNa3xnOVuFjj8i3hDfXudRmWcFtxZH+83yqQ5VzEesn1UNdnBV87jvHv9MviFrc=
-  on:
-    tags: true
-    all_branches: true
-    repo: jacobtomlinson/datapoint-python
+# deploy:
+#   provider: pypi
+#   user: jacob.tomlinson
+#   password:
+#     secure: lxlsbRqzo7XTAtjbU8KlkEdB/foHJgtQ1lYBa147k0x4PTaoicGUffmqWOO6P8+qU3sBZTMxeMIyyNWY3aS9k1JrFi7UYkLxSTI50BG/atNPiNa3xnOVuFjj8i3hDfXudRmWcFtxZH+83yqQ5VzEesn1UNdnBV87jvHv9MviFrc=
+#   on:
+#     tags: true
+#     all_branches: true
+#     repo: jacobtomlinson/datapoint-python
