@@ -26,12 +26,12 @@ install:
 - source activate test-environment
 - conda install --file requirements.txt
 - conda install pylint
-- pip install .
+- pip install -e .
 
 script:
 - nosetests -w tests/unit
 - if [[ "$API_KEY" != "" ]]; then
-    nosetests -w tests/integration
+    nosetests -w tests/integration;
   fi
 - pylint -E datapoint
 # deploy:
