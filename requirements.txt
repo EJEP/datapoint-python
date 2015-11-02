@@ -1,3 +1,3 @@
-requests==2.3.0
+requests
 appdirs
 pytz
