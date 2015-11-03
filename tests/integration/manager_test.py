@@ -101,5 +101,4 @@ class TestManager:
                 assert 0 <= timestep.humidity.value <= 100
                 assert timestep.humidity.units == '%'
                 if hasattr(timestep.uv, 'value'):
-                    print(timestep.uv.value)
                     assert 0 <= int(timestep.uv.value) < 20
