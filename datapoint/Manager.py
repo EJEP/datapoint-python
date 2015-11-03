@@ -22,6 +22,7 @@ if (sys.version_info > (3, 0)):
 
 API_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
 DATE_FORMAT = "%Y-%m-%dZ"
+DATA_DATE_FORMAT = "%Y-%m-%dT%XZ"
 ELEMENTS = {
     "Day":
         {"U":"U", "V":"V", "W":"W", "T":"Dm", "S":"S", "Pp":"PPd",
@@ -205,7 +206,8 @@ class Manager(object):
         params = data['SiteRep']['Wx']['Param']
 
         forecast = Forecast()
-        forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
+        forecast.data_date = data['SiteRep']['DV']['dataDate']
+        forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
         forecast.continent = data['SiteRep']['DV']['Location']['continent']
         forecast.country = data['SiteRep']['DV']['Location']['country']
         forecast.name = data['SiteRep']['DV']['Location']['name']
