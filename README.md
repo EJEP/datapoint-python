@@ -1,8 +1,8 @@
 # _DataPoint for Python_
-[![PyPi version](https://pypip.in/version/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
-[![PyPi downloads](https://pypip.in/download/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
-[![Supported Python versions](https://pypip.in/py_versions/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
-[![Development Status](https://pypip.in/status/datapoint/badge.svg?style=flat)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi version](https://img.shields.io/pypi/v/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
+[![PyPi downloads](https://img.shields.io/pypi/dm/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
+[![Development Status](https://img.shields.io/pypi/status/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Build Status](http://img.shields.io/travis/jacobtomlinson/datapoint-python.svg?style=flat)](https://travis-ci.org/jacobtomlinson/datapoint-python)
 [![Documentation Status](https://readthedocs.org/projects/datapoint-python/badge/?version=latest)](https://readthedocs.org/projects/datapoint-python/)
 
