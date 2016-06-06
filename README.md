@@ -1,8 +1,6 @@
 # _DataPoint for Python_
 [![PyPi version](https://img.shields.io/pypi/v/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
-[![PyPi downloads](https://img.shields.io/pypi/dm/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
-[![Development Status](https://img.shields.io/pypi/status/datapoint.svg)](https://pypi.python.org/pypi/datapoint/)
 [![Build Status](http://img.shields.io/travis/jacobtomlinson/datapoint-python.svg?style=flat)](https://travis-ci.org/jacobtomlinson/datapoint-python)
 [![Documentation Status](https://readthedocs.org/projects/datapoint-python/badge/?version=latest)](https://readthedocs.org/projects/datapoint-python/)
 
@@ -71,4 +69,4 @@ Please feel free to submit issues and pull requests.
 
 ## License
 
-Currently under decision.
+GPLv3

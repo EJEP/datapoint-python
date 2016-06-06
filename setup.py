@@ -59,7 +59,7 @@ Currently under decision.
       maintainer='Jacob Tomlinson',
       maintainer_email='jacob@jacobtomlinson.co.uk',
       url='https://github.com/jacobtomlinson/datapoint-python',
-      license='TBC',
+      license='GPLv3',
       packages=['datapoint'],
       classifiers=[
           'Development Status :: 3 - Alpha',
