@@ -31,10 +31,10 @@ class TestRegions(object):
     def test_get_forecast(self):
         sample_region = self.regions.get_all_regions()[0]
         response = self.regions.get_forecast(sample_region.id)
-        assert (response['regionId'] == sample_region.id)
+        assert (response['regionId'] == sample_region.region)
 
-        # Datapoint currently serves
-        forecast_periods = response['FcstPeriods']['Periods']
-        forecast_ids = [period.id for period in forecast_periods]
+        # Based on what Datapoint serves at time of writing...
+        forecast_periods = response['FcstPeriods']['Period']
+        forecast_ids = [period['id'] for period in forecast_periods]
         expected_ids = ['day1to2', 'day3to5', 'day6to15', 'day16to30']
         assert (forecast_ids == expected_ids)
