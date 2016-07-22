@@ -59,9 +59,8 @@ class RegionManager(object):
         self.regions_last_request = regions
         return regions
 
-    def get_forecast(self, region_id):
+    def get_raw_forecast(self, region_id):
         '''
-        Request forecast for a specific region_id.
+        Request unformatted forecast for a specific region_id.
         '''
-        result = self.call_api('/{}'.format(region_id)) 
-        return result['RegionalFcst']
+        return self.call_api('/{}'.format(region_id)) 

@@ -28,9 +28,10 @@ class TestRegions(object):
         assert (sample_region.name == 'UK')
         assert (sample_region.region == 'uk')
     
-    def test_get_forecast(self):
+    def test_get_raw_forecast(self):
         sample_region = self.regions.get_all_regions()[0]
-        response = self.regions.get_forecast(sample_region.id)
+        response = self.regions.get_raw_forecast(
+            sample_region.id)['RegionalFcst']
         assert (response['regionId'] == sample_region.region)
 
         # Based on what Datapoint serves at time of writing...
