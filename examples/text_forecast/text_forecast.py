@@ -6,8 +6,7 @@ This example will print out the 30 day text forecast for a region of the UK.
 import datapoint
 
 # Create datapoint connection
-#aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-conn = datapoint.Manager(api_key="c4260d02-3133-488d-91bd-abf66150dbe9")
+conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get all regions and print out their details
 regions = conn.regions.get_all_regions()
