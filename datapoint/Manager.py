@@ -15,6 +15,8 @@ from .Forecast import Forecast
 from .Day import Day
 from .Timestep import Timestep
 from .Element import Element
+from .regions.RegionManager import RegionManager
+
 
 if (sys.version_info > (3, 0)):
     long = int
@@ -83,6 +85,8 @@ class Manager(object):
         self.sites_last_update = 0
         self.sites_last_request = None
         self.sites_update_time = 3600
+
+        self.regions = RegionManager(self.api_key)
 
     def __call_api(self, path, params=None):
         """
