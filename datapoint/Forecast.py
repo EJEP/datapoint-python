@@ -21,12 +21,11 @@ class Forecast(object):
         now = None
         d = datetime.datetime.utcnow()
         msm = (d - d.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 60
-        if self.days[0].date == d.strftime("%Y-%m-%dZ"):
+        if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
             for timestep in self.days[0].timesteps:
                 if timestep.name > msm:
                     break
                 now = timestep
             return now
         else:
-#            return False
-             return(d, self.days[0].date.strftime("%Y-%m-%dZ"))
+            return False
