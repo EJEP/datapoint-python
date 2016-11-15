@@ -29,7 +29,7 @@ class Forecast(object):
         for_total_seconds = d - d.replace(hour=0, minute=0, second=0, microsecond=0)
         # python 2.6 does not have timedelta.total_seconds()
         if sys.version_info < (2,7):
-            msm = timedelta_total_seconds(for_total_seconds) / 60
+            msm = self.timedelta_total_seconds(for_total_seconds) / 60
         else:
             msm = for_total_seconds.total_seconds() / 60
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
