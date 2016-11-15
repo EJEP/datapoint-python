@@ -23,3 +23,6 @@ class TestForecast:
         
         self.forecast.days.append(test_day)        
         assert self.forecast.now()
+
+    def test_timedelta_works(self):
+        return
