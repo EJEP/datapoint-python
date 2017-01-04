@@ -24,10 +24,12 @@ class TestRegions(object):
 
     def test_get_all_regions(self):
         all_regions = self.regions.get_all_regions()
-        sample_region = filter(lambda x: x.id == '515', all_regions)[0]
+        sample_region = next(
+            region for region in all_regions
+            if region.id == '515')
         assert (sample_region.name == 'UK')
         assert (sample_region.region == 'uk')
-    
+
     def test_get_raw_forecast(self):
         sample_region = self.regions.get_all_regions()[0]
         response = self.regions.get_raw_forecast(
