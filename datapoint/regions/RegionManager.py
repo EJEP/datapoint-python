@@ -30,8 +30,8 @@ class RegionManager(object):
         '''
         if 'key' not in kwargs:
             kwargs['key'] = self.api_key
-        req = requests.get('{}{}'.format(self.base_url, path), params=kwargs)
-        
+        req = requests.get('{0}{1}'.format(self.base_url, path), params=kwargs)
+
         if req.status_code != requests.codes.ok:
             req.raise_for_status()
 
@@ -63,4 +63,4 @@ class RegionManager(object):
         '''
         Request unformatted forecast for a specific region_id.
         '''
-        return self.call_api('/{}'.format(region_id)) 
+        return self.call_api('/{0}'.format(region_id))
