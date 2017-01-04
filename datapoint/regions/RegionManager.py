@@ -5,12 +5,12 @@ import requests
 
 from datapoint.Site import Site
 from datapoint.regions.region_names import REGION_NAMES
-
 REGIONS_BASE_URL = 'http://datapoint.metoffice.gov.uk/public/data/txt/wxfcs/regionalforecast/json'
+
 
 class RegionManager(object):
     '''
-    Datapoint Manager for national and regional text forecasts 
+    Datapoint Manager for national and regional text forecasts
     '''
     def __init__(self, api_key, base_url=None):
         self.api_key = api_key
@@ -30,8 +30,8 @@ class RegionManager(object):
         '''
         if 'key' not in kwargs:
             kwargs['key'] = self.api_key
-        req = requests.get('{}{}'.format(self.base_url, path), params=kwargs)
-        
+        req = requests.get('{0}{1}'.format(self.base_url, path), params=kwargs)
+
         if req.status_code != requests.codes.ok:
             req.raise_for_status()
 
@@ -39,9 +39,9 @@ class RegionManager(object):
 
     def get_all_regions(self):
         '''
-        Request a list of regions from Datapoint. Returns each Region 
-        as a Site object. Regions rarely change, so we cache the response 
-        for one hour to minimise requests to API. 
+        Request a list of regions from Datapoint. Returns each Region
+        as a Site object. Regions rarely change, so we cache the response
+        for one hour to minimise requests to API.
         '''
         if (time() - self.regions_last_update) < self.regions_update_time:
             return self.regions_last_request
@@ -63,4 +63,4 @@ class RegionManager(object):
         '''
         Request unformatted forecast for a specific region_id.
         '''
-        return self.call_api('/{}'.format(region_id)) 
+        return self.call_api('/{0}'.format(region_id))
