@@ -17,6 +17,7 @@ script:
 deploy:
   provider: pypi
   user: jacob.tomlinson
+  skip_cleanup: true
   password:
     secure: lxlsbRqzo7XTAtjbU8KlkEdB/foHJgtQ1lYBa147k0x4PTaoicGUffmqWOO6P8+qU3sBZTMxeMIyyNWY3aS9k1JrFi7UYkLxSTI50BG/atNPiNa3xnOVuFjj8i3hDfXudRmWcFtxZH+83yqQ5VzEesn1UNdnBV87jvHv9MviFrc=
   on:
