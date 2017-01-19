@@ -10,12 +10,13 @@ import pytz
 
 import requests
 
-from .Site import Site
-from .Forecast import Forecast
-from .Day import Day
-from .Timestep import Timestep
-from .Element import Element
-from .regions.RegionManager import RegionManager
+from datapoint.exceptions import APIException
+from datapoint.Site import Site
+from datapoint.Forecast import Forecast
+from datapoint.Day import Day
+from datapoint.Timestep import Timestep
+from datapoint.Element import Element
+from datapoint.regions.RegionManager import RegionManager
 
 
 if (sys.version_info > (3, 0)):
@@ -71,6 +72,7 @@ WEATHER_CODES = {
     "30":"Thunder"
 }
 
+
 class Manager(object):
     """
     Datapoint Manager object
@@ -101,7 +103,7 @@ class Manager(object):
         try:
             data = req.json()
         except ValueError:
-            raise Exception("DataPoint has not returned any data, this could be due to an incorrect API key")
+            raise APIException("DataPoint has not returned any data, this could be due to an incorrect API key")
         self.call_response = data
         if req.status_code != 200:
             msg = [data[m] for m in ("message", "error_message", "status") \
