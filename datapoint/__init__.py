@@ -6,7 +6,7 @@ __author_email__ = "jacob.tomlinson@metoffice.gov.uk"
 
 import os.path
 
-from .Manager import Manager
+from datapoint.Manager import Manager
 import datapoint.profile
 
 
