@@ -71,6 +71,11 @@ WEATHER_CODES = {
     "30":"Thunder"
 }
 
+
+class DatapointAPIException(Exception):
+    pass
+
+
 class Manager(object):
     """
     Datapoint Manager object
@@ -101,7 +106,7 @@ class Manager(object):
         try:
             data = req.json()
         except ValueError:
-            raise Exception("DataPoint has not returned any data, this could be due to an incorrect API key")
+            raise DatapointAPIException("DataPoint has not returned any data, this could be due to an incorrect API key")
         self.call_response = data
         if req.status_code != 200:
             msg = [data[m] for m in ("message", "error_message", "status") \
