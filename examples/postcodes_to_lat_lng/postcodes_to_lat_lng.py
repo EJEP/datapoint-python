@@ -9,14 +9,14 @@ import postcodes
 # Create datapoint connection
 conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
-# Get longitude and latitude from postcode
+# Get latitude and longitude from postcode
 pc = postcodes.PostCoder()
 result = pc.get('SW1A 2AA')
 latitude = result['geo']['lat']
 longitude = result['geo']['lng']
 
 # Get nearest site and print out its name
-site = conn.get_nearest_site(longitude, latitude)
+site = conn.get_nearest_site(latitude, longitude)
 print site.name
 
 # Get a forecast for the nearest site
