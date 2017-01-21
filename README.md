@@ -15,7 +15,7 @@ The author will make reasonable efforts to keep it up to date and fully featured
 
 ## Features
  * List forecast sites
- * Get nearest forecast site from longitude and latitiude
+ * Get nearest forecast site from latitiude and longitude
  * Get the following 5 day forecast types for any site
   * Daily (Two timesteps, midday and midnight UTC)
   * 3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
@@ -42,8 +42,8 @@ import datapoint
 # Create connection to DataPoint with your API key
 conn = datapoint.connection(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
-# Get the nearest site for my longitude and latitude
-site = conn.get_nearest_site(-0.124626, 51.500728)
+# Get the nearest site for my latitude and longitude
+site = conn.get_nearest_site(51.500728, -0.124626)
 
 # Get a forecast for my nearest site with 3 hourly timesteps
 forecast = conn.get_forecast_for_site(site.id, "3hourly")
