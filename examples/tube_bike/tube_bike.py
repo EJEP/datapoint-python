@@ -12,8 +12,8 @@ import tubestatus
 conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site to my house and to work
-my_house = conn.get_nearest_site(0.0057500, 51.5016730)
-work = conn.get_nearest_site(-0.1123050, 51.5031650)
+my_house = conn.get_nearest_site(51.5016730, 0.0057500)
+work = conn.get_nearest_site(51.5031650, -0.1123050)
 
 # Get a forecast for my house and work
 my_house_forecast = conn.get_forecast_for_site(my_house.id, "3hourly")
