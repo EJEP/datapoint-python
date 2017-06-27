@@ -183,8 +183,9 @@ class Manager(object):
             print 'ERROR: No longitude and latitude given.'
             return False
 
-        sites = self.get_all_sites()
+        nearest = False
         distance = None
+        sites = self.get_all_sites()
         for site in sites:
             new_distance = \
                 self._distance_between_coords(
