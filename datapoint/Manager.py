@@ -180,11 +180,11 @@ class Manager(object):
         coordinates.
         """
         if not longitude or not latitude:
+            print 'ERROR: No longitude and latitude given.'
             return False
 
-        nearest = False
-        distance = False
         sites = self.get_all_sites()
+        distance = None
         for site in sites:
             new_distance = \
                 self._distance_between_coords(
@@ -193,7 +193,7 @@ class Manager(object):
                     float(longitude),
                     float(latitude))
 
-            if new_distance < distance or not distance:
+            if ((distance == None) or (new_distance < distance)):
                 distance = new_distance
                 nearest = site
         return nearest
@@ -210,7 +210,6 @@ class Manager(object):
         """
         data = self.__call_api(site_id, {"res":frequency})
         params = data['SiteRep']['Wx']['Param']
-
         forecast = Forecast()
         forecast.data_date = data['SiteRep']['DV']['dataDate']
         forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
