@@ -102,3 +102,14 @@ class TestManager:
                 assert timestep.humidity.units == '%'
                 if hasattr(timestep.uv, 'value'):
                     assert 0 <= int(timestep.uv.value) < 20
+                    
+    def test_get_nearest_observation_site(self):
+        pass
+                    
+    def test_get_observation_sites(self):
+        sites = self.manager.get_observation_sites()
+        assert isinstance(sites, list)
+        assert sites
+        
+    def test_get_observation(self):
+        pass
