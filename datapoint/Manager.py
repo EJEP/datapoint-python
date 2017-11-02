@@ -13,6 +13,7 @@ import requests
 from datapoint.exceptions import APIException
 from datapoint.Site import Site
 from datapoint.Forecast import Forecast
+from datapoint.Observation import Observation
 from datapoint.Day import Day
 from datapoint.Timestep import Timestep
 from datapoint.Element import Element
@@ -35,7 +36,10 @@ ELEMENTS = {
         "H":"Hm", "G":"Gm", "F":"FNm", "D":"D"},
     "Default":
         {"V":"V", "W":"W", "T":"T", "S":"S", "Pp":"Pp",
-        "H":"H", "G":"G", "F":"F", "D":"D", "U":"U"}
+        "H":"H", "G":"G", "F":"F", "D":"D", "U":"U"},        
+    "Observation":
+        {"G":"G", "T":"T", "V":"V", "D":"D", "S":"S",
+        "W":"W", "P":"P", "Pt":"Pt", "Dp":"Dp", "H":"H"}
 }
 
 WEATHER_CODES = {
@@ -87,6 +91,10 @@ class Manager(object):
         self.sites_last_update = 0
         self.sites_last_request = None
         self.sites_update_time = 3600
+		
+		self.observation_sites_last_update = 0
+		self.observation_sites_last_request = None
+		self.observation_sites_update_time = 3600
 
         self.regions = RegionManager(self.api_key)
 
@@ -302,3 +310,41 @@ class Manager(object):
             forecast.days.append(new_day)
 
         return forecast
+
+
+    def get_observation_sites(self):
+        """
+        This function returns a list of Site objects for which observations are available.
+        """
+        if (time() - self.observation_sites_last_update) > self.observation_sites_update_time:
+            self.observation_sites_last_update = time()
+            data = self.__call_api("sitelist/")
+            sites = list()
+            for jsoned in data['Locations']['Location']:
+                site = Site()
+                site.name = jsoned['name']
+                site.id = jsoned['id']
+                site.latitude = jsoned['latitude']
+                site.longitude = jsoned['longitude']
+
+                if 'region' in jsoned:
+                    site.region = jsoned['region']
+
+                if 'elevation' in jsoned:
+                    site.elevation = jsoned['elevation']
+
+                if 'unitaryAuthArea' in jsoned:
+                    site.elevation = jsoned['unitaryAuthArea']
+
+                if 'nationalPark' in jsoned:
+                    site.elevation = jsoned['nationalPark']
+
+                site.api_key = self.api_key
+
+                sites.append(site)
+            self.observation_sites_last_request = sites
+        else:
+            sites = observation_self.sites_last_request
+
+        return sites
+		
