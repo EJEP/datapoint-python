@@ -319,7 +319,7 @@ class Manager(object):
         """
         if (time() - self.observation_sites_last_update) > self.observation_sites_update_time:
             self.observation_sites_last_update = time()
-            data = self.__call_api("sitelist/")
+            data = self.__call_api("sitelist/", None, OBSERVATION_URL)
             sites = list()
             for jsoned in data['Locations']['Location']:
                 site = Site()
@@ -348,6 +348,31 @@ class Manager(object):
             sites = observation_self.sites_last_request
 
         return sites
+        
+    def get_nearest_observation_site(self, longitude=False, latitude=False):
+        """
+        This function returns the nearest Site to the specified
+		coordinates that supports observations
+        """
+        if not longitude or not latitude:
+            #print 'ERROR: No longitude and latitude given.'
+            return False
+
+        nearest = False
+        distance = None
+        sites = self.get_observation_sites()
+        for site in sites:
+            new_distance = \
+                self._distance_between_coords(
+                    float(site.longitude),
+                    float(site.latitude),
+                    float(longitude),
+                    float(latitude))
+
+            if ((distance == None) or (new_distance < distance)):
+                distance = new_distance
+                nearest = site
+        return nearest
         
         
     def get_observations_for_site(self, site_id, frequency='hourly'):
