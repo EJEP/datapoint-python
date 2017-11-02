@@ -23,7 +23,8 @@ from datapoint.regions.RegionManager import RegionManager
 if (sys.version_info > (3, 0)):
     long = int
 
-API_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
+FORECAST_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
+OBSERVATION_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json"
 DATE_FORMAT = "%Y-%m-%dZ"
 DATA_DATE_FORMAT = "%Y-%m-%dT%XZ"
 FORECAST_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
@@ -98,7 +99,7 @@ class Manager(object):
 
         self.regions = RegionManager(self.api_key)
 
-    def __call_api(self, path, params=None):
+    def __call_api(self, path, params=None, api_url=API_URL):
         """
         Call the datapoint api using the requests module
         """
@@ -106,7 +107,7 @@ class Manager(object):
             params = dict()
         payload = {'key': self.api_key}
         payload.update(params)
-        url = "%s/%s" % (API_URL, path)
+        url = "%s/%s" % (api_url, path)
         req = requests.get(url, params=payload)
         try:
             data = req.json()
@@ -348,3 +349,96 @@ class Manager(object):
 
         return sites
 		
+		
+def get_observations_for_site(self, site_id, frequency='hourly'):
+        """
+        Get observations for the provided site
+
+        Returns hourly observations for the previous 24 hours
+        
+        datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/350766?key=8607fe0b-7872-497b-8489-dcb95223b10e
+        """
+        data = self.__call_api(site_id,{"res":frequency}, OBSERVATION_URL)
+        params = data['SiteRep']['Wx']['Param']
+        observation = Observation()
+        observation.data_date = data['SiteRep']['DV']['dataDate']
+        observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
+        observation.continent = data['SiteRep']['DV']['Location']['continent']
+        observation.country = data['SiteRep']['DV']['Location']['country']
+        observation.name = data['SiteRep']['DV']['Location']['name']
+        observation.longitude = data['SiteRep']['DV']['Location']['lon']
+        observation.latitude = data['SiteRep']['DV']['Location']['lat']
+        observation.id = data['SiteRep']['DV']['Location']['i']
+        observation.elevation = data['SiteRep']['DV']['Location']['elevation']
+        
+        for day in data['SiteRep']['DV']['Location']['Period']:
+            new_day = Day()
+            new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
+
+            for timestep in day['Rep']:
+                new_timestep = Timestep()
+                
+                cur_elements = ELEMENTS['Observation']
+                new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
+                                    + timedelta(minutes=int(timestep['$']))
+
+                new_timestep.weather = \
+                    Element(cur_elements['W'],
+                            timestep[cur_elements['W']],
+                            self._get_wx_units(params, cur_elements['W']))
+                new_timestep.weather.text = self._weather_to_text(int(timestep[cur_elements['W']]))
+
+                new_timestep.temperature = \
+                    Element(cur_elements['T'],
+                            float(timestep[cur_elements['T']]),
+                            self._get_wx_units(params, cur_elements['T']))
+
+                # Wind data is not available for all sites
+                if 'S' in timestep:
+                    new_timestep.wind_speed = \
+                        Element(cur_elements['S'],
+                                int(timestep[cur_elements['S']]),
+                                self._get_wx_units(params, cur_elements['S']))
+
+                if 'D' in timestep:
+                    new_timestep.wind_direction = \
+                        Element(cur_elements['D'],
+                                timestep[cur_elements['D']],
+                                self._get_wx_units(params, cur_elements['D']))
+
+                if 'G' in timestep:
+                    new_timestep.wind_gust = \
+                        Element(cur_elements['G'],
+                                int(timestep[cur_elements['G']]),
+                                self._get_wx_units(params, cur_elements['G']))
+
+                new_timestep.visibility = \
+                    Element(cur_elements['V'],
+                            timestep[cur_elements['V']],
+                            self._get_wx_units(params, cur_elements['V']))
+
+                new_timestep.humidity = \
+                    Element(cur_elements['H'],
+                            float(timestep[cur_elements['H']]),
+                            self._get_wx_units(params, cur_elements['H']))
+                            
+                new_timestep.dew_point = \
+                    Element(cur_elements['Dp'],
+                            float(timestep[cur_elements['Dp']]),
+                            self._get_wx_units(params, cur_elements['Dp']))
+
+                new_timestep.pressure = \
+                    Element(cur_elements['P'],
+                            float(timestep[cur_elements['P']]),
+                            self._get_wx_units(params, cur_elements['P']))
+                            
+                new_timestep.pressure_tendency = \
+                    Element(cur_elements['Pt'],
+                            timestep[cur_elements['Pt']],
+                            self._get_wx_units(params, cur_elements['Pt']))
+
+                new_day.timesteps.append(new_timestep)
+            observation.days.append(new_day)
+        
+        
+        return observation
