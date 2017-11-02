@@ -102,6 +102,7 @@ class Manager(object):
     def __call_api(self, path, params=None, api_url=FORECAST_URL):
         """
         Call the datapoint api using the requests module
+      
         """
         if not params:
             params = dict()
@@ -352,7 +353,7 @@ class Manager(object):
     def get_nearest_observation_site(self, longitude=False, latitude=False):
         """
         This function returns the nearest Site to the specified
-		coordinates that supports observations
+        coordinates that supports observations
         """
         if not longitude or not latitude:
             #print 'ERROR: No longitude and latitude given.'
