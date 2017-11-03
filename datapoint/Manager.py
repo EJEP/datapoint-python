@@ -147,6 +147,24 @@ class Manager(object):
             raise ValueError("Weather code outof bounds, should be 0-30")
         text = WEATHER_CODES[str(code)]
         return text
+        
+    def _visibility_to_text(self, distance):
+        """
+        Convert observed visibility in metres to text used in forecast
+        """
+
+        if 0 <= distance < 1000:
+            return 'VP'
+        elif 1000 <= distance < 4000:
+            return 'P'
+        elif 4000 <= distance < 10000:
+            return 'M'
+        elif 10000 <= distance < 20000:
+            return 'G'
+        elif 20000 <= distance < 40000:
+            return 'VG'
+        else:
+            return 'E'
 
     def get_all_sites(self):
         """
@@ -400,14 +418,15 @@ class Manager(object):
             for day in data['SiteRep']['DV']['Location']['Period']:
                 new_day = Day()
                 new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
-				
+                
                 # If there is only one timestep, put it into a list by itself so we can iterate
-				# the same way we do with multiple timesteps
+                # the same way we do with multiple timesteps
                 if type(day['Rep']) is not list:
                         day['Rep'] = [day['Rep']]
                         
                 for timestep in day['Rep']:
                     new_timestep = Timestep()
+                    new_timestep.name = int(timestep['$'])
                     
                     cur_elements = ELEMENTS['Observation']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
@@ -446,6 +465,7 @@ class Manager(object):
                         Element(cur_elements['V'],
                                 timestep[cur_elements['V']],
                                 self._get_wx_units(params, cur_elements['V']))
+                    new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
 
                     new_timestep.humidity = \
                         Element(cur_elements['H'],
