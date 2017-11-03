@@ -156,15 +156,15 @@ class Manager(object):
         if 0 <= distance < 1000:
             return 'VP'
         elif 1000 <= distance < 4000:
-            return 'P'
+            return 'PO'
         elif 4000 <= distance < 10000:
-            return 'M'
+            return 'MO'
         elif 10000 <= distance < 20000:
-            return 'G'
+            return 'GO'
         elif 20000 <= distance < 40000:
             return 'VG'
         else:
-            return 'E'
+            return 'EX'
 
     def get_all_sites(self):
         """
