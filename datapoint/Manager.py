@@ -384,7 +384,9 @@ class Manager(object):
             
             datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json/350766?key=8607fe0b-7872-497b-8489-dcb95223b10e
             """
+            
             data = self.__call_api(site_id,{"res":frequency}, OBSERVATION_URL)
+
             params = data['SiteRep']['Wx']['Param']
             observation = Observation()
             observation.data_date = data['SiteRep']['DV']['dataDate']
@@ -400,13 +402,83 @@ class Manager(object):
             for day in data['SiteRep']['DV']['Location']['Period']:
                 new_day = Day()
                 new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
+                print(new_day.date)
+                
+                # If there is multiple timesteps for a day, iterate through them                
+                if type(day['Rep']) is list:
+                    for timestep in day['Rep']:
+                        print('Timestep:', timestep, len(day['Rep']))
+                        new_timestep = Timestep()
+                        
+                        cur_elements = ELEMENTS['Observation']
+                        new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
-                for timestep in day['Rep']:
+                        new_timestep.weather = \
+                            Element(cur_elements['W'],
+                                    timestep[cur_elements['W']],
+                                    self._get_wx_units(params, cur_elements['W']))
+                        new_timestep.weather.text = self._weather_to_text(int(timestep[cur_elements['W']]))
+
+                        new_timestep.temperature = \
+                            Element(cur_elements['T'],
+                                    float(timestep[cur_elements['T']]),
+                                    self._get_wx_units(params, cur_elements['T']))
+
+                        # Wind data is not available for all sites
+                        if 'S' in timestep:
+                            new_timestep.wind_speed = \
+                                Element(cur_elements['S'],
+                                        int(timestep[cur_elements['S']]),
+                                        self._get_wx_units(params, cur_elements['S']))
+
+                        if 'D' in timestep:
+                            new_timestep.wind_direction = \
+                                Element(cur_elements['D'],
+                                        timestep[cur_elements['D']],
+                                        self._get_wx_units(params, cur_elements['D']))
+
+                        if 'G' in timestep:
+                            new_timestep.wind_gust = \
+                                Element(cur_elements['G'],
+                                        int(timestep[cur_elements['G']]),
+                                        self._get_wx_units(params, cur_elements['G']))
+
+                        new_timestep.visibility = \
+                            Element(cur_elements['V'],
+                                    timestep[cur_elements['V']],
+                                    self._get_wx_units(params, cur_elements['V']))
+
+                        new_timestep.humidity = \
+                            Element(cur_elements['H'],
+                                    float(timestep[cur_elements['H']]),
+                                    self._get_wx_units(params, cur_elements['H']))
+                                    
+                        new_timestep.dew_point = \
+                            Element(cur_elements['Dp'],
+                                    float(timestep[cur_elements['Dp']]),
+                                    self._get_wx_units(params, cur_elements['Dp']))
+
+                        new_timestep.pressure = \
+                            Element(cur_elements['P'],
+                                    float(timestep[cur_elements['P']]),
+                                    self._get_wx_units(params, cur_elements['P']))
+                                    
+                        new_timestep.pressure_tendency = \
+                            Element(cur_elements['Pt'],
+                                    timestep[cur_elements['Pt']],
+                                    self._get_wx_units(params, cur_elements['Pt']))
+
+                        new_day.timesteps.append(new_timestep)
+                    observation.days.append(new_day)
+            
+                # If there is only 1 timestep for the day, just add it
+                else:
+                    print("Only 1 timestep!", new_day.date)
+                    timestep = day['Rep']
                     new_timestep = Timestep()
-                    
+                        
                     cur_elements = ELEMENTS['Observation']
-                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
-                                        + timedelta(minutes=int(timestep['$']))
+                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
                     new_timestep.weather = \
                         Element(cur_elements['W'],
@@ -464,7 +536,8 @@ class Manager(object):
                                 self._get_wx_units(params, cur_elements['Pt']))
 
                     new_day.timesteps.append(new_timestep)
-                observation.days.append(new_day)
+                    observation.days.append(new_day)
+                
             
             
             return observation
