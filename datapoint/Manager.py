@@ -305,6 +305,12 @@ class Manager(object):
                             timestep[cur_elements['D']],
                             self._get_wx_units(params, cur_elements['D']))
 
+
+                new_timestep.wind_gust = \
+                    Element(cur_elements['G'],
+                            int(timestep[cur_elements['G']]),
+                            self._get_wx_units(params, cur_elements['G']))
+							
                 new_timestep.visibility = \
                     Element(cur_elements['V'],
                             timestep[cur_elements['V']],
