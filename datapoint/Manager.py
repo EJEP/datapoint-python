@@ -153,6 +153,11 @@ class Manager(object):
         Convert observed visibility in metres to text used in forecast
         """
 
+		if not isinstance(distance, (int, long)):
+            raise ValueError("Weather code must be an integer not", type(code))
+        if code < 0:
+            raise ValueError("Weather code out of bounds, should be 0 or greater")
+		
         if 0 <= distance < 1000:
             return 'VP'
         elif 1000 <= distance < 4000:
