@@ -9,7 +9,6 @@ class Timestep(object):
         self.feels_like_temperature = None
         self.wind_speed = None
         self.wind_direction = None
-        self.wind_gust = None
         self.visibility = None
         self.uv = None
         self.precipitation = None

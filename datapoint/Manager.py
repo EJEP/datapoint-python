@@ -39,7 +39,7 @@ ELEMENTS = {
         {"V":"V", "W":"W", "T":"T", "S":"S", "Pp":"Pp",
         "H":"H", "G":"G", "F":"F", "D":"D", "U":"U"},        
     "Observation":
-        {"G":"G", "T":"T", "V":"V", "D":"D", "S":"S",
+        {"T":"T", "V":"V", "D":"D", "S":"S",
         "W":"W", "P":"P", "Pt":"Pt", "Dp":"Dp", "H":"H"}
 }
 
@@ -153,11 +153,11 @@ class Manager(object):
         Convert observed visibility in metres to text used in forecast
         """
 
-		if not isinstance(distance, (int, long)):
-            raise ValueError("Weather code must be an integer not", type(code))
-        if code < 0:
-            raise ValueError("Weather code out of bounds, should be 0 or greater")
-		
+        if not isinstance(distance, (int, long)):
+            raise ValueError("Distance must be an integer not", type(code))
+        if distance < 0:
+            raise ValueError("Distance out of bounds, should be 0 or greater")
+        
         if 0 <= distance < 1000:
             return 'VP'
         elif 1000 <= distance < 4000:
@@ -305,11 +305,6 @@ class Manager(object):
                             timestep[cur_elements['D']],
                             self._get_wx_units(params, cur_elements['D']))
 
-                new_timestep.wind_gust = \
-                    Element(cur_elements['G'],
-                            int(timestep[cur_elements['G']]),
-                            self._get_wx_units(params, cur_elements['G']))
-
                 new_timestep.visibility = \
                     Element(cur_elements['V'],
                             timestep[cur_elements['V']],
@@ -424,8 +419,8 @@ class Manager(object):
                 new_day = Day()
                 new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
                 
-                # If there is only one timestep, put it into a list by itself so we can iterate
-                # the same way we do with multiple timesteps
+                # If the day only has 1 timestep, put it into a list by itself so it can be treated
+                # the same as a day with multiple timesteps
                 if type(day['Rep']) is not list:
                         day['Rep'] = [day['Rep']]
                         
