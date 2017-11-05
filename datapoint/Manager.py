@@ -310,7 +310,7 @@ class Manager(object):
                     Element(cur_elements['G'],
                             int(timestep[cur_elements['G']]),
                             self._get_wx_units(params, cur_elements['G']))
-							
+                            
                 new_timestep.visibility = \
                     Element(cur_elements['V'],
                             timestep[cur_elements['V']],
