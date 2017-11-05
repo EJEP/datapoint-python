@@ -82,5 +82,5 @@ class Forecast(object):
                     future = timestep
                     return future
         else:
-            #print 'ERROR: requested date is outside the forcast range selected,', len(self.days)
+            print 'ERROR: requested date is outside the forcast range selected,', len(self.days)
             return False
