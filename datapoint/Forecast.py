@@ -33,12 +33,26 @@ class Forecast(object):
             msm = self.timedelta_total_seconds(for_total_seconds) / 60
         else:
             msm = for_total_seconds.total_seconds() / 60
+        # If the date now and the date in the forecast are the same, proceed
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
-            for timestep in self.days[0].timesteps:                
+            print("Here")
+            print("msm: " + str(msm))
+            for timestep in self.days[0].timesteps:
+                print(timestep.name)
                 if timestep.name > msm:
                     #print timestep.date,timestep.name,msm
                     now = timestep
+                    print(now)
                     return now
+        # Bodge to get around problems near midnight:
+        # If the date now is one day ahead of the date in the forecast, and the
+        # time now is between 00:00 and 01:00 then also proceed.
+        #elif self.days[0].date().day - d.date().day and d.time().minute < 60:
+        #     for timestep in self.days[0].timesteps:
+        #        if timestep.name > msm:
+                    #print timestep.date,timestep.name,msm
+        #             now = timestep
+        #             return now
         else:
             return False
 
