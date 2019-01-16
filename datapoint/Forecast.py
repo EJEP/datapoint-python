@@ -41,9 +41,10 @@ class Forecast(object):
                 print(timestep.name)
                 if timestep.name > msm:
                     #print timestep.date,timestep.name,msm
-                    now = timestep
-                    print(now)
-                    return now
+                    break
+                now = timestep
+                print(now)
+                return now
         # Bodge to get around problems near midnight:
         # If the date now is one day ahead of the date in the forecast, and the
         # time now is between 00:00 and 01:00 then also proceed.
