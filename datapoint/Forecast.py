@@ -34,7 +34,7 @@ class Forecast(object):
         else:
             msm = for_total_seconds.total_seconds() / 60
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
-            for timestep in self.days[0].timesteps:                
+            for timestep in self.days[0].timesteps:
                 if timestep.name > msm:
                     #print timestep.date,timestep.name,msm
                     break
