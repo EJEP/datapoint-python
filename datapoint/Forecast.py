@@ -37,8 +37,9 @@ class Forecast(object):
             for timestep in self.days[0].timesteps:                
                 if timestep.name > msm:
                     #print timestep.date,timestep.name,msm
-                    now = timestep
-                    return now
+                    break
+                now = timestep
+            return now
         else:
             return False
 
