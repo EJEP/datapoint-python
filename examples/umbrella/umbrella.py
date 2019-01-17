@@ -14,7 +14,7 @@ conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site and print out its name
 site = conn.get_nearest_site(-0.124626, 51.500728)
-print site.name
+print(site.name)
 
 # Get a forecast for the nearest site
 forecast = conn.get_forecast_for_site(site.id, "3hourly")
@@ -27,6 +27,6 @@ for timestep in forecast.days[0].timesteps:
 
 # Print out the results
 if umbrella == True:
-    print "Looks like rain! Better take an umbrella."
+    print("Looks like rain! Better take an umbrella.")
 else:
-    print "Don't worry you don't need an umbrella today."
+    print("Don't worry you don't need an umbrella today.")
