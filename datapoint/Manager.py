@@ -142,8 +142,17 @@ class Manager(object):
         """
         This function returns a list of Site object.
         """
-        if (time() - self.sites_last_update) > self.sites_update_time:
-            self.sites_last_update = time()
+
+        time_now = time()
+        print('sites_last_update = '+ str(self.sites_last_update))
+        print('sites_update_time = '+ str(self.sites_update_time))
+        print('time_now = ' + str(time_now))
+        print('time_now - self.sites_last_update = ' + str(time_now - self.sites_last_update))
+        num_sites = 0
+        if (time_now - self.sites_last_update) > self.sites_update_time:
+            print('time_now - self.sites_last_update is greater than self.sites_update_time')
+            self.sites_last_update = time_now
+            print('So call api')
             data = self.__call_api("sitelist/")
             sites = list()
             for jsoned in data['Locations']['Location']:
@@ -168,10 +177,14 @@ class Manager(object):
                 site.api_key = self.api_key
 
                 sites.append(site)
+                num_sites += 1
             self.sites_last_request = sites
         else:
+            print('time_now - self.sites_last_update is less than self.sites_update_time')
             sites = self.sites_last_request
-
+        print('sites is a ' + str(type(sites)))
+        print('There are ' + str(num_sites) + ' sites')
+        # Sometimes this function returns None
         return sites
 
     def get_nearest_site(self, longitude=False, latitude=False):
@@ -186,6 +199,9 @@ class Manager(object):
         nearest = False
         distance = None
         sites = self.get_all_sites()
+        print('sites is a ' + str(type(sites)))
+        # Sometimes there is a TypeError exception here: sites is None
+        # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
             new_distance = \
                 self._distance_between_coords(
