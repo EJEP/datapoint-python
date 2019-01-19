@@ -185,6 +185,11 @@ class Manager(object):
         print('sites is a ' + str(type(sites)))
         print('There are ' + str(num_sites) + ' sites')
         # Sometimes this function returns None
+        # The only ways I can see of this happening are:
+        # 1. The return statement never executes and the function returns None
+        # by default.
+        # 2. The else block is run while self.sites_last_request is still None
+        # (as initialised). This should never happen.
         return sites
 
     def get_nearest_site(self, longitude=False, latitude=False):
