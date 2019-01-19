@@ -37,7 +37,7 @@ ELEMENTS = {
         "H":"Hm", "G":"Gm", "F":"FNm", "D":"D"},
     "Default":
         {"V":"V", "W":"W", "T":"T", "S":"S", "Pp":"Pp",
-        "H":"H", "G":"G", "F":"F", "D":"D", "U":"U"},        
+        "H":"H", "G":"G", "F":"F", "D":"D", "U":"U"},
     "Observation":
         {"T":"T", "V":"V", "D":"D", "S":"S",
         "W":"W", "P":"P", "Pt":"Pt", "Dp":"Dp", "H":"H"}
@@ -92,7 +92,7 @@ class Manager(object):
         self.sites_last_update = 0
         self.sites_last_request = None
         self.sites_update_time = 3600
-        
+
         self.observation_sites_last_update = 0
         self.observation_sites_last_request = None
         self.observation_sites_update_time = 3600
@@ -102,7 +102,7 @@ class Manager(object):
     def __call_api(self, path, params=None, api_url=FORECAST_URL):
         """
         Call the datapoint api using the requests module
-      
+
         """
         if not params:
             params = dict()
@@ -147,17 +147,18 @@ class Manager(object):
             raise ValueError("Weather code outof bounds, should be 0-30")
         text = WEATHER_CODES[str(code)]
         return text
-        
+
     def _visibility_to_text(self, distance):
         """
         Convert observed visibility in metres to text used in forecast
         """
 
         if not isinstance(distance, (int, long)):
+            # Surely 'code' should be 'distance' here. code is from function above
             raise ValueError("Distance must be an integer not", type(code))
         if distance < 0:
             raise ValueError("Distance out of bounds, should be 0 or greater")
-        
+
         if 0 <= distance < 1000:
             return 'VP'
         elif 1000 <= distance < 4000:
@@ -310,7 +311,7 @@ class Manager(object):
                     Element(cur_elements['G'],
                             int(timestep[cur_elements['G']]),
                             self._get_wx_units(params, cur_elements['G']))
-                            
+
                 new_timestep.visibility = \
                     Element(cur_elements['V'],
                             timestep[cur_elements['V']],
@@ -370,10 +371,11 @@ class Manager(object):
                 sites.append(site)
             self.observation_sites_last_request = sites
         else:
+            # Surely this should be sites = self.observation_sites_last_request
             sites = observation_self.sites_last_request
 
         return sites
-        
+
     def get_nearest_observation_site(self, longitude=False, latitude=False):
         """
         This function returns the nearest Site to the specified
@@ -398,15 +400,15 @@ class Manager(object):
                 distance = new_distance
                 nearest = site
         return nearest
-        
-        
+
+
     def get_observations_for_site(self, site_id, frequency='hourly'):
             """
             Get observations for the provided site
 
             Returns hourly observations for the previous 24 hours
             """
-            
+
             data = self.__call_api(site_id,{"res":frequency}, OBSERVATION_URL)
 
             params = data['SiteRep']['Wx']['Param']
@@ -420,20 +422,20 @@ class Manager(object):
             observation.latitude = data['SiteRep']['DV']['Location']['lat']
             observation.id = data['SiteRep']['DV']['Location']['i']
             observation.elevation = data['SiteRep']['DV']['Location']['elevation']
-            
+
             for day in data['SiteRep']['DV']['Location']['Period']:
                 new_day = Day()
                 new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
-                
+
                 # If the day only has 1 timestep, put it into a list by itself so it can be treated
                 # the same as a day with multiple timesteps
                 if type(day['Rep']) is not list:
                         day['Rep'] = [day['Rep']]
-                        
+
                 for timestep in day['Rep']:
                     new_timestep = Timestep()
                     new_timestep.name = int(timestep['$'])
-                    
+
                     cur_elements = ELEMENTS['Observation']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
@@ -471,7 +473,7 @@ class Manager(object):
                         Element(cur_elements['H'],
                                 float(timestep[cur_elements['H']]),
                                 self._get_wx_units(params, cur_elements['H']))
-                                
+
                     new_timestep.dew_point = \
                         Element(cur_elements['Dp'],
                                 float(timestep[cur_elements['Dp']]),
@@ -481,7 +483,7 @@ class Manager(object):
                         Element(cur_elements['P'],
                                 float(timestep[cur_elements['P']]),
                                 self._get_wx_units(params, cur_elements['P']))
-                                
+
                     new_timestep.pressure_tendency = \
                         Element(cur_elements['Pt'],
                                 timestep[cur_elements['Pt']],
