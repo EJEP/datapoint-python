@@ -382,7 +382,7 @@ class Manager(object):
         coordinates that supports observations
         """
         if not longitude or not latitude:
-            print 'ERROR: No longitude and latitude given.'
+            print('ERROR: No longitude and latitude given.')
             return False
 
         nearest = False
