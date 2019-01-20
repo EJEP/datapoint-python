@@ -28,6 +28,11 @@ OBSERVATION_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/j
 DATE_FORMAT = "%Y-%m-%dZ"
 DATA_DATE_FORMAT = "%Y-%m-%dT%XZ"
 FORECAST_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+# See:
+# https://www.metoffice.gov.uk/binaries/content/assets/mohippo/pdf/3/0/datapoint_api_reference.pdf
+# pages 8 onwards for a description of the response anatomy, and the elements
+
 ELEMENTS = {
     "Day":
         {"U":"U", "V":"V", "W":"W", "T":"Dm", "S":"S", "Pp":"PPd",
@@ -433,10 +438,21 @@ class Manager(object):
                         day['Rep'] = [day['Rep']]
 
                 for timestep in day['Rep']:
+                    # As stated in
+                    # https://www.metoffice.gov.uk/datapoint/product/uk-hourly-site-specific-observations,
+                    # some sites do not have all parameters available for
+                    # observations. If the parameter is not available, nothing
+                    # is returned. Need to deal with this somehow.
+                    # if key in dict:
+                    #     do stuff ...
+                    # should work, but what value to store if the key does not
+                    # exist?
+                    print(timestep)
                     new_timestep = Timestep()
                     new_timestep.name = int(timestep['$'])
 
                     cur_elements = ELEMENTS['Observation']
+                    print(cur_elements['W'])
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
                     new_timestep.weather = \

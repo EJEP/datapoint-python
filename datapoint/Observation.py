@@ -13,4 +13,7 @@ class Observation(object):
         self.latitude = None
         self.id = None
         self.elevation = None
+        # Stores a list of observations in days
         self.days = []
+
+    # TODO: Add functions to get the latest observation and previous ones.
