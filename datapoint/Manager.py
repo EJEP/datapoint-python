@@ -149,9 +149,9 @@ class Manager(object):
         print('time_now = ' + str(time_now))
         print('time_now - self.sites_last_update = ' + str(time_now - self.sites_last_update))
         num_sites = 0
-        if (time_now - self.sites_last_update) > self.sites_update_time:
+        if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
             print('time_now - self.sites_last_update is greater than self.sites_update_time')
-            self.sites_last_update = time_now
+
             print('So call api')
             data = self.__call_api("sitelist/")
             sites = list()
@@ -179,6 +179,9 @@ class Manager(object):
                 sites.append(site)
                 num_sites += 1
             self.sites_last_request = sites
+            # Only set self.sites_last_update once self.sites_last_request has
+            # been set
+            self.sites_last_update = time_now
         else:
             print('time_now - self.sites_last_update is less than self.sites_update_time')
             sites = self.sites_last_request
