@@ -447,6 +447,15 @@ class Manager(object):
                     #     do stuff ...
                     # should work, but what value to store if the key does not
                     # exist?
+                    # Options are probably None, a string, deleting the key or
+                    # leaving the default value.
+                    # I think storing a string e.g. 'Not reported' is best.
+                    # Anyone using the module will have to write code for
+                    # dealing with the potential for missing data. Deleting the
+                    # key would require them to check for existence of every
+                    # key. None or the default value are not as informative as
+                    # a string. Problem with a string or None is that the type
+                    # might be assumed to be a float or int.
                     print(timestep)
                     new_timestep = Timestep()
                     new_timestep.name = int(timestep['$'])
