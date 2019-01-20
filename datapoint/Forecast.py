@@ -48,6 +48,8 @@ class Forecast(object):
             # msm is then the number of minutes after midnight
             msm = for_total_seconds.total_seconds() / 60
         # If the date now and the date in the forecast are the same, proceed
+        print('self.days[0].date.strftime("%Y-%m-%dZ") is ' + str(self.days[0].date.strftime("%Y-%m-%dZ")))
+        print('d.strftime("%Y-%m-%dZ") is ' + str(d.strftime("%Y-%m-%dZ")))
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
             print("msm: " + str(msm))
             # We have determined that the date in the forecast and the date now
@@ -57,7 +59,6 @@ class Forecast(object):
             # since midnight for each timestep.
             # The timestep we keep is the one with the largest timestep.name
             # which is less than the number of minutes since midnight
-            #
             for timestep in self.days[0].timesteps:
                 print('timestep.name is ' + str(timestep.name))
                 print('msm is ' +str(msm))
@@ -78,7 +79,7 @@ class Forecast(object):
         # time now is between 00:00 and 01:00 then also proceed.
         # Is the timestep.name > msm logic correct?
         # Likely not, want the last value
-        elif self.days[0].date().day - d.date().day == -1 and d.time().hour < 1:
+        elif self.days[0].date.day - d.date().day == -1 and d.time().hour < 1:
                 return self.days[0].timesteps[-1]
         else:
             return False
