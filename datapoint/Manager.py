@@ -144,13 +144,7 @@ class Manager(object):
         """
 
         time_now = time()
-        print('sites_last_update = '+ str(self.sites_last_update))
-        print('sites_update_time = '+ str(self.sites_update_time))
-        print('time_now = ' + str(time_now))
-        print('time_now - self.sites_last_update = ' + str(time_now - self.sites_last_update))
-        num_sites = 0
         if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
-            print('time_now - self.sites_last_update is greater than self.sites_update_time')
 
             print('So call api')
             data = self.__call_api("sitelist/")
@@ -183,16 +177,8 @@ class Manager(object):
             # been set
             self.sites_last_update = time_now
         else:
-            print('time_now - self.sites_last_update is less than self.sites_update_time')
             sites = self.sites_last_request
-        print('sites is a ' + str(type(sites)))
-        print('There are ' + str(num_sites) + ' sites')
-        # Sometimes this function returns None
-        # The only ways I can see of this happening are:
-        # 1. The return statement never executes and the function returns None
-        # by default.
-        # 2. The else block is run while self.sites_last_request is still None
-        # (as initialised). This should never happen.
+
         return sites
 
     def get_nearest_site(self, longitude=False, latitude=False):
