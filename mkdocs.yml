@@ -1,8 +1,8 @@
 site_name: DataPoint for Python
 theme: spacelab
 nav:
-- ['index.md', 'Main']
-- ['README.md', 'About']
-- ['install.md', 'Installation']
-- ['getting-started.md', 'Getting Started']
-- ['objects.md', 'Objects']
+- Main: index.md
+- About: README.md
+- Installation: install.md
+- Getting Started: getting-started
+- Objects: objects.md
