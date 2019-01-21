@@ -1,3 +1,3 @@
 <script>
-window.location.replace("README");
+window.location.replace("about");
 </script>
