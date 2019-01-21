@@ -455,7 +455,8 @@ class Manager(object):
                     # key would require them to check for existence of every
                     # key. None or the default value are not as informative as
                     # a string. Problem with a string or None is that the type
-                    # might be assumed to be a float or int.
+                    # might be assumed to be a float or int. The default values
+                    # are strings... better to have something informative
                     print(timestep)
                     new_timestep = Timestep()
                     new_timestep.name = int(timestep['$'])
