@@ -1,8 +1,8 @@
 site_name: DataPoint for Python
-theme: spacelab
-pages:
-- ['index.md', 'Main']
-- ['README.md', 'About']
-- ['install.md', 'Installation']
-- ['getting-started.md', 'Getting Started']
-- ['objects.md', 'Objects']
+theme: readthedocs
+nav:
+- Main: index.md
+- About: about.md
+- Installation: install.md
+- Getting Started: getting-started.md
+- Objects: objects.md
