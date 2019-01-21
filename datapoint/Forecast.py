@@ -80,7 +80,11 @@ class Forecast(object):
         # Is the timestep.name > msm logic correct?
         # Likely not, want the last value
         elif self.days[0].date.day - d.date().day == -1 and d.time().hour < 1:
-                return self.days[0].timesteps[-1]
+            # This is verbose to check that the returned data makes sense
+            timestep_to_return = self.days[0].timesteps[-1]
+            print('timestep.name is ' + str(timestep_to_return.name))
+            print('msm is ' +str(msm))
+            return timestep_to_return
         else:
             return False
 
