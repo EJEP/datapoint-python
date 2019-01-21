@@ -1,6 +1,6 @@
 site_name: DataPoint for Python
 theme: spacelab
-pages:
+nav:
 - ['index.md', 'Main']
 - ['README.md', 'About']
 - ['install.md', 'Installation']
