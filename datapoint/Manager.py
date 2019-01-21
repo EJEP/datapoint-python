@@ -142,8 +142,11 @@ class Manager(object):
         """
         This function returns a list of Site object.
         """
-        if (time() - self.sites_last_update) > self.sites_update_time:
-            self.sites_last_update = time()
+
+        time_now = time()
+        if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
+
+            print('So call api')
             data = self.__call_api("sitelist/")
             sites = list()
             for jsoned in data['Locations']['Location']:
@@ -168,7 +171,11 @@ class Manager(object):
                 site.api_key = self.api_key
 
                 sites.append(site)
+                num_sites += 1
             self.sites_last_request = sites
+            # Only set self.sites_last_update once self.sites_last_request has
+            # been set
+            self.sites_last_update = time_now
         else:
             sites = self.sites_last_request
 
@@ -186,6 +193,9 @@ class Manager(object):
         nearest = False
         distance = None
         sites = self.get_all_sites()
+        print('sites is a ' + str(type(sites)))
+        # Sometimes there is a TypeError exception here: sites is None
+        # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
             new_distance = \
                 self._distance_between_coords(
