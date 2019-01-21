@@ -441,8 +441,9 @@ class Manager(object):
                     # As stated in
                     # https://www.metoffice.gov.uk/datapoint/product/uk-hourly-site-specific-observations,
                     # some sites do not have all parameters available for
-                    # observations. If the parameter is not available, nothing
-                    # is returned. Need to deal with this somehow.
+                    # observations. The documentation does not state which
+                    # fields may be absent. If the parameter is not available,
+                    # nothing is returned. Need to deal with this somehow.
                     # if key in dict:
                     #     do stuff ...
                     # should work, but what value to store if the key does not
@@ -457,24 +458,39 @@ class Manager(object):
                     # a string. Problem with a string or None is that the type
                     # might be assumed to be a float or int. The default values
                     # are strings... better to have something informative
-                    print(timestep)
+                    #print(timestep)
                     new_timestep = Timestep()
+                    # Assume the '$' field is always present.
                     new_timestep.name = int(timestep['$'])
 
                     cur_elements = ELEMENTS['Observation']
-                    print(cur_elements['W'])
+
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
-                    new_timestep.weather = \
-                        Element(cur_elements['W'],
-                                timestep[cur_elements['W']],
-                                self._get_wx_units(params, cur_elements['W']))
-                    new_timestep.weather.text = self._weather_to_text(int(timestep[cur_elements['W']]))
+                    #print('cur_elements[\'W\']) is ' + str(cur_elements['W']))
+                    #print('timestep[cur_elements[\'W\']]) is ' + str(timestep[ cur_elements['W'] ]))
 
-                    new_timestep.temperature = \
-                        Element(cur_elements['T'],
-                                float(timestep[cur_elements['T']]),
-                                self._get_wx_units(params, cur_elements['T']))
+                    if cur_elements['W'] in timestep:
+                        new_timestep.weather = \
+                            Element(cur_elements['W'],
+                                    timestep[cur_elements['W']],
+                                    self._get_wx_units(params, cur_elements['W']))
+                        new_timestep.weather.text = \
+                            self._weather_to_text(int(timestep[cur_elements['W']]))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['W'],
+                                    'Not reported')
+
+                    if cur_elements['T'] in timestep:
+                        new_timestep.temperature = \
+                            Element(cur_elements['T'],
+                                    float(timestep[cur_elements['T']]),
+                                    self._get_wx_units(params, cur_elements['T']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['T'],
+                                    'Not reported')
 
                     # Wind data is not available for all sites
                     if 'S' in timestep:
@@ -482,38 +498,72 @@ class Manager(object):
                             Element(cur_elements['S'],
                                     int(timestep[cur_elements['S']]),
                                     self._get_wx_units(params, cur_elements['S']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['S'],
+                                    'Not reported')
 
                     if 'D' in timestep:
                         new_timestep.wind_direction = \
                             Element(cur_elements['D'],
                                     timestep[cur_elements['D']],
                                     self._get_wx_units(params, cur_elements['D']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['D'],
+                                    'Not reported')
 
-                    new_timestep.visibility = \
-                        Element(cur_elements['V'],
-                                int(timestep[cur_elements['V']]),
-                                self._get_wx_units(params, cur_elements['V']))
-                    new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
+                    if cur_elements['V'] in timestep:
+                        new_timestep.visibility = \
+                            Element(cur_elements['V'],
+                                    int(timestep[cur_elements['V']]),
+                                    self._get_wx_units(params, cur_elements['V']))
+                        new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['V'],
+                                    'Not reported')
 
-                    new_timestep.humidity = \
-                        Element(cur_elements['H'],
-                                float(timestep[cur_elements['H']]),
-                                self._get_wx_units(params, cur_elements['H']))
+                    if cur_elements['H'] in timestep:
+                        new_timestep.humidity = \
+                            Element(cur_elements['H'],
+                                    float(timestep[cur_elements['H']]),
+                                    self._get_wx_units(params, cur_elements['H']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['H'],
+                                    'Not reported')
 
-                    new_timestep.dew_point = \
-                        Element(cur_elements['Dp'],
-                                float(timestep[cur_elements['Dp']]),
-                                self._get_wx_units(params, cur_elements['Dp']))
+                    if cur_elements['Dp'] in timestep:
+                        new_timestep.dew_point = \
+                            Element(cur_elements['Dp'],
+                                    float(timestep[cur_elements['Dp']]),
+                                    self._get_wx_units(params,
+                                                       cur_elements['Dp']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['Dp'],
+                                    'Not reported')
 
-                    new_timestep.pressure = \
-                        Element(cur_elements['P'],
-                                float(timestep[cur_elements['P']]),
-                                self._get_wx_units(params, cur_elements['P']))
+                    if cur_elements['P'] in timestep:
+                        new_timestep.pressure = \
+                            Element(cur_elements['P'],
+                                    float(timestep[cur_elements['P']]),
+                                    self._get_wx_units(params, cur_elements['P']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['P'],
+                                    'Not reported')
 
-                    new_timestep.pressure_tendency = \
-                        Element(cur_elements['Pt'],
-                                timestep[cur_elements['Pt']],
-                                self._get_wx_units(params, cur_elements['Pt']))
+                    if cur_elements['Pt'] in timestep:
+                        new_timestep.pressure_tendency = \
+                            Element(cur_elements['Pt'],
+                                    timestep[cur_elements['Pt']],
+                                    self._get_wx_units(params, cur_elements['Pt']))
+                    else:
+                        new_timestep.weather = \
+                            Element(cur_elements['Pt'],
+                                    'Not reported')
 
                     new_day.timesteps.append(new_timestep)
                 observation.days.append(new_day)
