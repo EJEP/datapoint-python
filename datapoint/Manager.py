@@ -146,7 +146,6 @@ class Manager(object):
         time_now = time()
         if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
 
-            print('So call api')
             data = self.__call_api("sitelist/")
             sites = list()
             for jsoned in data['Locations']['Location']:
@@ -171,7 +170,6 @@ class Manager(object):
                 site.api_key = self.api_key
 
                 sites.append(site)
-                num_sites += 1
             self.sites_last_request = sites
             # Only set self.sites_last_update once self.sites_last_request has
             # been set
