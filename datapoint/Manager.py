@@ -191,7 +191,6 @@ class Manager(object):
         nearest = False
         distance = None
         sites = self.get_all_sites()
-        print('sites is a ' + str(type(sites)))
         # Sometimes there is a TypeError exception here: sites is None
         # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
