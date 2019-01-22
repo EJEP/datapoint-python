@@ -26,7 +26,7 @@ class Forecast(object):
         """
 
         # From the comments in issue 19: forecast.days[0] is dated for the
-        # previous day.
+        # previous day shortly after midnight
 
         now = None
         d = datetime.datetime.utcnow()
@@ -48,10 +48,7 @@ class Forecast(object):
             # msm is then the number of minutes after midnight
             msm = for_total_seconds.total_seconds() / 60
         # If the date now and the date in the forecast are the same, proceed
-        print('self.days[0].date.strftime("%Y-%m-%dZ") is ' + str(self.days[0].date.strftime("%Y-%m-%dZ")))
-        print('d.strftime("%Y-%m-%dZ") is ' + str(d.strftime("%Y-%m-%dZ")))
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
-            print("msm: " + str(msm))
             # We have determined that the date in the forecast and the date now
             # are the same.
             #
@@ -60,19 +57,13 @@ class Forecast(object):
             # The timestep we keep is the one with the largest timestep.name
             # which is less than the number of minutes since midnight
             for timestep in self.days[0].timesteps:
-                print('timestep.name is ' + str(timestep.name))
-                print('msm is ' +str(msm))
                 if timestep.name > msm:
-                    print('I think timestep.name > msm')
-                    print('timestep.name is ' + str(timestep.name))
-                    print('msm is ' +str(msm))
-                   #print timestep.date,timestep.name,msm
+
                     # break here stops the for loop
                     break
                 # now is assigned to the last timestep that did not break the
                 # loop
                 now = timestep
-            print('The now that will be returnes has now.name: ' + str(now.name))
             return now
         # Bodge to get around problems near midnight:
         # If the date now is one day ahead of the date in the forecast, and the
@@ -82,8 +73,7 @@ class Forecast(object):
         elif self.days[0].date.day - d.date().day == -1 and d.time().hour < 1:
             # This is verbose to check that the returned data makes sense
             timestep_to_return = self.days[0].timesteps[-1]
-            print('timestep.name is ' + str(timestep_to_return.name))
-            print('msm is ' +str(msm))
+
             return timestep_to_return
         else:
             return False
