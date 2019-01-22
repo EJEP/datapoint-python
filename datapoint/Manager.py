@@ -104,6 +104,7 @@ class Manager(object):
         # The value of 1 second is entirely arbitrary and may change.
         # Could expose to users in the functions which need to call the api.
         req = requests.get(url, params=payload, timeout=1)
+        # requests.Session has the same features but allows retrying.
 
         try:
             data = req.json()
