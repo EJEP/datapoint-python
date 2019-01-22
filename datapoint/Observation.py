@@ -17,3 +17,12 @@ class Observation(object):
         self.days = []
 
     # TODO: Add functions to get the latest observation and previous ones.
+    # We always want the final day in the list of days, and the final timestep
+    # in that day.
+
+    def now(self):
+        """
+        Return the final timestep available.
+        """
+
+        return self.days[-1].timesteps[-1]
