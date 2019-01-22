@@ -186,8 +186,9 @@ class TestManager:
         for day in observation.days:
             for timestep in day.timesteps:
                 assert isinstance(timestep.name, int)
-                assert self.manager._weather_to_text(
-                    int(timestep.weather.value)) == timestep.weather.text
+                if timestep.weather.value != 'Not reported':
+                    assert self.manager._weather_to_text(
+                        int(timestep.weather.value)) == timestep.weather.text
                 assert -100 < timestep.temperature.value < 100
                 assert timestep.temperature.units == 'C'
                 assert timestep.wind_speed is None
