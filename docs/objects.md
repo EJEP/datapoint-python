@@ -37,6 +37,18 @@ The object which stores your API key and has methods to access the API.
 <td><b>sites_update_time</b></td>
 <td>int</td>
 </tr>
+<tr>
+<td><b>observation_sites_last_update</b></td>
+<td>float</td>
+</tr>
+<tr>
+<td><b>observation_sites_last_request</b></td>
+<td>list of Site objects</td>
+</tr>
+<tr>
+<td><b>observation_sites_update_time</b></td>
+<td>int</td>
+</tr>
 </table>
 <br />
 
@@ -52,7 +64,7 @@ param longitude: int or float<br/>
 param latitude: int or float<br/>
 returns: Site
 
-##### get_forecast_for_site(site_id, frequency="daily"):
+##### get_forecast_for_site(site_id, frequency="daily")
 Get a forecast for the provided site.<br/>
 A frequency of "daily" will return two timesteps:
 "Day" and "Night".<br/>
@@ -62,8 +74,27 @@ param site_id: string or unicode<br/>
 param frequency: string ("daily" or "3hourly")<br/>
 returns: Forecast
 
+##### get_observation_sites()
+Returns a list of sites for which observations are available.<br/>
+returns: list of Site objects
+
+##### get_nearest_observation_site(longitude=False, latitude=False)
+Returns the nearest Site object to the specified coordinates.<br/>
+param longitude: int or float<br/>
+param latitude: int or float<br/>
+returns: Site
+
+##### get_observations_for_site(site_id, frequency='hourly')
+Get the observations for the provided site.<br/>
+Only hourly observations are available, and provide the last 24 hours of data.<br/>
+param site_id: string or unicode<br/>
+param frequency: string ("daily" or "3hourly")<br/>
+returns: Observation
+
+
+
 ## Site
-An object containing details about a specific forecast site.
+An object containing details about a specific forecast or observation site.
 
 #### Attributes
 
@@ -169,6 +200,65 @@ An object with properties of a single forecast and a list of Day objects.
 ##### now()
 Get the current timestep from this forecast<br>
 returns: Timestep (or False)
+
+## Observation
+An object with the properties of a single observation and a list of Day objects.
+
+#### Attributes
+
+<table>
+<tr>
+<td><b>attribute</b></td>
+<td><b>type</b></td>
+</tr>
+<tr>
+<td><b>api_key</b></td>
+<td>string</td>
+</tr>
+<tr>
+<td><b>data_date</b></td>
+<td>datetime</td>
+</tr>
+<tr>
+<td><b>continent</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>country</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>name</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>longitude</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>latitude</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>id</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>elevation</b></td>
+<td>unicode</td>
+</tr>
+<tr>
+<td><b>days</b></td>
+<td>list of Day objects</td>
+</tr>
+</table>
+<br/>
+
+#### Methods
+
+##### now()
+Get the current timestep from this observation<br>
+returns: Timestep
 
 ## Day
 An object with properties of a single day and a list of Timestep objects.
