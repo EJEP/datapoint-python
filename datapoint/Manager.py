@@ -443,22 +443,10 @@ class Manager(object):
                     # some sites do not have all parameters available for
                     # observations. The documentation does not state which
                     # fields may be absent. If the parameter is not available,
-                    # nothing is returned. Need to deal with this somehow.
-                    # if key in dict:
-                    #     do stuff ...
-                    # should work, but what value to store if the key does not
-                    # exist?
-                    # Options are probably None, a string, deleting the key or
-                    # leaving the default value.
-                    # I think storing a string e.g. 'Not reported' is best.
-                    # Anyone using the module will have to write code for
-                    # dealing with the potential for missing data. Deleting the
-                    # key would require them to check for existence of every
-                    # key. None or the default value are not as informative as
-                    # a string. Problem with a string or None is that the type
-                    # might be assumed to be a float or int. The default values
-                    # are strings... better to have something informative
-                    #print(timestep)
+                    # nothing is returned from the API. If this happens the
+                    # value of the element is set to 'Not reported'. This may
+                    # change to the element not being assigned to the timestep.
+
                     new_timestep = Timestep()
                     # Assume the '$' field is always present.
                     new_timestep.name = int(timestep['$'])
@@ -466,9 +454,6 @@ class Manager(object):
                     cur_elements = ELEMENTS['Observation']
 
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
-
-                    #print('cur_elements[\'W\']) is ' + str(cur_elements['W']))
-                    #print('timestep[cur_elements[\'W\']]) is ' + str(timestep[ cur_elements['W'] ]))
 
                     if cur_elements['W'] in timestep:
                         new_timestep.weather = \
@@ -492,7 +477,6 @@ class Manager(object):
                             Element(cur_elements['T'],
                                     'Not reported')
 
-                    # Wind data is not available for all sites
                     if 'S' in timestep:
                         new_timestep.wind_speed = \
                             Element(cur_elements['S'],
