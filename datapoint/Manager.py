@@ -165,8 +165,7 @@ class Manager(object):
         """
 
         if not isinstance(distance, (int, long)):
-            # Surely 'code' should be 'distance' here. code is from function above
-            raise ValueError("Distance must be an integer not", type(code))
+            raise ValueError("Distance must be an integer not", type(distance))
         if distance < 0:
             raise ValueError("Distance out of bounds, should be 0 or greater")
 
@@ -389,7 +388,6 @@ class Manager(object):
                 sites.append(site)
             self.observation_sites_last_request = sites
         else:
-            # Surely this should be sites = self.observation_sites_last_request
             sites = observation_self.sites_last_request
 
         return sites
