@@ -277,7 +277,7 @@ An object with properties about a specific weather element.
 </tr>
 <tr>
 <td><b>value</b></td>
-<td>int</td>
+<td>int, float or string</td>
 </tr>
 <tr>
 <td><b>units</b></td>
