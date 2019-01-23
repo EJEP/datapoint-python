@@ -394,7 +394,7 @@ class Manager(object):
 
         return sites
 
-    def get_nearest_observation_site(self, longitude=False, latitude=False):
+    def get_nearest_observation_site(self, latitude=False, longitude=False):
         """
         This function returns the nearest Site to the specified
         coordinates that supports observations
