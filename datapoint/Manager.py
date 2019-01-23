@@ -185,7 +185,7 @@ class Manager(object):
 
         return sites
 
-    def get_nearest_site(self, longitude=False, latitude=False):
+    def get_nearest_site(self, latitude=False,  longitude=False):
         """
         This function returns the nearest Site object to the specified
         coordinates.

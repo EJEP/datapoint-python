@@ -31,12 +31,12 @@ So now that we have our Manager Object with a connection to DataPoint we can req
 some data. Our goal is to request some forecast data but first we need to know the
 site ID for the location we want data for. Luckily the Manager Object has a method
 to return a [Site Object](objects.md#site), which contains the ID among other things,
-from a specified longitude and latitude.
+from a specified latitude and longitude.
 
 We can simply request a Site Object like so:
 
 ```
-site = conn.get_nearest_site(-0.124626, 51.500728)
+site = conn.get_nearest_site(51.500728, -0.124626)
 ```
 
 For now we're just going to use this object to get us our forecast but you'll find

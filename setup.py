@@ -39,7 +39,7 @@ Features
 --------
 
 -  List forecast sites
--  Get nearest forecast site from longitude and latitiude
+-  Get nearest forecast site from latitiude and longitude
 -  Get the following 5 day forecast types for any site
 -  Daily (Two timesteps, midday and midnight UTC)
 -  3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
