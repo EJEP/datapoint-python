@@ -58,10 +58,10 @@ The object which stores your API key and has methods to access the API.
 Returns a list of all available sites.<br/>
 returns: list of Site objects
 
-##### get_nearest_site(longitude=False, latitude=False)
+##### get_nearest_site(latitude=False, longitude=False)
 Returns the nearest Site object to the specified coordinates.<br/>
-param longitude: int or float<br/>
 param latitude: int or float<br/>
+param longitude: int or float<br/>
 returns: Site
 
 ##### get_forecast_for_site(site_id, frequency="daily")
@@ -173,11 +173,11 @@ An object with properties of a single forecast and a list of Day objects.
 <td>unicode</td>
 </tr>
 <tr>
-<td><b>longitude</b></td>
+<td><b>latitude</b></td>
 <td>unicode</td>
 </tr>
 <tr>
-<td><b>latitude</b></td>
+<td><b>longitude</b></td>
 <td>unicode</td>
 </tr>
 <tr>
@@ -367,7 +367,7 @@ An object with properties about a specific weather element.
 </tr>
 <tr>
 <td><b>value</b></td>
-<td>int</td>
+<td>int, float or string</td>
 </tr>
 <tr>
 <td><b>units</b></td>

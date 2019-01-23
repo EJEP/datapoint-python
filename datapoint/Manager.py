@@ -113,8 +113,14 @@ class Manager(object):
             params = dict()
         payload = {'key': self.api_key}
         payload.update(params)
-        url = "%s/%s" % (api_url, path)
-        req = requests.get(url, params=payload)
+        url = "%s/%s" % (API_URL, path)
+
+        # Add a timeout to the request.
+        # The value of 1 second is entirely arbitrary and may change.
+        # Could expose to users in the functions which need to call the api.
+        req = requests.get(url, params=payload, timeout=1)
+        # requests.Session has the same features but allows retrying.
+
         try:
             data = req.json()
         except ValueError:
@@ -181,8 +187,10 @@ class Manager(object):
         """
         This function returns a list of Site object.
         """
-        if (time() - self.sites_last_update) > self.sites_update_time:
-            self.sites_last_update = time()
+
+        time_now = time()
+        if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
+
             data = self.__call_api("sitelist/")
             sites = list()
             for jsoned in data['Locations']['Location']:
@@ -208,12 +216,15 @@ class Manager(object):
 
                 sites.append(site)
             self.sites_last_request = sites
+            # Only set self.sites_last_update once self.sites_last_request has
+            # been set
+            self.sites_last_update = time_now
         else:
             sites = self.sites_last_request
 
         return sites
 
-    def get_nearest_site(self, longitude=False, latitude=False):
+    def get_nearest_site(self, latitude=False,  longitude=False):
         """
         This function returns the nearest Site object to the specified
         coordinates.
@@ -225,6 +236,8 @@ class Manager(object):
         nearest = False
         distance = None
         sites = self.get_all_sites()
+        # Sometimes there is a TypeError exception here: sites is None
+        # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
             new_distance = \
                 self._distance_between_coords(

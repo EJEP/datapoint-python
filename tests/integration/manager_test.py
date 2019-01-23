@@ -11,7 +11,7 @@ class TestManager:
         self.manager = datapoint.Manager(api_key=os.environ['API_KEY'])
 
     def test_site(self):
-        site = self.manager.get_nearest_site(-0.124626, 51.500728)
+        site = self.manager.get_nearest_site(51.500728, -0.124626)
         assert site.name == 'London'
 
     def test_get_all_sites(self):
@@ -20,14 +20,14 @@ class TestManager:
         assert sites
 
     def test_get_daily_forecast(self):
-        site = self.manager.get_nearest_site(-0.124626, 51.500728)
+        site = self.manager.get_nearest_site(51.500728, -0.124626)
         forecast = self.manager.get_forecast_for_site(site.id, 'daily')
         assert isinstance(forecast, datapoint.Forecast.Forecast)
         assert forecast.continent.upper() == 'EUROPE'
         assert forecast.country.upper() == 'ENGLAND'
         assert forecast.name.upper() == 'LONDON'
-        assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         assert abs(float(forecast.latitude) - 51.500728) < 0.1
+        assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         # Forecast should have been made within last 3 hours
         tz = forecast.data_date.tzinfo
         assert (forecast.data_date
@@ -62,14 +62,14 @@ class TestManager:
                     assert 0 < int(timestep.uv.value) < 20
 
     def test_get_3hour_forecast(self):
-        site = self.manager.get_nearest_site(-0.124626, 51.500728)
+        site = self.manager.get_nearest_site(51.500728, -0.124626)
         forecast = self.manager.get_forecast_for_site(site.id, '3hourly')
         assert isinstance(forecast, datapoint.Forecast.Forecast)
         assert forecast.continent.upper() == 'EUROPE'
         assert forecast.country.upper() == 'ENGLAND'
         assert forecast.name.upper() == 'LONDON'
-        assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         assert abs(float(forecast.latitude) - 51.500728) < 0.1
+        assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         # Forecast should have been made within last 3 hours
         tz = forecast.data_date.tzinfo
         assert (forecast.data_date
