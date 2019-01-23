@@ -99,7 +99,13 @@ class Manager(object):
         payload = {'key': self.api_key}
         payload.update(params)
         url = "%s/%s" % (API_URL, path)
-        req = requests.get(url, params=payload)
+
+        # Add a timeout to the request.
+        # The value of 1 second is entirely arbitrary and may change.
+        # Could expose to users in the functions which need to call the api.
+        req = requests.get(url, params=payload, timeout=1)
+        # requests.Session has the same features but allows retrying.
+
         try:
             data = req.json()
         except ValueError:
