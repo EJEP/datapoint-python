@@ -101,7 +101,9 @@ class Manager(object):
         url = "%s/%s" % (API_URL, path)
 
         # Add a timeout to the request.
-        # The value of 1 second is entirely arbitrary and may change.
+        # The value of 1 second is based from taking the average time for 200
+        # calls to the api, taking the average, multiplying by ten and roundung
+        # up by 0.2 seconds. If the time is too short, the value will change.
         # Could expose to users in the functions which need to call the api.
         req = requests.get(url, params=payload, timeout=1)
         # requests.Session has the same features but allows retrying.
