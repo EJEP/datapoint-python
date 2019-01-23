@@ -24,7 +24,8 @@ conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site and print out its name
 site = conn.get_nearest_site(51.500728, -0.124626)
-print site.name
+print(site.name)
+
 
 # Get a forecast for the nearest site
 forecast = conn.get_forecast_for_site(site.id, "daily")
@@ -51,10 +52,10 @@ for day in forecast.days:
 
 # If best_day is still None then there are no good days
 if best_day is None:
-    print "Better use the tumble dryer"
+    print("Better use the tumble dryer")
 
 # Otherwise print out the day
 else:
     # Get the day of the week from the datetime object
     best_day_formatted = datetime.strftime(best_day, "%A")
-    print "%s is the best day with a score of %s" % (best_day_formatted, best_day_score)
+    print("%s is the best day with a score of %s" % (best_day_formatted, best_day_score))
