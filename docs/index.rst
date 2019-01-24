@@ -1,5 +1,9 @@
-.. raw:: html
+datapoint-python
+================
 
-   <script>
-   window.location.replace("about");
-   </script>
+.. toctree::
+   :maxdepth: 2
+
+   install
+   getting-started
+   objects

@@ -89,9 +89,9 @@ objects.
 Attributes
 ^^^^^^^^^^
 
-==========  ==================
+==========  ===================
 attribute   type
-----------  ------------------
+----------  -------------------
 api_key     string
 data_date   datetime
 continent   unicode
@@ -181,4 +181,4 @@ id         string
 value      int, float or string
 units      unicode
 text       string or None
-========   ====================
+=========  ====================

@@ -1,3 +1,6 @@
+Getting started
+===============
+
 Getting started with DataPoint for Python is simple and you can write a
 simple script which prints out data in just 6 lines of Python.
 

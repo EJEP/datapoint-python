@@ -1,3 +1,6 @@
+Installation
+============
+
 DataPoint for Python can be installed like any other Python module.
 
 It is available on `PyPI <https://pypi.python.org/pypi/datapoint/>`__
@@ -83,6 +86,6 @@ Windows
    -  Create a new variable:
    -  **name** pip
    -  **value** the path to **pip.exe** (this should be something like
-      C::raw-latex:`\Python`27:raw-latex:`\Scripts`)
+      :code:`C:\Python27\Scripts`)
 
 -  From the command line run **pip install datapoint**
