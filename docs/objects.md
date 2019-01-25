@@ -5,7 +5,7 @@ There are 6 different objects which will be returned by the module.
 
 The diagram below shows the main classes used by the library, and how to move between them.
 
-![classes](https://cloud.githubusercontent.com/assets/9357195/4751636/83f178cc-5aa0-11e4-8eb0-a1b9531ed319.png)
+![classes](https://user-images.githubusercontent.com/22224469/51768591-a54fb580-20d8-11e9-851a-cbc3dc434cca.png)
 
 ## Manager
 The object which stores your API key and has methods to access the API.
