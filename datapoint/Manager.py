@@ -113,7 +113,7 @@ class Manager(object):
             params = dict()
         payload = {'key': self.api_key}
         payload.update(params)
-        url = "%s/%s" % (API_URL, path)
+        url = "%s/%s" % (FORECAST_URL, path)
 
         # Add a timeout to the request.
         # The value of 1 second is based from taking the average time for 200
