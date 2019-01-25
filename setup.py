@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='datapoint',
-      version='0.4.3',
+      version='0.5.0',
       install_requires=[
           "requests >= 2.3.0",
           "appdirs",
@@ -25,6 +25,15 @@ for this module is provided by the Met Office and may break as the
 Datapoint service grows/evolves. The author will make reasonable efforts
 to keep it up to date and fully featured.**
 
+Changelog
+---------
+
+- Observations from datapoint added. Access using
+  get_nearest_observation_site() and get_observations_for_site() in the same
+  manner as forecasts
+- Order of latitude and longitude swapped in all functions. They are now
+  ordered like: function(latitude, longitude). This is a BREAKING CHANGE.
+
 Installation
 ------------
 
@@ -43,6 +52,8 @@ Features
 -  Get the following 5 day forecast types for any site
 -  Daily (Two timesteps, midday and midnight UTC)
 -  3 hourly (Eight timesteps, every 3 hours starting at midnight UTC)
+-  Get observation sites
+-  Get observations for any site
 
 Contributing changes
 --------------------
