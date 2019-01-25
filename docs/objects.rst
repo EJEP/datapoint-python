@@ -36,22 +36,31 @@ Methods
 get_all_sites()
 '''''''''''''''
 
-Returns a list of all available sites. returns: list of Site objects
+Returns a list of all available sites.
+
+- returns: list of Site objects
 
 get_nearest_site(latitude=False, longitude=False)
 '''''''''''''''''''''''''''''''''''''''''''''''''
 
-Returns the nearest Site object to the specified coordinates. param
-latitude: int or float param longitude: int or float returns: Site
+Returns the nearest Site object to the specified coordinates.
+
+- param latitude: int or float
+- param longitude: int or float
+
+- returns: Site
 
 get_forecast_for_site(site_id, frequency=“daily”):
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Get a forecast for the provided site. A frequency of “daily” will return
 two timesteps: “Day” and “Night”. A frequency of “3hourly” will return 8
-timesteps: 0, 180, 360 … 1260 (minutes since midnight UTC) param
-site_id: string or unicode param frequency: string (“daily” or
-“3hourly”) returns: Forecast
+timesteps: 0, 180, 360 … 1260 (minutes since midnight UTC)
+
+- param site_id: string or unicode
+- param frequency: string (“daily” or “3hourly”)
+
+- returns: Forecast
 
 Site
 ----
@@ -112,7 +121,9 @@ Methods
 now()
 '''''
 
-Get the current timestep from this forecast returns: Timestep (or False)
+Get the current timestep from this forecast
+
+- returns: Timestep (or False)
 
 Day
 ---
