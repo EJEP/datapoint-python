@@ -113,7 +113,7 @@ class Manager(object):
             params = dict()
         payload = {'key': self.api_key}
         payload.update(params)
-        url = "%s/%s" % (FORECAST_URL, path)
+        url = "%s/%s" % (api_url, path)
 
         # Add a timeout to the request.
         # The value of 1 second is based from taking the average time for 200
@@ -122,13 +122,17 @@ class Manager(object):
         # Could expose to users in the functions which need to call the api.
         req = requests.get(url, params=payload, timeout=1)
         # requests.Session has the same features but allows retrying.
-
+        print(api_url)
+        print(req)
         try:
             data = req.json()
         except ValueError:
+            print('I\'m going to except!')
             raise APIException("DataPoint has not returned any data, this could be due to an incorrect API key")
+        print('got past first exception')
         self.call_response = data
         if req.status_code != 200:
+            print('Got here')
             msg = [data[m] for m in ("message", "error_message", "status") \
                       if m in data][0]
             raise Exception(msg)
