@@ -206,10 +206,10 @@ class Manager(object):
                     site.elevation = jsoned['elevation']
 
                 if 'unitaryAuthArea' in jsoned:
-                    site.elevation = jsoned['unitaryAuthArea']
+                    site.unitaryAuthArea = jsoned['unitaryAuthArea']
 
                 if 'nationalPark' in jsoned:
-                    site.elevation = jsoned['nationalPark']
+                    site.nationalPark = jsoned['nationalPark']
 
                 site.api_key = self.api_key
 
@@ -382,10 +382,10 @@ class Manager(object):
                     site.elevation = jsoned['elevation']
 
                 if 'unitaryAuthArea' in jsoned:
-                    site.elevation = jsoned['unitaryAuthArea']
+                    site.unitaryAuthArea = jsoned['unitaryAuthArea']
 
                 if 'nationalPark' in jsoned:
-                    site.elevation = jsoned['nationalPark']
+                    site.nationalPark = jsoned['nationalPark']
 
                 site.api_key = self.api_key
 
