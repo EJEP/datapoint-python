@@ -1,5 +1,4 @@
 import datetime
-import sys
 
 class Forecast(object):
     def __init__(self, api_key=""):
