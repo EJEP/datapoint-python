@@ -1,5 +1,4 @@
 import datetime
-import sys
 
 class Forecast(object):
     def __init__(self, api_key=""):
@@ -38,15 +37,13 @@ class Forecast(object):
         # this is the number of seconds through the day
         for_total_seconds = d - \
             d.replace(hour=0, minute=0, second=0, microsecond=0)
-        # python 2.6 does not have timedelta.total_seconds()
-        if sys.version_info < (2,7):
-            msm = self.timedelta_total_seconds(for_total_seconds) / 60
-        else:
-            # In the example time,
-            # for_total_seconds.total_seconds() = 61528 + 0.337439
-            # This is the number of seconds after midnight
-            # msm is then the number of minutes after midnight
-            msm = for_total_seconds.total_seconds() / 60
+
+        # In the example time,
+        # for_total_seconds.total_seconds() = 61528 + 0.337439
+        # This is the number of seconds after midnight
+        # msm is then the number of minutes after midnight
+        msm = for_total_seconds.total_seconds() / 60
+
         # If the date now and the date in the forecast are the same, proceed
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
             # We have determined that the date in the forecast and the date now

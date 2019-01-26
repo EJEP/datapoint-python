@@ -3,9 +3,9 @@
 from distutils.core import setup
 
 setup(name='datapoint',
-      version='0.5.1',
+      version='0.6.0',
       install_requires=[
-          "requests >= 2.3.0",
+          "requests >= 2.20.0",
           "appdirs",
           "pytz",
       ],
@@ -28,7 +28,7 @@ to keep it up to date and fully featured.**
 Changelog
 ---------
 
-- Deprecation warning: this is the final version to support python 2.x and 3.3.
+- Deprecation warning: Support for python 2.x and python 3.3 has been removed.
 - Observations from datapoint added. Access using
   get_nearest_observation_site() and get_observations_for_site() in the same
   manner as forecasts
@@ -75,8 +75,6 @@ GPLv3.
       packages=['datapoint', 'datapoint.regions'],
       classifiers=[
           'Development Status :: 3 - Alpha',
-          'Programming Language :: Python :: 2.6',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',

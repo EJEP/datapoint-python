@@ -4,7 +4,6 @@ Datapoint python module
 
 from datetime import datetime
 from datetime import timedelta
-import sys
 from time import time
 import pytz
 
@@ -19,9 +18,8 @@ from datapoint.Timestep import Timestep
 from datapoint.Element import Element
 from datapoint.regions.RegionManager import RegionManager
 
-
-if (sys.version_info > (3, 0)):
-    long = int
+# Is this even needed now?
+long = int
 
 FORECAST_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
 OBSERVATION_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json"
