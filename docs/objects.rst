@@ -200,7 +200,7 @@ Day
 An object with properties of a single day and a list of Timestep
 objects.
 
-.. _attributes-3:
+.. _attributes-4:
 
 Attributes
 ^^^^^^^^^^
@@ -220,7 +220,7 @@ Timestep
 An object with each forecast property (wind, temp, etc) for a specific
 time, in the form of Element objects.
 
-.. _attributes-4:
+.. _attributes-5:
 
 Attributes
 ^^^^^^^^^^
@@ -249,7 +249,7 @@ Element
 
 An object with properties about a specific weather element.
 
-.. _attributes-5:
+.. _attributes-6:
 
 Attributes
 ^^^^^^^^^^
