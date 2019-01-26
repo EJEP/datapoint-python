@@ -77,7 +77,7 @@ class Forecast(object):
 
     def future(self,in_days=None,in_hours=None,in_minutes=None,in_seconds=None):
         """
-        Function to return a future timestp 
+        Function to return a future timestep
         """
         future = None
 
@@ -91,15 +91,14 @@ class Forecast(object):
             mm = mm + in_minutes
         if (in_seconds != None):
             ss = ss + in_seconds
-        #print dd,hh,mm,ss
-            
+
         # Set the hours, minutes and seconds from now (minus the days)
         dnow = datetime.datetime.utcnow()  # Now
         d = dnow + \
             datetime.timedelta(hours=hh, minutes=mm, seconds = ss)
         # Time from midnight
         for_total_seconds = d - \
-            d.replace(hour=0, minute=0, second=0, microsecond=0)  
+            d.replace(hour=0, minute=0, second=0, microsecond=0)
 
         # Convert into minutes since midnight
         try:
@@ -111,7 +110,6 @@ class Forecast(object):
         if (dd<len(self.days)):
             for timestep in self.days[dd].timesteps:
                 if timestep.name >= msm:
-                    #print timestep.date,timestep.name,msm
                     future = timestep
                     return future
         else:
