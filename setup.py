@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='datapoint',
-      version='0.6.0',
+      version='0.6.1',
       install_requires=[
           "requests >= 2.20.0",
           "appdirs",
