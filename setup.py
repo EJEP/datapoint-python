@@ -3,9 +3,9 @@
 from distutils.core import setup
 
 setup(name='datapoint',
-      version='0.5.0',
+      version='0.6.0',
       install_requires=[
-          "requests >= 2.3.0",
+          "requests >= 2.20.0",
           "appdirs",
           "pytz",
       ],
@@ -75,8 +75,6 @@ GPLv3.
       packages=['datapoint', 'datapoint.regions'],
       classifiers=[
           'Development Status :: 3 - Alpha',
-          'Programming Language :: Python :: 2.6',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
