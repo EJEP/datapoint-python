@@ -28,6 +28,7 @@ to keep it up to date and fully featured.**
 Changelog
 ---------
 
+- Deprecation warning: this is the final version to support python 2.x and 3.3.
 - Observations from datapoint added. Access using
   get_nearest_observation_site() and get_observations_for_site() in the same
   manner as forecasts
