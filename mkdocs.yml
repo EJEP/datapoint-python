@@ -1,8 +1,0 @@
-site_name: DataPoint for Python
-theme: readthedocs
-nav:
-- Main: index.md
-- About: about.md
-- Installation: install.md
-- Getting Started: getting-started.md
-- Objects: objects.md
