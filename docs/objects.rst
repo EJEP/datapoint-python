@@ -7,7 +7,7 @@ are 6 different objects which will be returned by the module.
 The diagram below shows the main classes used by the library, and how to
 move between them.
 
-.. figure:: https://cloud.githubusercontent.com/assets/9357195/4751636/83f178cc-5aa0-11e4-8eb0-a1b9531ed319.png
+.. figure:: https://user-images.githubusercontent.com/22224469/51768591-a54fb580-20d8-11e9-851a-cbc3dc434cca.png
    :alt: classes
 
    classes
@@ -61,6 +61,35 @@ timesteps: 0, 180, 360 … 1260 (minutes since midnight UTC)
 - param frequency: string (“daily” or “3hourly”)
 
 - returns: Forecast
+
+get_observation_sites()
+'''''''''''''''''''''''
+
+Returns a list of sites for which observations are available.
+
+- returns: list of Site objects
+
+get_nearest_observation_site(longitude=False, latitude=False)
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Returns the nearest Site object to the specified coordinates.
+
+- param longitude: int or float
+- param latitude: int or float
+
+- returns: Site
+
+get_observations_for_site(site_id, frequency='hourly')
+''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Get the observations for the provided site.
+Only hourly observations are available, and provide the last 24 hours of data.
+
+- param site_id: string or unicode
+- param frequency: string ("daily" or "3hourly")
+
+- returns: Observation
+
 
 Site
 ----
@@ -124,6 +153,46 @@ now()
 Get the current timestep from this forecast
 
 - returns: Timestep (or False)
+
+Observation
+-----------
+
+An object with the properties of a single observation and a list of Day objects.
+
+.. _attributes-3:
+
+Attributes
+^^^^^^^^^^
+
+==========  ===================
+attribute   type
+----------  -------------------
+api_key     string
+data_date   datetime
+continent   unicode
+country     unicode
+name        unicode
+longitude   unicode
+latitude    unicode
+id          unicode
+elevation   unicode
+days        list of Day objects
+==========  ===================
+
+
+.. _methods-2:
+
+Methods
+^^^^^^^
+
+now()
+'''''
+
+Get the current timestep from this observation
+
+- returns: Timestep
+
+
 
 Day
 ---
