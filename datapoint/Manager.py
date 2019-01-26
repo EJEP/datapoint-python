@@ -5,7 +5,9 @@ Datapoint python module
 from datetime import datetime
 from datetime import timedelta
 from time import time
+from math import radians, cos, sin, asin, sqrt
 import pytz
+from geopy import distance as gp_dist
 
 import requests
 
@@ -135,8 +137,28 @@ class Manager(object):
     def _distance_between_coords(self, lon1, lat1, lon2, lat2):
         """
         Calculate the great circle distance between two points
-        on the earth (specified in decimal degrees)
+        on the earth (specified in decimal degrees).
+        Haversine formula states that:
+
+        d = 2 * r * arcsin(sqrt(sin^2((lat1 - lat2) / 2 +
+        cos(lat1)cos(lat2)sin^2((lon1 - lon2) / 2))))
+
+        where r is the radius of the sphere. This assumes the earth is spherical.
         """
+
+        d_geo = gp_dist.distance((lat1, lon1), (lat2, lon2))
+
+        lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+        r = 6371
+
+        d_hav = 2 * r * asin(sqrt((sin((lat1 - lat2) / 2))**2 + \
+                                  cos(lat1) * cos(lat2) * (sin((lon1 - lon2) / 2)**2 )))
+
+        print('Distance with direct haversine: ' + str(d_hav) + ' km')
+        print('Distance with geopy:            ' + str(d_geo))
+        print('Difference: ' + str(d_hav - d_geo.km) + ' km')
+        print('\n')
+
         distance = abs(lon1-lon2) + abs(lat1-lat2)
         return distance
 
@@ -242,6 +264,8 @@ class Manager(object):
         # Sometimes there is a TypeError exception here: sites is None
         # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
+            print(site.name)
+            print(str(site.latitude) + ', ' + str(site.longitude))
             new_distance = \
                 self._distance_between_coords(
                     float(site.longitude),
