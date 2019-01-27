@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='datapoint',
       version='0.6.1',
@@ -10,6 +10,7 @@ setup(name='datapoint',
           "pytz",
       ],
       description='Python interface to the Met Office\'s Datapoint API',
+      long_description_content_type='text/x-rst',
       long_description='''
 Datapoint for Python
 --------------------
@@ -42,7 +43,7 @@ Installation
 
     $ pip install datapoint
 
-You will also require a `Datapoint API
+You will also require a `Datapoint API`
 key from http://www.metoffice.gov.uk/datapoint/API.
 
 Features
