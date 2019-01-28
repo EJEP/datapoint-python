@@ -12,7 +12,7 @@ class TestManager:
 
     def test_site(self):
         site = self.manager.get_nearest_site(latitude=51.500728, longitude=-0.124626)
-        assert site.name == 'London'
+        assert site.name.upper() == 'HORSEGUARDS PARADE'
 
     def test_get_all_sites(self):
         sites = self.manager.get_all_sites()
@@ -25,7 +25,7 @@ class TestManager:
         assert isinstance(forecast, datapoint.Forecast.Forecast)
         assert forecast.continent.upper() == 'EUROPE'
         assert forecast.country.upper() == 'ENGLAND'
-        assert forecast.name.upper() == 'LONDON'
+        assert forecast.name.upper() == 'HORSEGUARDS PARADE'
         assert abs(float(forecast.latitude) - 51.500728) < 0.1
         assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         # Forecast should have been made within last 3 hours
@@ -67,7 +67,7 @@ class TestManager:
         assert isinstance(forecast, datapoint.Forecast.Forecast)
         assert forecast.continent.upper() == 'EUROPE'
         assert forecast.country.upper() == 'ENGLAND'
-        assert forecast.name.upper() == 'LONDON'
+        assert forecast.name.upper() == 'HORSEGUARDS PARADE'
         assert abs(float(forecast.latitude) - 51.500728) < 0.1
         assert abs(float(forecast.longitude) - (-0.124626)) < 0.1
         # Forecast should have been made within last 3 hours
@@ -104,7 +104,7 @@ class TestManager:
                     assert 0 <= int(timestep.uv.value) < 20
 
     def test_get_nearest_observation_site(self):
-        site = self.manager.get_nearest_observation_site(longitude=-0.124626, latitude=51.500728)
+        site = self.manager.get_nearest_observation_site(longitude=-0.1025, latitude=51.3263)
         assert site.name.upper() == 'KENLEY'
 
     def test_get_observation_sites(self):
