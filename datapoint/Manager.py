@@ -243,7 +243,6 @@ class Manager(object):
         coordinates.
         """
         if longitude is None:
-            print('ERROR: No longitude given')
             return False
 
         if latitude is None:
