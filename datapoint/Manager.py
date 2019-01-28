@@ -7,7 +7,6 @@ from datetime import timedelta
 from time import time
 from math import radians, cos, sin, asin, sqrt
 import pytz
-from geopy import distance as gp_dist
 
 import requests
 
@@ -146,21 +145,14 @@ class Manager(object):
         where r is the radius of the sphere. This assumes the earth is spherical.
         """
 
-        d_geo = gp_dist.distance((lat1, lon1), (lat2, lon2))
-
+        # Convert the coordinates of the points to radians.
         lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
         r = 6371
 
         d_hav = 2 * r * asin(sqrt((sin((lat1 - lat2) / 2))**2 + \
                                   cos(lat1) * cos(lat2) * (sin((lon1 - lon2) / 2)**2 )))
 
-        print('Distance with direct haversine: ' + str(d_hav) + ' km')
-        print('Distance with geopy:            ' + str(d_geo))
-        print('Difference: ' + str(d_hav - d_geo.km) + ' km')
-        print('\n')
-
-        distance = abs(lon1-lon2) + abs(lat1-lat2)
-        return distance
+        return d_hav
 
     def _get_wx_units(self, params, name):
         """
@@ -264,8 +256,6 @@ class Manager(object):
         # Sometimes there is a TypeError exception here: sites is None
         # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
-            print(site.name)
-            print(str(site.latitude) + ', ' + str(site.longitude))
             new_distance = \
                 self._distance_between_coords(
                     float(site.longitude),
