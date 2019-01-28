@@ -5,6 +5,7 @@ Datapoint python module
 from datetime import datetime
 from datetime import timedelta
 from time import time
+from math import radians, cos, sin, asin, sqrt
 import pytz
 
 import requests
@@ -135,10 +136,23 @@ class Manager(object):
     def _distance_between_coords(self, lon1, lat1, lon2, lat2):
         """
         Calculate the great circle distance between two points
-        on the earth (specified in decimal degrees)
+        on the earth (specified in decimal degrees).
+        Haversine formula states that:
+
+        d = 2 * r * arcsin(sqrt(sin^2((lat1 - lat2) / 2 +
+        cos(lat1)cos(lat2)sin^2((lon1 - lon2) / 2))))
+
+        where r is the radius of the sphere. This assumes the earth is spherical.
         """
-        distance = abs(lon1-lon2) + abs(lat1-lat2)
-        return distance
+
+        # Convert the coordinates of the points to radians.
+        lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+        r = 6371
+
+        d_hav = 2 * r * asin(sqrt((sin((lat1 - lat2) / 2))**2 + \
+                                  cos(lat1) * cos(lat2) * (sin((lon1 - lon2) / 2)**2 )))
+
+        return d_hav
 
     def _get_wx_units(self, params, name):
         """
