@@ -6,4 +6,5 @@ datapoint-python
 
    install
    getting-started
+   locations
    objects
