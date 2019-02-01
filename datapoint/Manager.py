@@ -124,7 +124,6 @@ class Manager(object):
         try:
             data = req.json()
         except ValueError:
-            print('I\'m going to except!')
             raise APIException("DataPoint has not returned any data, this could be due to an incorrect API key")
         self.call_response = data
         if req.status_code != 200:
@@ -243,6 +242,7 @@ class Manager(object):
         coordinates.
         """
         if longitude is None:
+            print('ERROR: No latitude given.')
             return False
 
         if latitude is None:
