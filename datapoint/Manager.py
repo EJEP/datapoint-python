@@ -195,7 +195,7 @@ class Manager(object):
         else:
             return 'EX'
 
-    def get_all_sites(self):
+    def get_forecast_sites(self):
         """
         This function returns a list of Site object.
         """
@@ -236,7 +236,7 @@ class Manager(object):
 
         return sites
 
-    def get_nearest_site(self, latitude=None,  longitude=None):
+    def get_nearest_forecast_site(self, latitude=None,  longitude=None):
         """
         This function returns the nearest Site object to the specified
         coordinates.
