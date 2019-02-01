@@ -6,9 +6,7 @@ There are around 6000 sites available for forecasts, and around 150 sites availa
 Forecast sites
 --------------
 
-The locations of the sites available for which forecasts are shown on the map below.
-
-.. Forecasts are restricted to locations within 30 km of the nearest site. This includes all of the United Kingdom. Most of the UK is within 10 km of the nearest site.
+The locations of the sites available for which forecasts are shown on the map below. Forecasts are restricted to locations within 30 km of the nearest site. This includes all of the United Kingdom. Most of the UK is within 10 km of the nearest site.
 
 .. figure:: forecast_sites_map.png
    :alt: Map showing the locations of the sites for which forecasts are available.
