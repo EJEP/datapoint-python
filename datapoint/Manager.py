@@ -442,6 +442,11 @@ class Manager(object):
             if ((distance == None) or (new_distance < distance)):
                 distance = new_distance
                 nearest = site
+
+        # If the nearest site is more than 20km away, raise an error
+        if distance > 20:
+            raise APIException("There is no site within 30km.")
+
         return nearest
 
 
