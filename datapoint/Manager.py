@@ -251,7 +251,7 @@ class Manager(object):
 
         nearest = False
         distance = None
-        sites = self.get_all_sites()
+        sites = self.get_forecast_sites()
         # Sometimes there is a TypeError exception here: sites is None
         # So, sometimes self.get_all_sites() has returned None.
         for site in sites:
