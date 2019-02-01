@@ -265,6 +265,12 @@ class Manager(object):
             if ((distance == None) or (new_distance < distance)):
                 distance = new_distance
                 nearest = site
+
+        # If the nearest site is more than 30km away, raise an error
+
+        if distance > 30:
+            raise APIException("There is no site within 30km.")
+
         return nearest
 
     def get_forecast_for_site(self, site_id, frequency="daily"):
