@@ -47,7 +47,7 @@ We can simply request a Site Object like so:
 
 ::
 
-   site = conn.get_nearest_site(51.500728, -0.124626)
+   site = conn.get_nearest_forecast_site(51.500728, -0.124626)
 
 For now we’re just going to use this object to get us our forecast but
 you’ll find more information about what the Site Object contains later.

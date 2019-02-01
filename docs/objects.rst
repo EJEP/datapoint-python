@@ -33,17 +33,17 @@ sites_update_time   int
 Methods
 ^^^^^^^
 
-get_all_sites()
+get_forecast_sites()
 '''''''''''''''
 
-Returns a list of all available sites.
+Returns a list of available forecast sites.
 
 - returns: list of Site objects
 
-get_nearest_site(latitude=False, longitude=False)
+get_nearest_forecast_site(latitude=False, longitude=False)
 '''''''''''''''''''''''''''''''''''''''''''''''''
 
-Returns the nearest Site object to the specified coordinates.
+Returns the nearest Site object to the specified coordinates which can provide a forecast.
 
 - param latitude: int or float
 - param longitude: int or float
