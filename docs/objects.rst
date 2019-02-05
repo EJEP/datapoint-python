@@ -20,15 +20,18 @@ The object which stores your API key and has methods to access the API.
 Attributes
 ^^^^^^^^^^
 
-==================  ====================
-attribute           type
-------------------  --------------------
-api_key             string
-call_response       dict
-sites_last_update   float
-sites_last_request  list of Site objects
-sites_update_time   int
-==================  ====================
+==============================  ====================
+attribute                       type
+------------------------------  --------------------
+api_key                         string
+call_response                   dict
+forecast_sites_last_update      float
+forecast_sites_last_request     list of Site objects
+forecast_sites_update_time      int
+observation_sites_last_update   float
+observation_sites_last_request  list of Site objects
+observation_sites_update_time   int
+==============================  ====================
 
 Methods
 ^^^^^^^
