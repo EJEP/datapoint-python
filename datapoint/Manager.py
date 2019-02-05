@@ -7,6 +7,7 @@ from datetime import timedelta
 from time import time
 from math import radians, cos, sin, asin, sqrt
 import pytz
+from warnings import warn
 
 import requests
 
@@ -195,6 +196,15 @@ class Manager(object):
         else:
             return 'EX'
 
+    def get_all_sites(self):
+        """
+        Deprecated. This function returns a list of Site object.
+        """
+        warning_message = 'This function is deprecated. Use get_forecast_sites() instead'
+        warn(warning_message, DeprecationWarning, stacklevel=2)
+
+        return self.get_forecast_sites()
+
     def get_forecast_sites(self):
         """
         This function returns a list of Site object.
@@ -235,6 +245,16 @@ class Manager(object):
             sites = self.forecast_sites_last_request
 
         return sites
+
+    def get_nearest_site(self, latitude=None,  longitude=None):
+        """
+        Deprecated. This function returns nearest Site object to the specified
+        coordinates.
+        """
+        warning_message = 'This function is deprecated. Use get_nearest_forecast_site() instead'
+        warn(warning_message, DeprecationWarning, stacklevel=2)
+
+        return self.get_nearest_site(latitude, longitude)
 
     def get_nearest_forecast_site(self, latitude=None,  longitude=None):
         """
