@@ -93,9 +93,9 @@ class Manager(object):
 
         # The list of sites changes infrequently so limit to requesting it
         # every hour.
-        self.sites_last_update = 0
-        self.sites_last_request = None
-        self.sites_update_time = 3600
+        self.forecast_sites_last_update = 0
+        self.forecast_sites_last_request = None
+        self.forecast_sites_update_time = 3600
 
         self.observation_sites_last_update = 0
         self.observation_sites_last_request = None
@@ -201,7 +201,7 @@ class Manager(object):
         """
 
         time_now = time()
-        if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
+        if (time_now - self.forecast_sites_last_update) > self.forecast_sites_update_time or self.forecast_sites_last_request is None:
 
             data = self.__call_api("sitelist/")
             sites = list()
@@ -227,12 +227,12 @@ class Manager(object):
                 site.api_key = self.api_key
 
                 sites.append(site)
-            self.sites_last_request = sites
+            self.forecast_sites_last_request = sites
             # Only set self.sites_last_update once self.sites_last_request has
             # been set
-            self.sites_last_update = time_now
+            self.forecast_sites_last_update = time_now
         else:
-            sites = self.sites_last_request
+            sites = self.forecast_sites_last_request
 
         return sites
 
