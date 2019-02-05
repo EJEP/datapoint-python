@@ -254,7 +254,7 @@ class Manager(object):
         warning_message = 'This function is deprecated. Use get_nearest_forecast_site() instead'
         warn(warning_message, DeprecationWarning, stacklevel=2)
 
-        return self.get_nearest_site(latitude, longitude)
+        return self.get_nearest_forecast_site(latitude, longitude)
 
     def get_nearest_forecast_site(self, latitude=None,  longitude=None):
         """
