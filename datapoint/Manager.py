@@ -7,6 +7,7 @@ from datetime import timedelta
 from time import time
 from math import radians, cos, sin, asin, sqrt
 import pytz
+from warnings import warn
 
 import requests
 
@@ -93,9 +94,9 @@ class Manager(object):
 
         # The list of sites changes infrequently so limit to requesting it
         # every hour.
-        self.sites_last_update = 0
-        self.sites_last_request = None
-        self.sites_update_time = 3600
+        self.forecast_sites_last_update = 0
+        self.forecast_sites_last_request = None
+        self.forecast_sites_update_time = 3600
 
         self.observation_sites_last_update = 0
         self.observation_sites_last_request = None
@@ -197,11 +198,20 @@ class Manager(object):
 
     def get_all_sites(self):
         """
+        Deprecated. This function returns a list of Site object.
+        """
+        warning_message = 'This function is deprecated. Use get_forecast_sites() instead'
+        warn(warning_message, DeprecationWarning, stacklevel=2)
+
+        return self.get_forecast_sites()
+
+    def get_forecast_sites(self):
+        """
         This function returns a list of Site object.
         """
 
         time_now = time()
-        if (time_now - self.sites_last_update) > self.sites_update_time or self.sites_last_request is None:
+        if (time_now - self.forecast_sites_last_update) > self.forecast_sites_update_time or self.forecast_sites_last_request is None:
 
             data = self.__call_api("sitelist/")
             sites = list()
@@ -227,16 +237,26 @@ class Manager(object):
                 site.api_key = self.api_key
 
                 sites.append(site)
-            self.sites_last_request = sites
+            self.forecast_sites_last_request = sites
             # Only set self.sites_last_update once self.sites_last_request has
             # been set
-            self.sites_last_update = time_now
+            self.forecast_sites_last_update = time_now
         else:
-            sites = self.sites_last_request
+            sites = self.forecast_sites_last_request
 
         return sites
 
     def get_nearest_site(self, latitude=None,  longitude=None):
+        """
+        Deprecated. This function returns nearest Site object to the specified
+        coordinates.
+        """
+        warning_message = 'This function is deprecated. Use get_nearest_forecast_site() instead'
+        warn(warning_message, DeprecationWarning, stacklevel=2)
+
+        return self.get_nearest_forecast_site(latitude, longitude)
+
+    def get_nearest_forecast_site(self, latitude=None,  longitude=None):
         """
         This function returns the nearest Site object to the specified
         coordinates.
@@ -251,7 +271,7 @@ class Manager(object):
 
         nearest = False
         distance = None
-        sites = self.get_all_sites()
+        sites = self.get_forecast_sites()
         # Sometimes there is a TypeError exception here: sites is None
         # So, sometimes self.get_all_sites() has returned None.
         for site in sites:

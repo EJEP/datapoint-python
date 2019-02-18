@@ -20,30 +20,33 @@ The object which stores your API key and has methods to access the API.
 Attributes
 ^^^^^^^^^^
 
-==================  ====================
-attribute           type
-------------------  --------------------
-api_key             string
-call_response       dict
-sites_last_update   float
-sites_last_request  list of Site objects
-sites_update_time   int
-==================  ====================
+==============================  ====================
+attribute                       type
+------------------------------  --------------------
+api_key                         string
+call_response                   dict
+forecast_sites_last_update      float
+forecast_sites_last_request     list of Site objects
+forecast_sites_update_time      int
+observation_sites_last_update   float
+observation_sites_last_request  list of Site objects
+observation_sites_update_time   int
+==============================  ====================
 
 Methods
 ^^^^^^^
 
-get_all_sites()
+get_forecast_sites()
 '''''''''''''''
 
-Returns a list of all available sites.
+Returns a list of available forecast sites.
 
 - returns: list of Site objects
 
-get_nearest_site(latitude=False, longitude=False)
+get_nearest_forecast_site(latitude=False, longitude=False)
 '''''''''''''''''''''''''''''''''''''''''''''''''
 
-Returns the nearest Site object to the specified coordinates.
+Returns the nearest Site object to the specified coordinates which can provide a forecast.
 
 - param latitude: int or float
 - param longitude: int or float
