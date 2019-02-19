@@ -24,9 +24,9 @@ copyright = '2014, Jacon Tomlinson'
 author = 'Jacob Tomlinson'
 
 # The short X.Y version
-version = '0.4'
+version = '0.7'
 # The full version, including alpha/beta/rc tags
-release = '0.4.3'
+release = '0.7.0'
 
 
 # -- General configuration ---------------------------------------------------

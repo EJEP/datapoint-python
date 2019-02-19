@@ -43,7 +43,7 @@ import datapoint
 conn = datapoint.connection(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get the nearest site for my latitude and longitude
-site = conn.get_nearest_site(51.500728, -0.124626)
+site = conn.get_nearest_forecast_site(51.500728, -0.124626)
 
 # Get a forecast for my nearest site with 3 hourly timesteps
 forecast = conn.get_forecast_for_site(site.id, "3hourly")
