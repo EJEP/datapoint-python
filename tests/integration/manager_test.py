@@ -138,26 +138,36 @@ class TestManager:
         for day in observation.days:
             for timestep in day.timesteps:
                 assert isinstance(timestep.name, int)
-                assert self.manager._weather_to_text(
-                    int(timestep.weather.value)) == timestep.weather.text
+                if timestep.weather.value != 'Not reported':
+                    assert self.manager._weather_to_text(int(timestep.weather.value)) == timestep.weather.text
                 assert -100 < timestep.temperature.value < 100
                 assert timestep.temperature.units == 'C'
-                assert 0 <= timestep.wind_speed.value < 300
-                assert timestep.wind_speed.units == 'mph'
-                for char in timestep.wind_direction.value:
-                    assert char in ['N', 'E', 'S', 'W']
-                assert timestep.wind_direction.units == 'compass'
+                if timestep.wind_speed.value != 'Not reported':
+                    assert 0 <= timestep.wind_speed.value < 300
+                    assert timestep.wind_speed.units == 'mph'
+
+                if timestep.wind_direction.value != 'Not reported':
+                    for char in timestep.wind_direction.value:
+                        assert char in ['N', 'E', 'S', 'W']
+                        assert timestep.wind_direction.units == 'compass'
+
                 assert 0 <= timestep.visibility.value
                 assert (timestep.visibility.text in
                     ['UN', 'VP', 'PO', 'MO', 'GO', 'VG', 'EX'])
+
                 assert 0 <= timestep.humidity.value <= 100
                 assert timestep.humidity.units == '%'
+
                 assert -100 < timestep.dew_point.value < 100
                 assert timestep.dew_point.units == 'C'
-                assert 900 < timestep.pressure.value < 1100
-                assert timestep.pressure.units == 'hpa'
-                assert timestep.pressure_tendency.value in ('R','F','S')
-                assert timestep.pressure_tendency.units == 'Pa/s'
+
+                if timestep.pressure.value != 'Not reported':
+                    assert 900 < timestep.pressure.value < 1100
+                    assert timestep.pressure.units == 'hpa'
+
+                if timestep.pressure_tendency.value != 'Not reported':
+                    assert timestep.pressure_tendency.value in ('R','F','S')
+                    assert timestep.pressure_tendency.units == 'Pa/s'
 
 
     def test_get_observation_without_wind_data(self):
