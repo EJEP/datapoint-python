@@ -536,7 +536,7 @@ class Manager(object):
                                     float(timestep[cur_elements['T']]),
                                     self._get_wx_units(params, cur_elements['T']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.temperature = \
                             Element(cur_elements['T'],
                                     'Not reported')
 
@@ -546,7 +546,7 @@ class Manager(object):
                                     int(timestep[cur_elements['S']]),
                                     self._get_wx_units(params, cur_elements['S']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.wind_speed = \
                             Element(cur_elements['S'],
                                     'Not reported')
 
@@ -556,7 +556,7 @@ class Manager(object):
                                     timestep[cur_elements['D']],
                                     self._get_wx_units(params, cur_elements['D']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.wind_direction = \
                             Element(cur_elements['D'],
                                     'Not reported')
 
@@ -567,7 +567,7 @@ class Manager(object):
                                     self._get_wx_units(params, cur_elements['V']))
                         new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.visibility = \
                             Element(cur_elements['V'],
                                     'Not reported')
 
@@ -577,7 +577,7 @@ class Manager(object):
                                     float(timestep[cur_elements['H']]),
                                     self._get_wx_units(params, cur_elements['H']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.humidity = \
                             Element(cur_elements['H'],
                                     'Not reported')
 
@@ -588,7 +588,7 @@ class Manager(object):
                                     self._get_wx_units(params,
                                                        cur_elements['Dp']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.dew_point = \
                             Element(cur_elements['Dp'],
                                     'Not reported')
 
@@ -598,7 +598,7 @@ class Manager(object):
                                     float(timestep[cur_elements['P']]),
                                     self._get_wx_units(params, cur_elements['P']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.pressure = \
                             Element(cur_elements['P'],
                                     'Not reported')
 
@@ -608,7 +608,7 @@ class Manager(object):
                                     timestep[cur_elements['Pt']],
                                     self._get_wx_units(params, cur_elements['Pt']))
                     else:
-                        new_timestep.weather = \
+                        new_timestep.pressure_tendency = \
                             Element(cur_elements['Pt'],
                                     'Not reported')
 
