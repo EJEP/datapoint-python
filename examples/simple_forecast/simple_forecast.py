@@ -11,7 +11,7 @@ conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get nearest site and print out its name
 
-site = conn.get_nearest_site(51.500728, -0.124626)
+site = conn.get_nearest_forecast_site(51.500728, -0.124626)
 print(site.name)
 
 # Get a forecast for the nearest site

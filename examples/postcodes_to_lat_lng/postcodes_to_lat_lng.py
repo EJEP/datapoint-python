@@ -17,7 +17,7 @@ latitude = postcode['result']['latitude']
 longitude = postcode['result']['longitude']
 
 # Get nearest site and print out its name
-site = conn.get_nearest_site(latitude, longitude)
+site = conn.get_nearest_forecast_site(latitude, longitude)
 print(site.name)
 
 # Get a forecast for the nearest site
