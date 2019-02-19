@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='datapoint',
-      version='0.6.1',
+      version='0.7.0',
       install_requires=[
           "requests >= 2.20.0",
           "appdirs",
@@ -29,12 +29,15 @@ to keep it up to date and fully featured.**
 Changelog
 ---------
 
-- Deprecation warning: Support for python 2.x and python 3.3 has been removed.
-- Observations from datapoint added. Access using
-  get_nearest_observation_site() and get_observations_for_site() in the same
-  manner as forecasts
-- Order of latitude and longitude swapped in all functions. They are now
-  ordered like: function(latitude, longitude). This is a BREAKING CHANGE.
+- The nearest site is now calculated using the haversine formula. The nearest
+      site may change.
+- Locations must be within 30km of the nearest forecast site.
+- Support for observations from DataPoint added. Locations must be within 20km
+      of the nearest observation site.
+- Deprecation warning: the following function names have been changed:
+      `get_all_sites` to `get_forecast_sites`, `get_nearest_site` to
+      `get_nearest_forecast_site`.
+
 
 Installation
 ------------
