@@ -17,7 +17,7 @@ Datapoint for Python
 
 *A Python module for accessing weather data via the Met
 Office's open data API known as
-`Datapoint.*
+`Datapoint`.*
 
 **Disclaimer: This module is in no way part of the datapoint
 project/service. This module is intended to simplify the use of
