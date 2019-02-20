@@ -16,6 +16,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# -- Other imports -----------------------------------------------------------
+from pkg_resources import get_distribution
 
 # -- Project information -----------------------------------------------------
 
@@ -23,11 +25,11 @@ project = 'datapoint-python'
 copyright = '2014, Jacon Tomlinson'
 author = 'Jacob Tomlinson'
 
-# The short X.Y version
-version = '0.7'
 # The full version, including alpha/beta/rc tags
-release = '0.7.0'
+release = get_distribution('datapoint').version
 
+# The short X.Y version
+version = '.'.join(release.split('.')[:2])
 
 # -- General configuration ---------------------------------------------------
 
