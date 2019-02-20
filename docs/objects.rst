@@ -37,14 +37,14 @@ Methods
 ^^^^^^^
 
 get_forecast_sites()
-'''''''''''''''
+''''''''''''''''''''
 
 Returns a list of available forecast sites.
 
 - returns: list of Site objects
 
 get_nearest_forecast_site(latitude=False, longitude=False)
-'''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Returns the nearest Site object to the specified coordinates which can provide a forecast.
 
@@ -53,7 +53,7 @@ Returns the nearest Site object to the specified coordinates which can provide a
 
 - returns: Site
 
-get_forecast_for_site(site_id, frequency=“daily”):
+get_forecast_for_site(site_id, frequency=“daily”)
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Get a forecast for the provided site. A frequency of “daily” will return
