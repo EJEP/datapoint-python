@@ -3,12 +3,15 @@
 from setuptools import setup
 
 setup(name='datapoint',
-      version='0.7.0',
       install_requires=[
           "requests >= 2.20.0",
           "appdirs",
           "pytz",
       ],
+      use_scm_version=True,
+      setup_requires=[
+          'setuptools_scm',
+          ],
       description='Python interface to the Met Office\'s Datapoint API',
       long_description_content_type='text/x-rst',
       long_description='''
