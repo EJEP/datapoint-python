@@ -1,14 +1,21 @@
 """Datapoint API to retrieve Met Office data"""
 
-__version__ = "0.7.0"
+#__version__ = "0.7.0"
 __author__ = "Jacob Tomlinson"
 __author_email__ = "jacob.tomlinson@metoffice.gov.uk"
 
 import os.path
+from pkg_resources import get_distribution, DistributionNotFound
 
 from datapoint.Manager import Manager
 import datapoint.profile
 
+# This block is from the setuptools_scm README
+try:
+    __version__ = get_distribution(__name__).version
+except DistributionNotFound:
+    # Package is not installed
+    pass
 
 def connection(profile_name='default', api_key=None):
     """Connect to DataPoint with the given API key profile name."""
