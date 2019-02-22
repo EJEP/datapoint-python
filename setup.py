@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 from setuptools import setup
+import versioneer
 
 setup(name='datapoint',
-      version='0.7.0',
+      version=versioneer.getversion(),
+      cmdclass=versioneer.get_cmdclass(),
       install_requires=[
           "requests >= 2.20.0",
           "appdirs",
