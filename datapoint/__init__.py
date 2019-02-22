@@ -1,6 +1,5 @@
 """Datapoint API to retrieve Met Office data"""
 
-__version__ = "0.7.0"
 __author__ = "Jacob Tomlinson"
 __author_email__ = "jacob.tomlinson@metoffice.gov.uk"
 
