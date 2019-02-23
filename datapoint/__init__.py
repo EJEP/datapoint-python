@@ -1,6 +1,5 @@
 """Datapoint API to retrieve Met Office data"""
 
-__version__ = "0.7.0"
 __author__ = "Jacob Tomlinson"
 __author_email__ = "jacob.tomlinson@metoffice.gov.uk"
 
@@ -21,3 +20,7 @@ def connection(profile_name='default', api_key=None):
         with open(profile_fname) as fh:
             api_key = fh.readlines()
     return Manager(api_key=api_key)
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions

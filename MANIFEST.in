@@ -1,0 +1,2 @@
+include versioneer.py
+include datapoint/_version.py
