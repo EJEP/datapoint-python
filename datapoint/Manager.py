@@ -157,7 +157,10 @@ class Manager(object):
             sess, retry = self.__retry_session()
             req = sess.get(url, params=payload, timeout=1)
         except ConnectionError:
-            print('retry.is_exhausted is: ' + str(retry.is_exhausted()))
+            print('retry.is_exhausted() is: ' + str(retry.is_exhausted()))
+            print('Retry history is:')
+            for hist in retry.history:
+                print(hist)
             raise
 
         try:
