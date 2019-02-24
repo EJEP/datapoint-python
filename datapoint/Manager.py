@@ -128,7 +128,8 @@ class Manager(object):
         session.mount('http://', adapter)
         session.mount('https://', adapter)
 
-        return session
+        # DEBUG: Return the retry object to see if we are out of goes later
+        return session, retry
 
     def __call_api(self, path, params=None):
         """
@@ -149,7 +150,14 @@ class Manager(object):
         # The wrapper function __retry_session returns a requests.Session
         # object. This has a .get() function like requests.get(), so the use
         # doesn't change here.
-        req = self.__retry_session().get(url, params=payload, timeout=1)
+
+        # DEBUG: Sometimes a timeout exception is raised. This may be because
+        # we are out of goes or something else.
+        try:
+            req, retry = self.__retry_session()
+            req.get(url, params=payload, timeout=1)
+        except ConnectionError:
+            print('retry.is_exhausted is: ' + str(retry.is_exhausted))
 
         try:
             data = req.json()
