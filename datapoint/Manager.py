@@ -154,8 +154,8 @@ class Manager(object):
         # DEBUG: Sometimes a timeout exception is raised. This may be because
         # we are out of goes or something else.
         try:
-            req, retry = self.__retry_session()
-            req.get(url, params=payload, timeout=1)
+            sess, retry = self.__retry_session()
+            req = sess.get(url, params=payload, timeout=1)
         except ConnectionError:
             print('retry.is_exhausted is: ' + str(retry.is_exhausted))
             raise
