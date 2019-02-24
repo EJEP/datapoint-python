@@ -158,6 +158,7 @@ class Manager(object):
             req.get(url, params=payload, timeout=1)
         except ConnectionError:
             print('retry.is_exhausted is: ' + str(retry.is_exhausted))
+            raise
 
         try:
             data = req.json()
