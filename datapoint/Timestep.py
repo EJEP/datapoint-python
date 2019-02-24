@@ -14,3 +14,6 @@ class Timestep(object):
         self.uv = None
         self.precipitation = None
         self.humidity = None
+        self.pressure = None
+        self.pressure_tendency = None
+        self.dew_point = None

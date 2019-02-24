@@ -4,9 +4,11 @@ datapoint/Day.py
 datapoint/Element.py
 datapoint/Forecast.py
 datapoint/Manager.py
+datapoint/Observation.py
 datapoint/Site.py
 datapoint/Timestep.py
 datapoint/__init__.py
+datapoint/exceptions.py
 datapoint/profile.py
 datapoint/regions/RegionManager.py
 datapoint/regions/__init__.py

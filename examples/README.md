@@ -6,20 +6,20 @@
 _Examples of getting data from DataPoint._
 
 * [Current Weather](current_weather/) - Get the current weather for a specified
-longitude and latitude.
+latitude and longitude.
 
 * [Simple Forecast](simple_forecast/) - Get a full 5 day forecast for a specified
-longitude and latitude.
+latitude and longitude.
 
 ## Making Decisions
 
 _Examples which make decisions based on weather data._
 
 * [Umbrella](umbrella/) - Inform the user whether they need an umbrella today
-for a specified longitude and latitude.
+for a specified latitude and longitude.
 
 * [Washing](washing/) - Inform the user which day in the next 5 days would be
-the best for hanging out their washing for a specified longitude and latitude.
+the best for hanging out their washing for a specified latitude and longitude.
 
 ## Mixing Data
 
@@ -30,4 +30,4 @@ take the tube across London, based on weather and tube service for two sets of
 longitude and latitude along with a tube line name.
 
 * [Postcodes](postcodes_to_lat_lng) - A variation on the [Current Weather](current_weather/)
-example but uses UK postcodes instead of longitude and latitude.
+example but uses UK postcodes instead of latitude and longitude.

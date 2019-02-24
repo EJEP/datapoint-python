@@ -5,14 +5,13 @@ import datetime
 
 import datapoint
 
-
-
-class TestForecast:
+class TestObservation:
 
     def __init__(self):
-        self.forecast = datapoint.Forecast.Forecast()
+        self.observation = datapoint.Observation.Observation()
 
-    def test_forecast_now_works(self):
+    def test_observation(self):
+        # Just copy the forecast test
         test_day = datapoint.Day.Day()
         test_day.date = datetime.datetime.utcnow()
 
@@ -21,5 +20,5 @@ class TestForecast:
 
         test_day.timesteps.append(test_timestep)
 
-        self.forecast.days.append(test_day)
-        assert self.forecast.now()
+        self.observation.days.append(test_day)
+        assert self.observation.now()

@@ -1,5 +1,4 @@
 import datetime
-import sys
 
 class Forecast(object):
     def __init__(self, api_key=""):
@@ -38,15 +37,13 @@ class Forecast(object):
         # this is the number of seconds through the day
         for_total_seconds = d - \
             d.replace(hour=0, minute=0, second=0, microsecond=0)
-        # python 2.6 does not have timedelta.total_seconds()
-        if sys.version_info < (2,7):
-            msm = self.timedelta_total_seconds(for_total_seconds) / 60
-        else:
-            # In the example time,
-            # for_total_seconds.total_seconds() = 61528 + 0.337439
-            # This is the number of seconds after midnight
-            # msm is then the number of minutes after midnight
-            msm = for_total_seconds.total_seconds() / 60
+
+        # In the example time,
+        # for_total_seconds.total_seconds() = 61528 + 0.337439
+        # This is the number of seconds after midnight
+        # msm is then the number of minutes after midnight
+        msm = for_total_seconds.total_seconds() / 60
+
         # If the date now and the date in the forecast are the same, proceed
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
             # We have determined that the date in the forecast and the date now
@@ -80,7 +77,7 @@ class Forecast(object):
 
     def future(self,in_days=None,in_hours=None,in_minutes=None,in_seconds=None):
         """
-        Function to return a future timestp 
+        Function to return a future timestep
         """
         future = None
 
@@ -94,15 +91,14 @@ class Forecast(object):
             mm = mm + in_minutes
         if (in_seconds != None):
             ss = ss + in_seconds
-        #print dd,hh,mm,ss
-            
+
         # Set the hours, minutes and seconds from now (minus the days)
         dnow = datetime.datetime.utcnow()  # Now
         d = dnow + \
             datetime.timedelta(hours=hh, minutes=mm, seconds = ss)
         # Time from midnight
         for_total_seconds = d - \
-            d.replace(hour=0, minute=0, second=0, microsecond=0)  
+            d.replace(hour=0, minute=0, second=0, microsecond=0)
 
         # Convert into minutes since midnight
         try:
@@ -114,7 +110,6 @@ class Forecast(object):
         if (dd<len(self.days)):
             for timestep in self.days[dd].timesteps:
                 if timestep.name >= msm:
-                    #print timestep.date,timestep.name,msm
                     future = timestep
                     return future
         else:
