@@ -131,7 +131,7 @@ class Manager(object):
         # DEBUG: Return the retry object to see if we are out of goes later
         return session, retry
 
-    def __call_api(self, path, params=None):
+    def __call_api(self, path, params=None, api_url=FORECAST_URL):
         """
         Call the datapoint api using the requests module
 
