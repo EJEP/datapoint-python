@@ -106,7 +106,7 @@ class Manager(object):
 
         self.regions = RegionManager(self.api_key)
 
-    def __retry_session(retries=5, backoff_factor=0.3,
+    def __retry_session(self, retries=5, backoff_factor=0.3,
                         status_forcelist=(500, 502, 504),
                         session=None):
         """
@@ -116,7 +116,7 @@ class Manager(object):
 
         # requests.Session allows finer control, which is needed to use the
         # retrying code
-        session = session or requests.Session()
+        the_session = session or requests.Session()
 
         # The Retry object manages the actual retrying
         retry = Retry(total=retries, read=retries, connect=retries,
@@ -125,11 +125,11 @@ class Manager(object):
 
         adapter = HTTPAdapter(max_retries=retry)
 
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
+        the_session.mount('http://', adapter)
+        the_session.mount('https://', adapter)
 
         # DEBUG: Return the retry object to see if we are out of goes later
-        return session, retry
+        return the_session, retry
 
     def __call_api(self, path, params=None, api_url=FORECAST_URL):
         """
