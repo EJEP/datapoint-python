@@ -28,7 +28,10 @@ class Forecast(object):
         # previous day shortly after midnight
 
         now = None
-        d = datetime.datetime.utcnow()
+        # Set the time now to be in the same time zone as the first timestep in
+        # the forecast. This shouldn't cause problems with daylight savings as
+        # the change is far enough after midnight.
+        d = datetime.datetime.now(tz=self.days[0].date.tzinfo)
         # d is something like datetime.datetime(2019, 1, 19, 17, 5, 28, 337439)
         # d.replace(...) is datetime.datetime(2019, 1, 19, 0, 0)
         # for_total_seconds is then: datetime.timedelta(seconds=61528,
@@ -63,9 +66,9 @@ class Forecast(object):
                 now = timestep
             return now
         # Bodge to get around problems near midnight:
-        # Previous method does not account for the end of the month.
-        # The test is that the absolute difference between the times is less
-        # than 1 hour.
+        #  Previous method does not account for the end of the month. The test
+        # trying to be evaluated is that the absolute difference between the
+        # times is less than 1 hour.
         elif abs(self.days[0].date - d).total_seconds() < 3600:
             # This is verbose to check that the returned data makes sense
             timestep_to_return = self.days[0].timesteps[-1]
