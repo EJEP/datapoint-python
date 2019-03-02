@@ -66,7 +66,7 @@ class Forecast(object):
         # Previous method does not account for the end of the month.
         # The test is that the absolute difference between the times is less
         # than 1 hour.
-        elif abs(self.days[0].date - d.date()).total_seconds() < 3600:
+        elif abs(self.days[0].date - d).total_seconds() < 3600:
             # This is verbose to check that the returned data makes sense
             timestep_to_return = self.days[0].timesteps[-1]
 
