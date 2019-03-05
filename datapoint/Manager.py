@@ -106,7 +106,7 @@ class Manager(object):
 
         self.regions = RegionManager(self.api_key)
 
-    def __retry_session(self, retries=5, backoff_factor=0.3,
+    def __retry_session(self, retries=10, backoff_factor=0.3,
                         status_forcelist=(500, 502, 504),
                         session=None):
         """
