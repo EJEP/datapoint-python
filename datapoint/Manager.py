@@ -10,6 +10,8 @@ import pytz
 from warnings import warn
 
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 from datapoint.exceptions import APIException
 from datapoint.Site import Site
@@ -104,6 +106,30 @@ class Manager(object):
 
         self.regions = RegionManager(self.api_key)
 
+    def __retry_session(self, retries=10, backoff_factor=0.3,
+                        status_forcelist=(500, 502, 504),
+                        session=None):
+        """
+        Retry the connection using requests if it fails. Use this as a wrapper
+        to request from datapoint
+        """
+
+        # requests.Session allows finer control, which is needed to use the
+        # retrying code
+        the_session = session or requests.Session()
+
+        # The Retry object manages the actual retrying
+        retry = Retry(total=retries, read=retries, connect=retries,
+                      backoff_factor=backoff_factor,
+                      status_forcelist=status_forcelist)
+
+        adapter = HTTPAdapter(max_retries=retry)
+
+        the_session.mount('http://', adapter)
+        the_session.mount('https://', adapter)
+
+        return the_session
+
     def __call_api(self, path, params=None, api_url=FORECAST_URL):
         """
         Call the datapoint api using the requests module
@@ -116,12 +142,17 @@ class Manager(object):
         url = "%s/%s" % (api_url, path)
 
         # Add a timeout to the request.
-        # The value of 1 second is based from taking the average time for 200
-        # calls to the api, taking the average, multiplying by ten and roundung
-        # up by 0.2 seconds. If the time is too short, the value will change.
+        # The value of 1 second is based on attempting 100 connections to
+        # datapoint and taking ten times the mean connection time (rounded up).
         # Could expose to users in the functions which need to call the api.
-        req = requests.get(url, params=payload, timeout=1)
-        # requests.Session has the same features but allows retrying.
+        #req = requests.get(url, params=payload, timeout=1)
+        # The wrapper function __retry_session returns a requests.Session
+        # object. This has a .get() function like requests.get(), so the use
+        # doesn't change here.
+
+        sess = self.__retry_session()
+        req = sess.get(url, params=payload, timeout=1)
+
         try:
             data = req.json()
         except ValueError:
