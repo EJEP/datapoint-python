@@ -79,9 +79,10 @@ class Forecast(object):
         # Bodge to get around problems near midnight:
         # Previous method does not account for the end of the month. The test
         # trying to be evaluated is that the absolute difference between the
-        # last timestep of the first day and the current time is less than 1
-        # hour.
-        elif abs(self.days[0].timesteps[-1].date - d).total_seconds() < 3600:
+        # last timestep of the first day and the current time is less than 4
+        # hours. 4 hours is because the final timestep of the previous day is
+        # for 21:00
+        elif abs(self.days[0].timesteps[-1].date - d).total_seconds() < 14400:
             # This is verbose to check that the returned data makes sense
             timestep_to_return = self.days[0].timesteps[-1]
 
