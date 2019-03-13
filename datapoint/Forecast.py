@@ -48,15 +48,15 @@ class Forecast(object):
         msm = for_total_seconds.total_seconds() / 60
 
         # DEBUG check on the dates.
-        print('self.days[0].date is ' + str(self.days[0].date))
-        print('d is ' + str(d))
-        print('abs(self.days[0].date - d) is ' + str(abs(self.days[0].date - d)))
-        print('abs(self.days[0].date - d).total_seconds() is ' + str(abs(self.days[0].date - d).total_seconds()))
+        #print('self.days[0].date is ' + str(self.days[0].date))
+        #print('d is ' + str(d))
+        #print('abs(self.days[0].date - d) is ' + str(abs(self.days[0].date - d)))
+        #print('abs(self.days[0].date - d).total_seconds() is ' + str(abs(self.days[0].date - d).total_seconds()))
 
-        print('self.days[0].timesteps[-1].date is ' + str(self.days[0].timesteps[-1].date))
-        print('d is ' + str(d))
-        print('abs(self.days[0].timesteps[-1].date - d) is ' + str(abs(self.days[0].timesteps[-1].date - d)))
-        print('abs(self.days[0].timesteps[-1].date - d).total_seconds() is ' + str(abs(self.days[0].timesteps[-1].date - d).total_seconds()))
+        #print('self.days[0].timesteps[-1].date is ' + str(self.days[0].timesteps[-1].date))
+        #print('d is ' + str(d))
+        #print('abs(self.days[0].timesteps[-1].date - d) is ' + str(abs(self.days[0].timesteps[-1].date - d)))
+        #print('abs(self.days[0].timesteps[-1].date - d).total_seconds() is ' + str(abs(self.days[0].timesteps[-1].date - d).total_seconds()))
 
         # If the date now and the date in the forecast are the same, proceed
         if self.days[0].date.strftime("%Y-%m-%dZ") == d.strftime("%Y-%m-%dZ"):
