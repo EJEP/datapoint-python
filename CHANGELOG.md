@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Use versioneer to set version number from git tag.
 + Retry the connection to datapoint if it fails (up to 10 times).
 + Fix failure to return forecast at midnight.
++ Add changelog.
 
 ## [0.7.0] - 2019-02-19
 
