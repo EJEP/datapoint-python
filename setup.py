@@ -31,10 +31,10 @@ to keep it up to date and fully featured.**
 Changelog
 ---------
 
-- The nearest site is now calculated using the haversine formula. The nearest site may change.
-- Locations must be within 30km of the nearest forecast site.
-- Support for observations from DataPoint added. Locations must be within 20km of the nearest observation site.
-- Deprecation warning: the following function names have been changed: `get_all_sites` to `get_forecast_sites`, `get_nearest_site` to `get_nearest_forecast_site`.
++ Retry the connection to datapoint if it fails (up to 10 times).
++ Use versioneer to set version number from git tag.
++ Fix failure to return forecast at midnight.
++ Add changelog.
 
 
 Installation
