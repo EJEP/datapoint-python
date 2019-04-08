@@ -246,6 +246,17 @@ precipitation           Element
 humidity                Element
 ======================  ========================
 
+Methods
+^^^^^^^
+
+elements()
+''''''''''
+
+Get a list of element objects in the Timestep.
+
+- returns: List of element objects
+
+
 
 Element
 -------
