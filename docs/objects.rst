@@ -17,6 +17,8 @@ Manager
 
 The object which stores your API key and has methods to access the API.
 
+.. _manager_attributes:
+
 Attributes
 ^^^^^^^^^^
 
@@ -32,6 +34,8 @@ observation_sites_last_update   float
 observation_sites_last_request  list of Site objects
 observation_sites_update_time   int
 ==============================  ====================
+
+.. _manager_methods:
 
 Methods
 ^^^^^^^
@@ -99,7 +103,7 @@ Site
 
 An object containing details about a specific forecast site.
 
-.. _attributes-1:
+.. _site_attributes:
 
 Attributes
 ^^^^^^^^^^
@@ -125,7 +129,7 @@ Forecast
 An object with properties of a single forecast and a list of Day
 objects.
 
-.. _attributes-2:
+.. _forecast_attributes:
 
 Attributes
 ^^^^^^^^^^
@@ -145,7 +149,7 @@ elevation   unicode
 days        list of Day objects
 ==========  ===================
 
-.. _methods-1:
+.. _forecast_methods:
 
 Methods
 ^^^^^^^
@@ -162,7 +166,7 @@ Observation
 
 An object with the properties of a single observation and a list of Day objects.
 
-.. _attributes-3:
+.. _observation_attributes:
 
 Attributes
 ^^^^^^^^^^
@@ -183,7 +187,7 @@ days        list of Day objects
 ==========  ===================
 
 
-.. _methods-2:
+.. _observation_methods:
 
 Methods
 ^^^^^^^
@@ -196,14 +200,13 @@ Get the current timestep from this observation
 - returns: Timestep
 
 
-
 Day
 ---
 
 An object with properties of a single day and a list of Timestep
 objects.
 
-.. _attributes-4:
+.. _day_attributes:
 
 Attributes
 ^^^^^^^^^^
@@ -223,7 +226,7 @@ Timestep
 An object with each forecast property (wind, temp, etc) for a specific
 time, in the form of Element objects.
 
-.. _attributes-5:
+.. _timestep_attributes:
 
 Attributes
 ^^^^^^^^^^
@@ -252,7 +255,7 @@ Element
 
 An object with properties about a specific weather element.
 
-.. _attributes-6:
+.. _element_attributes:
 
 Attributes
 ^^^^^^^^^^
