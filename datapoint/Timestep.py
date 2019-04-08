@@ -17,3 +17,23 @@ class Timestep(object):
         self.pressure = None
         self.pressure_tendency = None
         self.dew_point = None
+
+    def elements(self):
+        """Return a list of all the elements"""
+
+        elements = [
+            self.weather,
+            self.temperature,
+            self.feels_like_temperature,
+            self.wind_speed,
+            self.wind_direction,
+            self.wind_gust,
+            self.visibility,
+            self.uv,
+            self.precipitation,
+            self.humidity,
+            self.pressure,
+            self.pressure_tendency,
+            self.dew_point,]
+
+        return elements
