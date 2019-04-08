@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Remove night/day indication from weather codes which have them.
+
 ## [0.8.0] - 2019-04-05
 
 + Retry the connection to datapoint if it fails (up to 10 times).
