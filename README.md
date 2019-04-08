@@ -32,7 +32,7 @@ For more installation methods see the [installation guide](http://datapoint-pyth
 
 ## Documentation
 
-Detailed documentation for this project is available on [Read the Docs](http://datapoint-python.readthedocs.org/en/latest).
+Detailed documentation for this project is available on [Read the Docs](http://datapoint-python.readthedocs.org/en/latest). This project uses semantic versioning as defined at [semver.org](https://semver.org/).
 
 ## Example Usage
 

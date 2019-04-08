@@ -4,6 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Explicitly state the use of semantic versioning in `README.md`.
 + Add `elements()` function to `Timestep`.
 
 ## [0.8.0] - 2019-04-05
