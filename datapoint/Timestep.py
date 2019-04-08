@@ -18,22 +18,18 @@ class Timestep(object):
         self.pressure_tendency = None
         self.dew_point = None
 
-    def elements(self):
-        """Return a list of all the elements"""
+    def __iter__(self):
+        for attr, value in self.__dict__.items():
+            yield attr, value
 
-        elements = [
-            self.weather,
-            self.temperature,
-            self.feels_like_temperature,
-            self.wind_speed,
-            self.wind_direction,
-            self.wind_gust,
-            self.visibility,
-            self.uv,
-            self.precipitation,
-            self.humidity,
-            self.pressure,
-            self.pressure_tendency,
-            self.dew_point,]
+    def elements(self):
+        """Return a list of the elements which are not None"""
+
+        elements = []
+
+        for el in ct:
+            if isinstance(el[1], datapoint.Element.Element):
+                elements.append(el[1])
 
         return elements
+
