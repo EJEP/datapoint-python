@@ -19,7 +19,47 @@ class Forecast(object):
             timedelta.microseconds + 0.0 +
             (timedelta.seconds + timedelta.days * 24 * 3600) * 10 ** 6) / 10 ** 6
 
+    def at_datetime(self, target):
+        """ Return the timestep closest to the target datetime"""
+
+        prev_td = None
+        prev_ts = None
+
+        # First check that the target is in after the first timestep
+        if target < self.days[0].timesteps[0].date:
+            # Print something or raise an error
+            return False
+
+        # Check that the target is less than 15 minutes after the final
+        # timestep
+        if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(minutes=15)):
+            # Print something or raise an error
+            return False
+
+        # Loop over all timesteps
+        for day in self.days:
+            for timestep in day.timesteps:
+                # Calculate the difference between the target time and the timestep.
+                td = target - timestep.date
+
+                # Find the timestep which is further from the target than the
+                # previous one. Return the previous timestep
+                if abs(td.total_seconds()) > abs(prev_td.total_seconds()):
+                    # We are further from the target
+                    return prev_ts
+
+                prev_ts = timestep
+                prev_td = td
+
     def now(self):
+        """Function to return the closest timestep to the current time
+        """
+
+        d = datetime.datetime.now(tz=self.days[0].date.tzinfo)
+
+        return self.at_datetime(d)
+
+    def now_old(self):
         """
         Function to return just the current timestep from this forecast
         """
@@ -79,7 +119,17 @@ class Forecast(object):
         else:
             return False
 
-    def future(self,in_days=None,in_hours=None,in_minutes=None,in_seconds=None):
+
+    def future(self,in_days=0,in_hours=0,in_minutes=0,in_seconds=0):
+        """Return the closest timestep to a date in a given amount of time"""
+
+        d = datetime.datetime.now(tz=self.days[0].date.tzinfo)
+        target = d + datetime.timedelta(days=in_days, hours=in_hours,
+                                        minutes=in_minutes, seconds=in_seconds)
+
+        return self.at_datetime(target)
+
+    def future_old(self,in_days=None,in_hours=None,in_minutes=None,in_seconds=None):
         """
         Function to return a future timestep
         """
