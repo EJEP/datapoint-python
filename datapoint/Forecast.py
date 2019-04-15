@@ -22,21 +22,31 @@ class Forecast(object):
     def at_datetime(self, target):
         """ Return the timestep closest to the target datetime"""
 
-        prev_td = None
-        prev_ts = None
+        # Convert target to offset aware datetime
+        if target.tzinfo is None:
+            target = datetime.datetime.combine(target.date(), target.time(), self.days[0].date.tzinfo)
 
-        # First check that the target is in after the first timestep
+        # First check that the target is after the first timestep
+        # The logic is correct, check it works in practice
         if target < self.days[0].timesteps[0].date:
             # Print something or raise an error
             return False
 
-        # Check that the target is less than 15 minutes after the final
-        # timestep
+        # Ensure that the target is less than 15 minutes after the final
+        # timestep.
+        # Logic is correct, check this works for both forecast types
         if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(minutes=15)):
             # Print something or raise an error
             return False
 
         # Loop over all timesteps
+        prev_td = None
+        prev_ts = None
+
+        # Calculate the first time difference
+        prev_td = target - self.days[0].timesteps[0].date
+        prev_ts = self.days[0].timesteps[0]
+
         for day in self.days:
             for timestep in day.timesteps:
                 # Calculate the difference between the target time and the timestep.
