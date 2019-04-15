@@ -27,36 +27,53 @@ class Forecast(object):
             target = datetime.datetime.combine(target.date(), target.time(), self.days[0].date.tzinfo)
 
         # First check that the target is after the first timestep
-        # The logic is correct, check it works in practice
         if target < self.days[0].timesteps[0].date:
             # Print something or raise an error
+            print('f0')
             return False
 
-        # Ensure that the target is less than 15 minutes after the final
+        num_timesteps = len(self.days[1].timesteps)
+        # Ensure that the target is less than 1 hour 30 minutes after the final
         # timestep.
-        # Logic is correct, check this works for both forecast types
-        if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(minutes=15)):
+        # Logic is correct
+        # If there are 8 timesteps per day, then the target must be within 1.5
+        # hours of the last timestep
+        if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(hours=1, minutes=30)) and num_timesteps == 8:
             # Print something or raise an error
+            print('f1')
+            return False
+        # If there are 2 timesteps per day, then the target must be within 6
+        # hours of the last timestep
+        if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(hours=6)) and num_timesteps == 2:
+            # Print something or raise an error
+            print('f2')
             return False
 
         # Loop over all timesteps
-        prev_td = None
-        prev_ts = None
-
         # Calculate the first time difference
         prev_td = target - self.days[0].timesteps[0].date
+        print(prev_td)
         prev_ts = self.days[0].timesteps[0]
 
         for day in self.days:
             for timestep in day.timesteps:
                 # Calculate the difference between the target time and the timestep.
                 td = target - timestep.date
+                print(td)
 
                 # Find the timestep which is further from the target than the
                 # previous one. Return the previous timestep
                 if abs(td.total_seconds()) > abs(prev_td.total_seconds()):
                     # We are further from the target
                     return prev_ts
+                elif abs(td.total_seconds()) < 5400 and num_timesteps == 8:
+                    # if we are past the final timestep, and it is a 3 hourly
+                    # forecast, check that we are within 90 minutes of it
+                    return timestep
+                elif abs(td.total_seconds()) < 21600 and num_timesteps == 2:
+                    # if we are past the final timestep, and it is a daily
+                    # forecast, check that we are within 6 hours of it
+                    return timestep
 
                 prev_ts = timestep
                 prev_td = td
