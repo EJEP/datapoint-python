@@ -17,3 +17,19 @@ class Timestep(object):
         self.pressure = None
         self.pressure_tendency = None
         self.dew_point = None
+
+    def __iter__(self):
+        for attr, value in self.__dict__.items():
+            yield attr, value
+
+    def elements(self):
+        """Return a list of the elements which are not None"""
+
+        elements = []
+
+        for el in ct:
+            if isinstance(el[1], datapoint.Element.Element):
+                elements.append(el[1])
+
+        return elements
+
