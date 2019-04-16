@@ -1,4 +1,5 @@
 import datetime
+from datapoint.exceptions import APIException
 
 class Forecast(object):
     def __init__(self, api_key=""):
@@ -26,28 +27,38 @@ class Forecast(object):
         if target.tzinfo is None:
             target = datetime.datetime.combine(target.date(), target.time(), self.days[0].date.tzinfo)
 
-        # First check that the target is after the first timestep
-        if target < self.days[0].timesteps[0].date:
-            # Print something or raise an error
-            print('f0')
-            return False
-
         num_timesteps = len(self.days[1].timesteps)
+        # First check that the target is at most 1.5 hours before the first timestep
+        if target < self.days[0].timesteps[0].date - datetime.timedelta(hours=1, minutes=30) and num_timesteps == 8:
+            err_str = 'There is no forecast available for the requested time. ' + \
+                'The requested time is more than 1.5 hours before the first available forecast'
+            raise APIException(err_str)
+
+        elif target < self.days[0].timesteps[0].date - datetime.timedelta(hours=6) and num_timesteps == 2:
+
+            err_str = 'There is no forecast available for the requested time. ' + \
+                'The requested time is more than 6 hours before the first available forecast'
+
+            raise APIException(err_str)
+
         # Ensure that the target is less than 1 hour 30 minutes after the final
         # timestep.
         # Logic is correct
         # If there are 8 timesteps per day, then the target must be within 1.5
         # hours of the last timestep
         if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(hours=1, minutes=30)) and num_timesteps == 8:
-            # Print something or raise an error
-            print('f1')
-            return False
+
+            err_str = 'There is no forecast available for the requested time. The requested time is more than 1.5 hours after the first available forecast'
+
+            raise APIException(err_str)
+
         # If there are 2 timesteps per day, then the target must be within 6
         # hours of the last timestep
         if target > (self.days[-1].timesteps[-1].date + datetime.timedelta(hours=6)) and num_timesteps == 2:
-            # Print something or raise an error
-            print('f2')
-            return False
+
+            err_str = 'There is no forecast available for the requested time. The requested time is more than 6 hours after the first available forecast'
+
+            raise APIException(err_str)
 
         # Loop over all timesteps
         # Calculate the first time difference
