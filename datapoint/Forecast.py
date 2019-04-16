@@ -52,14 +52,12 @@ class Forecast(object):
         # Loop over all timesteps
         # Calculate the first time difference
         prev_td = target - self.days[0].timesteps[0].date
-        print(prev_td)
         prev_ts = self.days[0].timesteps[0]
 
         for day in self.days:
             for timestep in day.timesteps:
                 # Calculate the difference between the target time and the timestep.
                 td = target - timestep.date
-                print(td)
 
                 # Find the timestep which is further from the target than the
                 # previous one. Return the previous timestep
@@ -83,7 +81,6 @@ class Forecast(object):
         """
 
         d = datetime.datetime.now(tz=self.days[0].date.tzinfo)
-
         return self.at_datetime(d)
 
     def now_old(self):
