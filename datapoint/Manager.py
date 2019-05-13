@@ -337,15 +337,30 @@ class Manager(object):
         data = self.__call_api(site_id, {"res":frequency})
         params = data['SiteRep']['Wx']['Param']
         forecast = Forecast()
-        forecast.data_date = data['SiteRep']['DV']['dataDate']
-        forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
-        forecast.continent = data['SiteRep']['DV']['Location']['continent']
-        forecast.country = data['SiteRep']['DV']['Location']['country']
-        forecast.name = data['SiteRep']['DV']['Location']['name']
-        forecast.longitude = data['SiteRep']['DV']['Location']['lon']
-        forecast.latitude = data['SiteRep']['DV']['Location']['lat']
-        forecast.id = data['SiteRep']['DV']['Location']['i']
-        forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
+        if 'dataDate' in data['SiteRep']['DV']['dataDate']:
+            forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
+
+        if 'location' in data['SiteRep']['DV']:
+            if 'continent' in data['SiteRep']['DV']['Location']:
+                forecast.continent = data['SiteRep']['DV']['Location']['continent']
+
+            if 'country' in data['SiteRep']['DV']['Location']:
+                forecast.country = data['SiteRep']['DV']['Location']['country']
+
+            if 'name' in data['SiteRep']['DV']['Location']:
+                forecast.name = data['SiteRep']['DV']['Location']['name']
+
+            if 'lon' in data['SiteRep']['DV']['Location']:
+                forecast.longitude = data['SiteRep']['DV']['Location']['lon']
+
+            if 'lat' in data['SiteRep']['DV']['Location']:
+                forecast.latitude = data['SiteRep']['DV']['Location']['lat']
+
+            if 'i' in data['SiteRep']['DV']['Location']:
+                forecast.id = data['SiteRep']['DV']['Location']['i']
+
+            if 'elevation' in data['SiteRep']['DV']['Location']:
+                forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
 
         for day in data['SiteRep']['DV']['Location']['Period']:
             new_day = Day()
