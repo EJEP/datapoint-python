@@ -354,13 +354,21 @@ class Manager(object):
             for timestep in day['Rep']:
                 new_timestep = Timestep()
 
+                # According to the datapoint documentation
+                # (https://www.metoffice.gov.uk/datapoint/product/uk-daily-site-specific-forecast),
+                # the data provided are for noon (local time) and midnight
+                # (local time). This implies that midnight is 00:00 and noon is
+                # 12:00.
+
                 if timestep['$'] == "Day":
                     cur_elements = ELEMENTS['Day']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
                                         + timedelta(hours=12)
+                    print(new_timestep.date)
                 elif timestep['$'] == "Night":
                     cur_elements = ELEMENTS['Night']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
+                    print(new_timestep.date)
                 else:
                     cur_elements = ELEMENTS['Default']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
@@ -425,6 +433,10 @@ class Manager(object):
                                 self._get_wx_units(params, cur_elements['U']))
 
                 new_day.timesteps.append(new_timestep)
+
+                # The daily timesteps are not sorted by time. Sort them
+                if frequency == 'daily':
+                    new_day.timesteps.sort(key=lambda r: r.date)
             forecast.days.append(new_day)
 
         return forecast
