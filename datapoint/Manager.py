@@ -345,8 +345,9 @@ class Manager(object):
         if 'dataDate' in data['SiteRep']['DV']:
             forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-        if 'location' in data['SiteRep']['DV']:
+        if 'Location' in data['SiteRep']['DV']:
             if 'continent' in data['SiteRep']['DV']['Location']:
+                print(data['SiteRep']['DV']['Location']['continent'])
                 forecast.continent = data['SiteRep']['DV']['Location']['continent']
 
             if 'country' in data['SiteRep']['DV']['Location']:
@@ -549,7 +550,7 @@ class Manager(object):
             if 'dataDate' in data['SiteRep']['DV']:
                 observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-            if 'location' in data['SiteRep']['DV']:
+            if 'Location' in data['SiteRep']['DV']:
                 if 'continent' in data['SiteRep']['DV']['Location']:
                     observation.continent = data['SiteRep']['DV']['Location']['continent']
 
@@ -560,7 +561,8 @@ class Manager(object):
                     observation.name = data['SiteRep']['DV']['Location']['name']
 
                 if 'lon' in data['SiteRep']['DV']['Location']:
-                    obscontinentervation.longitude = data['SiteRep']['DV']['Location']['lon']
+                    observation.longitude = data['SiteRep']['DV']['Location']['lon']
+
                 if 'lat' in data['SiteRep']['DV']['Location']:
                     observation.latitude = data['SiteRep']['DV']['Location']['lat']
 
