@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Add `elements()` function to `Timestep`.
 + Remove night/day indication from weather codes which have them.
 + Change the logic used to calculate the closest timestep to a datetime. The closest timestep to the datetime is now used. Add a new function, `Forecast.at_datetime(target)` to do this. `Forecast.now()` has been changed to use this new function. The old behaviour is deprecated and available using `Forecast.now_old()`. `Forecast.future()` has been changed to use this new function. The old behaviour is deprecated and available using `Forecast.future_old()`.
++ Check if keys are returned from datapoint api in `Manager.py`. Do not attempt to read the values from the dict if they are not there.
 
 ## [0.8.0] - 2019-04-05
 
