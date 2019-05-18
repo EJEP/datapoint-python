@@ -337,6 +337,11 @@ class Manager(object):
         data = self.__call_api(site_id, {"res":frequency})
         params = data['SiteRep']['Wx']['Param']
         forecast = Forecast()
+
+        # Check if the keys we need are in the data returned from the datapoint
+        # API. If they are not, the data elements in the python class are left
+        # as None. It is currently the responsibility of the program using them
+        # to cope with this.
         if 'dataDate' in data['SiteRep']['DV']['dataDate']:
             forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
