@@ -52,7 +52,7 @@ forecast = conn.get_forecast_for_site(site.id, "3hourly")
 current_timestep = forecast.now()
 
 # Print out the site and current weather
-print site.name, "-", current_timestep.weather.text
+print(site.name + "-" + current_timestep.weather.text)
 
 ```
 
