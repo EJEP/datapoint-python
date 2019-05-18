@@ -342,7 +342,7 @@ class Manager(object):
         # API. If they are not, the data elements in the python class are left
         # as None. It is currently the responsibility of the program using them
         # to cope with this.
-        if 'dataDate' in data['SiteRep']['DV']['dataDate']:
+        if 'dataDate' in data['SiteRep']['DV']:
             forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
         if 'location' in data['SiteRep']['DV']:
@@ -544,22 +544,38 @@ class Manager(object):
 
             params = data['SiteRep']['Wx']['Param']
             observation = Observation()
-            observation.data_date = data['SiteRep']['DV']['dataDate']
-            observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
-            observation.continent = data['SiteRep']['DV']['Location']['continent']
-            observation.country = data['SiteRep']['DV']['Location']['country']
-            observation.name = data['SiteRep']['DV']['Location']['name']
-            observation.longitude = data['SiteRep']['DV']['Location']['lon']
-            observation.latitude = data['SiteRep']['DV']['Location']['lat']
-            observation.id = data['SiteRep']['DV']['Location']['i']
-            observation.elevation = data['SiteRep']['DV']['Location']['elevation']
+
+            # Check if keys are in data returned before using them.
+            if 'dataDate' in data['SiteRep']['DV']:
+                observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
+
+            if 'location' in data['SiteRep']['DV']:
+                if 'continent' in data['SiteRep']['DV']['Location']:
+                    observation.continent = data['SiteRep']['DV']['Location']['continent']
+
+                if 'country' in data['SiteRep']['DV']['Location']:
+                    observation.country = data['SiteRep']['DV']['Location']['country']
+
+                if 'name' in data['SiteRep']['DV']['Location']:
+                    observation.name = data['SiteRep']['DV']['Location']['name']
+
+                if 'lon' in data['SiteRep']['DV']['Location']:
+                    obscontinentervation.longitude = data['SiteRep']['DV']['Location']['lon']
+                if 'lat' in data['SiteRep']['DV']['Location']:
+                    observation.latitude = data['SiteRep']['DV']['Location']['lat']
+
+                if 'i' in data['SiteRep']['DV']['Location']:
+                    observation.id = data['SiteRep']['DV']['Location']['i']
+
+                if 'elevation' in data['SiteRep']['DV']['Location']:
+                    observation.elevation = data['SiteRep']['DV']['Location']['elevation']
 
             for day in data['SiteRep']['DV']['Location']['Period']:
                 new_day = Day()
                 new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-                # If the day only has 1 timestep, put it into a list by itself so it can be treated
-                # the same as a day with multiple timesteps
+                # If the day only has 1 timestep, put it into a list by itself
+                # so it can be treated the same as a day with multiple timesteps
                 if type(day['Rep']) is not list:
                         day['Rep'] = [day['Rep']]
 
