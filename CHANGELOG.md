@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Remove stray print statement
+
 ## [0.9.0] - 2019-05-18
 
 + Explicitly state the use of semantic versioning in `README.md`.
