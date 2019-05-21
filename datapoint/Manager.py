@@ -347,7 +347,6 @@ class Manager(object):
 
         if 'Location' in data['SiteRep']['DV']:
             if 'continent' in data['SiteRep']['DV']['Location']:
-                print(data['SiteRep']['DV']['Location']['continent'])
                 forecast.continent = data['SiteRep']['DV']['Location']['continent']
 
             if 'country' in data['SiteRep']['DV']['Location']:
