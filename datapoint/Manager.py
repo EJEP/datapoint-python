@@ -338,34 +338,40 @@ class Manager(object):
         params = data['SiteRep']['Wx']['Param']
         forecast = Forecast()
 
-        # Check if the keys we need are in the data returned from the datapoint
-        # API. If they are not, the data elements in the python class are left
-        # as None. It is currently the responsibility of the program using them
-        # to cope with this.
+        # If the 'Location' key is missing, there is no data for the site,
+        # raise an error.
+        if 'Location' not in data['SiteRep']['DV']:
+            err_string = ('DataPoint has not returned any data for the'
+                          'requested site.' )
+            raise APIException(err_string)
+
+        # Check if the other keys we need are in the data returned from the
+        # datapoint API. If they are not, the data elements in the python class
+        # are left as None. It is currently the responsibility of the program
+        # using them to cope with this.
         if 'dataDate' in data['SiteRep']['DV']:
             forecast.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-        if 'Location' in data['SiteRep']['DV']:
-            if 'continent' in data['SiteRep']['DV']['Location']:
-                forecast.continent = data['SiteRep']['DV']['Location']['continent']
+        if 'continent' in data['SiteRep']['DV']['Location']:
+            forecast.continent = data['SiteRep']['DV']['Location']['continent']
 
-            if 'country' in data['SiteRep']['DV']['Location']:
-                forecast.country = data['SiteRep']['DV']['Location']['country']
+        if 'country' in data['SiteRep']['DV']['Location']:
+            forecast.country = data['SiteRep']['DV']['Location']['country']
 
-            if 'name' in data['SiteRep']['DV']['Location']:
-                forecast.name = data['SiteRep']['DV']['Location']['name']
+        if 'name' in data['SiteRep']['DV']['Location']:
+            forecast.name = data['SiteRep']['DV']['Location']['name']
 
-            if 'lon' in data['SiteRep']['DV']['Location']:
-                forecast.longitude = data['SiteRep']['DV']['Location']['lon']
+        if 'lon' in data['SiteRep']['DV']['Location']:
+            forecast.longitude = data['SiteRep']['DV']['Location']['lon']
 
-            if 'lat' in data['SiteRep']['DV']['Location']:
-                forecast.latitude = data['SiteRep']['DV']['Location']['lat']
+        if 'lat' in data['SiteRep']['DV']['Location']:
+            forecast.latitude = data['SiteRep']['DV']['Location']['lat']
 
-            if 'i' in data['SiteRep']['DV']['Location']:
-                forecast.id = data['SiteRep']['DV']['Location']['i']
+        if 'i' in data['SiteRep']['DV']['Location']:
+            forecast.id = data['SiteRep']['DV']['Location']['i']
 
-            if 'elevation' in data['SiteRep']['DV']['Location']:
-                forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
+        if 'elevation' in data['SiteRep']['DV']['Location']:
+            forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
 
         for day in data['SiteRep']['DV']['Location']['Period']:
             new_day = Day()
