@@ -8,11 +8,11 @@ import datapoint
 
 class TestRegions(object):
     def __init__(self):
-        self.manager = datapoint.Manager(api_key=os.environ['API_KEY'])
+        self.manager = datapoint.Manager(api_key=os.environ['NEW_API_KEY'])
         self.regions = self.manager.regions
 
     def test_key(self):
-        assert self.regions.api_key == os.environ['API_KEY']
+        assert self.regions.api_key == os.environ['NEW_API_KEY']
 
     def test_call_api(self):
         assert (

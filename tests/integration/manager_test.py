@@ -8,7 +8,7 @@ import datapoint
 class TestManager:
 
     def __init__(self):
-        self.manager = datapoint.Manager(api_key=os.environ['API_KEY'])
+        self.manager = datapoint.Manager(api_key=os.environ['NEW_API_KEY'])
 
     def test_site(self):
         site = self.manager.get_nearest_forecast_site(latitude=51.500728, longitude=-0.124626)
