@@ -69,11 +69,11 @@ License
 
 GPLv3.
 ''',
-      author='Jacob Tomlinson',
-      author_email='jacob@jacobtomlinson.co.uk',
-      maintainer='Jacob Tomlinson',
-      maintainer_email='jacob@jacobtomlinson.co.uk',
-      url='https://github.com/jacobtomlinson/datapoint-python',
+      author='Jacob Tomlinson, Emlyn Price',
+      author_email='emlyn.je.price@gmail.com',
+      maintainer='Emlyn Price',
+      maintainer_email='emlyn.je.price@gmail.com',
+      url='https://github.com/ejep/datapoint-python',
       license='GPLv3',
       packages=['datapoint', 'datapoint.regions'],
       classifiers=[

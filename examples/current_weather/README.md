@@ -3,7 +3,7 @@
 _This example displays the current weather and temperature for your location._
 
 ### Required Modules
- * [datapoint](https://github.com/jacobtomlinson/datapoint-python)
+ * [datapoint](https://github.com/ejep/datapoint-python)
 
 ## Learning Objective
 

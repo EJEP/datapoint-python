@@ -4,7 +4,7 @@ _This example looks at the forecast for the next 5 days and suggests which day
 (if any) would be best for hanging your washing out to dry._
 
 ### Required Modules
- * [datapoint](https://github.com/jacobtomlinson/datapoint-python)
+ * [datapoint](https://github.com/ejep/datapoint-python)
 
 ## Learning Objective
 

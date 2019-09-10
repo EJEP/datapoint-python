@@ -3,7 +3,7 @@
 _A variation on current_weather.py which uses postcodes rather than lon lat._
 
 ### Required Modules
- * [datapoint](https://github.com/jacobtomlinson/datapoint-python)
+ * [datapoint](https://github.com/ejep/datapoint-python)
  * [python-postcodes-io](https://github.com/raigad/python-postcodes-io)
 
 ## Learning Objective

@@ -5,7 +5,7 @@ DataPoint for Python can be installed like any other Python module.
 
 It is available on `PyPI <https://pypi.python.org/pypi/datapoint/>`__
 and the source is available on
-`GitHub <https://github.com/jacobtomlinson/datapoint-python>`__.
+`GitHub <https://github.com/ejep/datapoint-python>`__.
 
 Pip
 ---
@@ -21,13 +21,13 @@ or for the very latest code from the repository’s master branch run:
 
 ::
 
-   pip install git+git://github.com/jacobtomlinson/datapoint-python.git@master
+   pip install git+git://github.com/ejep/datapoint-python.git@master
 
 and to upgrade it in the future:
 
 ::
 
-   pip install git+git://github.com/jacobtomlinson/datapoint-python.git@master --upgrade
+   pip install git+git://github.com/ejep/datapoint-python.git@master --upgrade
 
 Easy Install
 ------------
@@ -48,12 +48,12 @@ Source
 You can also install from the source in GitHub.
 
 First checkout the GitHub repository (or you can `download the
-zip <https://github.com/jacobtomlinson/datapoint-python/archive/master.zip>`__
+zip <https://github.com/ejep/datapoint-python/archive/master.zip>`__
 and extract it).
 
 ::
 
-   git clone https://github.com/jacobtomlinson/datapoint-python.git datapoint-python
+   git clone https://github.com/ejep/datapoint-python.git datapoint-python
 
 Navigate to that directory
 
@@ -72,7 +72,7 @@ Windows
 
 -  Install `python <https://www.python.org/downloads/>`__ - you can see
    supported versions in the
-   `readme <https://github.com/jacobtomlinson/datapoint-python/blob/master/README.md>`__
+   `readme <https://github.com/ejep/datapoint-python/blob/master/README.md>`__
 -  Install the appropriate
    `setuptools <http://www.lfd.uci.edu/~gohlke/pythonlibs/#setuptools>`__
    python extension for your machine
