@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.9.3] - 2019-09-10
+
 + Update README.md and travis.yml due to change in ownership.
 
 ## [0.9.2] - 2019-07-26
