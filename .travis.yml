@@ -14,7 +14,7 @@ script:
 - if [[ "$API_KEY" != "" ]]; then nosetests -w tests/integration; fi
 deploy:
   provider: pypi
-  user: jacob.tomlinson
+  user: EJEP
   skip_cleanup: true
   password: "$PYPI_PASSWORD"
   on:
