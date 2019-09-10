@@ -6,8 +6,6 @@ python:
   - '3.5'
   - '3.6'
   - '3.7'
-env:
-- secure: PEOM40L5TK78GFQyt2I2PgOFf8QYGcP0YZmgMhacuKnCI0Lr3wztXucWtxeVpXeuDDe12d349FumQrg6ard8T69ZZYe25eJ5lR9ZMyVOzFJ9Ew3XhoEgWBgKFRNjEkhFU+/reYWRBkYHyFImLe9d8wq1I2UMQ6z2189PLKfBtIg=
 install:
 - pip install .
 - pip install -r requirements.txt
