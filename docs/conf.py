@@ -23,7 +23,7 @@ import datapoint
 
 project = 'datapoint-python'
 copyright = '2014, Jacon Tomlinson'
-author = 'Jacob Tomlinson'
+author = 'Jacob Tomlinson, Emlyn Price'
 
 # The full version, including alpha/beta/rc tags
 release = datapoint.__version__
@@ -131,7 +131,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'datapoint-python.tex', 'datapoint-python Documentation',
-     'Jacob Tomlinson', 'manual'),
+     'Jacob Tomlinson, Emlyn Price', 'manual'),
 ]
 
 

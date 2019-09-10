@@ -14,11 +14,11 @@ script:
 - if [[ "$API_KEY" != "" ]]; then nosetests -w tests/integration; fi
 deploy:
   provider: pypi
-  user: jacob.tomlinson
+  user: EJEP
   skip_cleanup: true
   password: "$PYPI_PASSWORD"
   on:
     tags: true
     all_branches: true
-    repo: ejep/datapoint-python
+    repo: EJEP/datapoint-python
     python: '3.5'
