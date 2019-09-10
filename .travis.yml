@@ -20,5 +20,5 @@ deploy:
   on:
     tags: true
     all_branches: true
-    repo: jacobtomlinson/datapoint-python
+    repo: ejep/datapoint-python
     python: '3.5'
