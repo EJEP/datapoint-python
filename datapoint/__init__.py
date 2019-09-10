@@ -1,8 +1,5 @@
 """Datapoint API to retrieve Met Office data"""
 
-__author__ = "Jacob Tomlinson"
-__author_email__ = "jacob.tomlinson@metoffice.gov.uk"
-
 import os.path
 
 from datapoint.Manager import Manager
