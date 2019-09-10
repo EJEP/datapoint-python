@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Update README.md and travis.yml due to change in ownership.
+
 ## [0.9.2] - 2019-07-26
 
 + Raise an error if data for the requested location is not provided from the datapoint API.
