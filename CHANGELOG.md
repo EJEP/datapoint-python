@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Remove support for Python 3.4.
+
 ## [0.9.4] - 2019-09-10
 
 + Fix to url case in `travis.yml` to enable releases.
