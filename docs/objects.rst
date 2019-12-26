@@ -12,6 +12,9 @@ move between them.
 
    classes
 
+
+.. _manager:
+
 Manager
 -------
 
@@ -97,6 +100,7 @@ Only hourly observations are available, and provide the last 24 hours of data.
 
 - returns: Observation
 
+.. _site:
 
 Site
 ----
@@ -122,6 +126,7 @@ region           unicode
 unitaryAuthArea  unicode
 ===============  =======
 
+.. _forecast:
 
 Forecast
 --------
@@ -219,6 +224,7 @@ date       datetime
 timesteps  list of Timestep objects
 =========  ========================
 
+.. _timestep:
 
 Timestep
 --------
