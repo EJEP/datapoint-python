@@ -159,7 +159,7 @@ now()
 
 Get the current timestep from this forecast
 
-- returns: Timestep (or False)
+- returns: Timestep
 
 Observation
 -----------
