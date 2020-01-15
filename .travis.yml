@@ -21,4 +21,4 @@ deploy:
     tags: true
     all_branches: true
     repo: EJEP/datapoint-python
-    python: '3.7'
+    python: '3.8'
