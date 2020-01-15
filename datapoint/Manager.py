@@ -287,18 +287,11 @@ class Manager(object):
 
         return self.get_nearest_forecast_site(latitude, longitude)
 
-    def get_nearest_forecast_site(self, latitude=None,  longitude=None):
+    def get_nearest_forecast_site(self, latitude,  longitude):
         """
         This function returns the nearest Site object to the specified
         coordinates.
         """
-        if longitude is None:
-            print('ERROR: No latitude given.')
-            return False
-
-        if latitude is None:
-            print('ERROR: No latitude given.')
-            return False
 
         nearest = False
         distance = None
