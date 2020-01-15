@@ -22,8 +22,6 @@ from datapoint.Timestep import Timestep
 from datapoint.Element import Element
 from datapoint.regions.RegionManager import RegionManager
 
-# Is this even needed now?
-long = int
 
 FORECAST_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json"
 OBSERVATION_URL = "http://datapoint.metoffice.gov.uk/public/data/val/wxobs/all/json"
@@ -197,7 +195,7 @@ class Manager(object):
         return units
 
     def _weather_to_text(self, code):
-        if not isinstance(code, (int, long)):
+        if not isinstance(code, int):
             raise ValueError("Weather code must be an integer not", type(code))
         if code < 0 or code > 30:
             raise ValueError("Weather code outof bounds, should be 0-30")
@@ -209,7 +207,7 @@ class Manager(object):
         Convert observed visibility in metres to text used in forecast
         """
 
-        if not isinstance(distance, (int, long)):
+        if not isinstance(distance, int):
             raise ValueError("Distance must be an integer not", type(distance))
         if distance < 0:
             raise ValueError("Distance out of bounds, should be 0 or greater")
