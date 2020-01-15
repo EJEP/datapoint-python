@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = datapoint-python
+source = datapoint
 
 [report]
 exclude_lines =
