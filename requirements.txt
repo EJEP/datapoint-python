@@ -1,3 +1,3 @@
 requests==2.21.0
-appdirs
-pytz
+appdirs==1.4.3
+pytz==2019.3
