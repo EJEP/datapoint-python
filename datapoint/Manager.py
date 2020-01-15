@@ -207,7 +207,7 @@ class Manager(object):
         Convert observed visibility in metres to text used in forecast
         """
 
-        if not isinstance(distance, (int, long)):
+        if not isinstance(distance, int):
             raise ValueError("Distance must be an integer not", type(distance))
         if distance < 0:
             raise ValueError("Distance out of bounds, should be 0 or greater")
