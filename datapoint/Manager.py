@@ -497,18 +497,11 @@ class Manager(object):
 
         return sites
 
-    def get_nearest_observation_site(self, latitude=None, longitude=None):
+    def get_nearest_observation_site(self, latitude, longitude):
         """
         This function returns the nearest Site to the specified
         coordinates that supports observations
         """
-        if longitude is None:
-            print('ERROR: No longitude given.')
-            return False
-
-        if latitude is None:
-            print('ERROR: No latitude given.')
-            return False
 
         nearest = False
         distance = None
