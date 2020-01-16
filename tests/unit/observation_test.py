@@ -1,13 +1,10 @@
-from types import *
-from nose.tools import *
-
+import unittest
 import datetime
-
 import datapoint
 
-class TestObservation:
+class ObservationTestCase(unittest.TestCase):
 
-    def __init__(self):
+    def setUp(self):
         self.observation = datapoint.Observation.Observation()
 
     def test_observation(self):
@@ -21,4 +18,6 @@ class TestObservation:
         test_day.timesteps.append(test_timestep)
 
         self.observation.days.append(test_day)
+
+        # What is this asserting?
         assert self.observation.now()
