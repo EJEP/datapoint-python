@@ -1,6 +1,7 @@
 [run]
 branch = True
 source = datapoint
+omit = datapoint/_version.py
 
 [report]
 exclude_lines =
