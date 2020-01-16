@@ -7,11 +7,15 @@ python:
   - '3.7'
   - '3.8'
 install:
+- pip install codecov
+- pip install coverage
 - pip install .
 - pip install -r requirements.txt
 script:
-- nosetests -w tests/unit
-- if [[ "$API_KEY" != "" ]]; then nosetests -w tests/integration; fi
+- coverage run -m nose tests/unit
+- if [[ "$API_KEY" != "" ]]; then coverage run -m nose tests/integration; fi
+after_success:
+  - codecov
 deploy:
   provider: pypi
   user: EJEP
