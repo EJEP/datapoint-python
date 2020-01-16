@@ -1,14 +1,11 @@
-from types import *
-from nose.tools import *
-
 import datetime
-
 import datapoint
+import unittest
 
 
-class TestForecast:
+class TestForecast(unittest.TestCase):
 
-    def __init__(self):
+    def setUp(self):
         self.forecast = datapoint.Forecast.Forecast()
 
     def test_forecast_now_works(self):
@@ -37,4 +34,5 @@ class TestForecast:
             test_day_1.timesteps.append(ts)
         self.forecast.days.append(test_day_1)
 
+        # What is being asserted here?
         assert self.forecast.now()
