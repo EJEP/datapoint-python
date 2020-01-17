@@ -83,7 +83,7 @@ WEATHER_CODES = {
 }
 
 
-class Manager(object):
+class Manager():
     """
     Datapoint Manager object
     """

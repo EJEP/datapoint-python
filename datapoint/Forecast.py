@@ -1,7 +1,7 @@
 import datetime
 from datapoint.exceptions import APIException
 
-class Forecast(object):
+class Forecast():
     def __init__(self, api_key=""):
         self.api_key = api_key
 
