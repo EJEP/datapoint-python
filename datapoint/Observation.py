@@ -1,6 +1,6 @@
 import datetime
 
-class Observation(object):
+class Observation():
     def __init__(self, api_key=""):
         self.api_key = api_key
 

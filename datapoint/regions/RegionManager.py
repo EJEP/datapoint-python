@@ -8,7 +8,7 @@ from datapoint.regions.region_names import REGION_NAMES
 REGIONS_BASE_URL = 'http://datapoint.metoffice.gov.uk/public/data/txt/wxfcs/regionalforecast/json'
 
 
-class RegionManager(object):
+class RegionManager():
     '''
     Datapoint Manager for national and regional text forecasts
     '''

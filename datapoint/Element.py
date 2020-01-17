@@ -1,4 +1,4 @@
-class Element(object):
+class Element():
     def __init__(self, id=None, value=None, units=None):
 
         self.id = id
