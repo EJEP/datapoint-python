@@ -381,11 +381,9 @@ class Manager():
                     cur_elements = ELEMENTS['Day']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
                                         + timedelta(hours=12)
-                    print(new_timestep.date)
                 elif timestep['$'] == "Night":
                     cur_elements = ELEMENTS['Night']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
-                    print(new_timestep.date)
                 else:
                     cur_elements = ELEMENTS['Default']
                     new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) \
