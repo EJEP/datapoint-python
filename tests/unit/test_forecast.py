@@ -52,38 +52,6 @@ class TestForecast(unittest.TestCase):
         self.forecast_daily.days.append(test_day_0)
         self.forecast_daily.days.append(test_day_1)
 
-
-    def test_forecast_now_works(self):
-        forecast = datapoint.Forecast.Forecast()
-        test_day_0 = datapoint.Day.Day()
-        test_day_0.date = datetime.datetime.now(datetime.timezone.utc)
-
-        test_timestep_0 = datapoint.Timestep.Timestep()
-        test_timestep_0.name = 0
-        test_timestep_0.date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=2)
-
-        test_timestep_1 = datapoint.Timestep.Timestep()
-        test_timestep_1.name = 1
-        test_timestep_1.date = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=4)
-
-        test_day_0.timesteps.append(test_timestep_0)
-        test_day_0.timesteps.append(test_timestep_1)
-
-        forecast.days.append(test_day_0)
-
-        test_day_1 = datapoint.Day.Day()
-        for i in range(8):
-            ts = datapoint.Timestep.Timestep()
-            ts.name = i * 180
-            ts.date = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=1, hours=i*3)
-
-            test_day_1.timesteps.append(ts)
-        forecast.days.append(test_day_1)
-
-        # What is being asserted here?
-        #print(self.forecast.now())
-        assert forecast.now()
-
     def test_at_datetime_1_5_hours_before_after(self):
 
         target_before = datetime.datetime(2020, 3, 3, 7, 0,
