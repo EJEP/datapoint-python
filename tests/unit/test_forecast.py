@@ -123,6 +123,15 @@ class TestForecast(unittest.TestCase):
                                      tzinfo=datetime.timezone.utc)
         self.assertEqual(nearest.date, expected)
 
+        target = datetime.datetime(2020, 3, 3, 11, 0,
+                                          tzinfo=datetime.timezone.utc)
+
+        nearest = self.forecast_3hrly.at_datetime(target)
+        expected = datetime.datetime(2020, 3, 3, 12,
+                                     tzinfo=datetime.timezone.utc)
+        self.assertEqual(nearest.date, expected)
+
+
     def test_forecase_midnight(self):
         target = datetime.datetime(2020, 3, 4, 0, 15,
                                           tzinfo=datetime.timezone.utc)
