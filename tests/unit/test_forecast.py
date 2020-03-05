@@ -52,7 +52,7 @@ class TestForecast(unittest.TestCase):
 
         for i in range(5):
             ts = datapoint.Timestep.Timestep()
-            ts.name = i+9
+            ts.name = 9+(3*i)
             ts.date = datetime.datetime(2020, 3, 3, 9+(3*i), tzinfo=datetime.timezone.utc)
             test_day_0.timesteps.append(ts)
 
@@ -61,8 +61,8 @@ class TestForecast(unittest.TestCase):
 
         for i in range(8):
             ts = datapoint.Timestep.Timestep()
-            ts.name = i+9
-            ts.date = datetime.datetime(2020, 3, 3, 3*i, tzinfo=datetime.timezone.utc)
+            ts.name = 3*i
+            ts.date = datetime.datetime(2020, 3, 4, 3*i, tzinfo=datetime.timezone.utc)
             test_day_1.timesteps.append(ts)
 
         forecast = datapoint.Forecast.Forecast()
@@ -74,6 +74,46 @@ class TestForecast(unittest.TestCase):
                                           tzinfo=datetime.timezone.utc)
 
         target_after = datetime.datetime(2020, 3, 4, 23, 0,
+                                          tzinfo=datetime.timezone.utc)
+
+
+        self.assertRaises(datapoint.exceptions.APIException,
+                          forecast.at_datetime, target_before)
+
+        self.assertRaises(datapoint.exceptions.APIException,
+                          forecast.at_datetime, target_after)
+
+    def test_at_datetime_6_hours_before_after(self):
+
+        # Generate 2 timesteps These are set at 00:00 and 12:00
+
+        test_day_0 = datapoint.Day.Day()
+        test_day_0.date = datetime.datetime(2020, 3, 3, tzinfo=datetime.timezone.utc)
+
+        for i in range(2):
+            ts = datapoint.Timestep.Timestep()
+            ts.name = 2*i
+            ts.date = datetime.datetime(2020, 3, 3, 2*i, tzinfo=datetime.timezone.utc)
+            test_day_0.timesteps.append(ts)
+
+        test_day_1 = datapoint.Day.Day()
+        test_day_1.date = datetime.datetime(2020, 3, 4, tzinfo=datetime.timezone.utc)
+
+        for i in range(2):
+            ts = datapoint.Timestep.Timestep()
+            ts.name = 2*i
+            ts.date = datetime.datetime(2020, 3, 4, 2*i, tzinfo=datetime.timezone.utc)
+            test_day_1.timesteps.append(ts)
+
+        forecast = datapoint.Forecast.Forecast()
+
+        forecast.days.append(test_day_0)
+        forecast.days.append(test_day_1)
+
+        target_before = datetime.datetime(2020, 3, 2, 15, 0,
+                                          tzinfo=datetime.timezone.utc)
+
+        target_after = datetime.datetime(2020, 3, 6, 7, 0,
                                           tzinfo=datetime.timezone.utc)
 
 
