@@ -489,7 +489,7 @@ class Manager():
                 sites.append(site)
             self.observation_sites_last_request = sites
         else:
-            sites = observation_self.sites_last_request
+            sites = self.observation_sites_last_request
 
         return sites
 
