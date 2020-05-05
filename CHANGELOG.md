@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.9.6] - 2020-05-05
+
 + Require arguments to `get_nearest_forecast_site` and `get_nearest_observation_site`.
 + Add python 3.8 to tests and setup.py
 
