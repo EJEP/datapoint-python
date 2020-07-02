@@ -1,3 +1,5 @@
+from .Element import Element
+
 class Timestep():
     def __init__(self, api_key=""):
         self.api_key = api_key
@@ -23,13 +25,7 @@ class Timestep():
             yield attr, value
 
     def elements(self):
-        """Return a list of the elements which are not None"""
-
-        elements = []
-
-        for el in ct:
-            if isinstance(el[1], datapoint.Element.Element):
-                elements.append(el[1])
+        """Return a list of the Elements which are not None"""
+        elements = [el[1] for el in self.__dict__.items() if isinstance(el[1], Element)]
 
         return elements
-
