@@ -20,7 +20,7 @@ class MockDateTime(datetime):
 class TestDataPoint(unittest.TestCase):
     @Mocker()
     def setUp(self, mock_request):
-        with open(f"{pathlib.Path(__file__).parent.absolute()}/datapoint.json") as f:
+        with open("{}/datapoint.json".format(pathlib.Path(__file__).parent.absolute())) as f:
             mock_json = json.load(f)
 
         self.all_sites = json.dumps(mock_json['all_sites'])
