@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.9.8] - 2020-07-03
+
++ Remove f-string in test
+
 ## [0.9.7] - 2020-07-03
 
 + Bugfix for `get_observation_sites`
