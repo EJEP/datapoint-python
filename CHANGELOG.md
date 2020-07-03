@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.9.7] - 2020-07-03
+
++ Bugfix for `get_observation_sites`
+
 ## [0.9.6] - 2020-05-05
 
 + Require arguments to `get_nearest_forecast_site` and `get_nearest_observation_site`.
