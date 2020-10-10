@@ -359,7 +359,7 @@ class Manager():
             forecast.latitude = data['SiteRep']['DV']['Location']['lat']
 
         if 'i' in data['SiteRep']['DV']['Location']:
-            forecast.id = data['SiteRep']['DV']['Location']['i']
+            forecast.location_id = data['SiteRep']['DV']['Location']['i']
 
         if 'elevation' in data['SiteRep']['DV']['Location']:
             forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
@@ -554,7 +554,7 @@ class Manager():
                     observation.latitude = data['SiteRep']['DV']['Location']['lat']
 
                 if 'i' in data['SiteRep']['DV']['Location']:
-                    observation.id = data['SiteRep']['DV']['Location']['i']
+                    observation.location_id = data['SiteRep']['DV']['Location']['i']
 
                 if 'elevation' in data['SiteRep']['DV']['Location']:
                     observation.elevation = data['SiteRep']['DV']['Location']['elevation']
