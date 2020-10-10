@@ -6,7 +6,7 @@ import unittest
 class TestForecast(unittest.TestCase):
 
     def setUp(self):
-        self.forecast_3hrly = datapoint.Forecast.Forecast()
+        self.forecast_3hrly = datapoint.Forecast.Forecast(frequency='3hourly')
 
         test_day_0 = datapoint.Day.Day()
         test_day_0.date = datetime.datetime(2020, 3, 3, tzinfo=datetime.timezone.utc)
@@ -47,7 +47,7 @@ class TestForecast(unittest.TestCase):
             ts.date = datetime.datetime(2020, 3, 4, 2*i, tzinfo=datetime.timezone.utc)
             test_day_1.timesteps.append(ts)
 
-        self.forecast_daily = datapoint.Forecast.Forecast()
+        self.forecast_daily = datapoint.Forecast.Forecast(frequency='daily')
 
         self.forecast_daily.days.append(test_day_0)
         self.forecast_daily.days.append(test_day_1)
