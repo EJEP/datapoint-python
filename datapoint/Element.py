@@ -7,3 +7,6 @@ class Element():
 
         # For elements which can also have a text value
         self.text = None
+
+    def __str__(self):
+        return str(self.value) + str(self.units)

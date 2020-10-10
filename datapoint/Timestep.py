@@ -29,3 +29,10 @@ class Timestep():
         elements = [el[1] for el in self.__dict__.items() if isinstance(el[1], Element)]
 
         return elements
+
+    def __str__(self):
+        timestep_string = ''
+        for attr, value in self.__dict__.items():
+            to_append = attr + str(value) + '\n'
+            timestep_string += to_append
+        return timestep_string
