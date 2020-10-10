@@ -9,4 +9,4 @@ class Element():
         self.text = None
 
     def __str__(self):
-        return str(self.value) + str(self.units)
+        return str(self.value) + ' ' + str(self.units)
