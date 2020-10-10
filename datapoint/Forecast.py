@@ -67,7 +67,8 @@ class Forecast():
 
         for day in self.days:
             for timestep in day.timesteps:
-                # Calculate the difference between the target time and the timestep.
+                # Calculate the difference between the target time and the
+                # timestep.
                 td = target - timestep.date
 
                 # Find the timestep which is further from the target than the
@@ -75,11 +76,11 @@ class Forecast():
                 if abs(td.total_seconds()) > abs(prev_td.total_seconds()):
                     # We are further from the target
                     return prev_ts
-                elif abs(td.total_seconds()) < 5400 and num_timesteps == 8:
+                if abs(td.total_seconds()) < 5400 and num_timesteps == 8:
                     # if we are past the final timestep, and it is a 3 hourly
                     # forecast, check that we are within 90 minutes of it
                     return timestep
-                elif abs(td.total_seconds()) < 21600 and num_timesteps == 2:
+                if abs(td.total_seconds()) < 21600 and num_timesteps == 2:
                     # if we are past the final timestep, and it is a daily
                     # forecast, check that we are within 6 hours of it
                     return timestep
