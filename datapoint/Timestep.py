@@ -1,9 +1,7 @@
 from .Element import Element
 
 class Timestep():
-    def __init__(self, api_key=""):
-        self.api_key = api_key
-
+    def __init__(self):
         self.name = None
         self.date = None
         self.weather = None

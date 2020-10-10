@@ -55,7 +55,7 @@ Let’s call another of the Manager Object’s methods to give us a
 
 ::
 
-   forecast = conn.get_forecast_for_site(site.id, "3hourly")
+   forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
 
 We’ve given this method two parameters, the site ID for the forecast we want and
 also a forecast type of “3hourly”. We’ll discuss the forecast types later on.

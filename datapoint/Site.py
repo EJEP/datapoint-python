@@ -1,9 +1,7 @@
 class Site():
-    def __init__(self, api_key=""):
-        self.api_key = api_key
-
+    def __init__(self):
         self.name = None
-        self.id = None
+        self.location_id = None
         self.elevation = None
         self.latitude = None
         self.longitude = None

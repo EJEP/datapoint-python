@@ -7,11 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Remove deprecated `new_old` and `future_old` functions.
 + Add `__str__` functions to `Timestep`, `Element`, `Day`, `Site`
 + Add element to `Forecast` to track if forecast is daily or 3 hourly
++ Change `id` variable in `Forecast`, `Observation`, `Site` to `location_id`.
++ Change `id` variable in `Element` to `field_code`.
 
 ## [0.9.8] - 2020-07-03
 
 + Remove f-string in test
-
+  
 ## [0.9.7] - 2020-07-03
 
 + Bugfix for `get_observation_sites`
@@ -141,4 +143,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.1] - 2014-07-16
 
-+ Initial commit and license.
+    + Initial commit and license.

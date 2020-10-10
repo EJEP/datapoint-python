@@ -1,7 +1,7 @@
 class Element():
-    def __init__(self, id=None, value=None, units=None):
+    def __init__(self, field_code=None, value=None, units=None):
 
-        self.id = id
+        self.field_code = field_code
         self.value = value
         self.units = units
 

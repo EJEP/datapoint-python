@@ -42,10 +42,10 @@ class TestDataPoint(unittest.TestCase):
         MockDateTime.now = classmethod(lambda cls, **kwargs: datetime(2020, 4, 25, 12, tzinfo=timezone.utc))
         mock_request.get('/public/data/val/wxfcs/all/json/354107?res=3hourly', text=self.wavertree_hourly)
 
-        forecast = self.conn.get_forecast_for_site(self.wavertree.id, "3hourly")
+        forecast = self.conn.get_forecast_for_site(self.wavertree.location_id, "3hourly")
         now = forecast.now()
 
-        self.assertEqual(self.wavertree.id, '354107')
+        self.assertEqual(self.wavertree.location_id, '354107')
         self.assertEqual(self.wavertree.name, 'Wavertree')
 
         self.assertEqual(now.date.strftime(DATETIME_FORMAT), '2020-04-25 12:00:00+0000')
@@ -84,10 +84,10 @@ class TestDataPoint(unittest.TestCase):
         MockDateTime.now = classmethod(lambda cls, **kwargs: datetime(2020, 4, 25, 12, tzinfo=timezone.utc))
         mock_request.get('/public/data/val/wxfcs/all/json/354107?res=daily', text=self.wavertree_daily)
 
-        forecast = self.conn.get_forecast_for_site(self.wavertree.id, "daily")
+        forecast = self.conn.get_forecast_for_site(self.wavertree.location_id, "daily")
         now = forecast.now()
 
-        self.assertEqual(self.wavertree.id, '354107')
+        self.assertEqual(self.wavertree.location_id, '354107')
         self.assertEqual(self.wavertree.name, 'Wavertree')
 
         self.assertEqual(now.date.strftime(DATETIME_FORMAT), '2020-04-25 12:00:00+0000')
@@ -125,10 +125,10 @@ class TestDataPoint(unittest.TestCase):
         MockDateTime.now = classmethod(lambda cls, **kwargs: datetime(2020, 4, 25, 12, tzinfo=timezone.utc))
         mock_request.get('/public/data/val/wxfcs/all/json/322380?res=3hourly', text=self.kingslynn_hourly)
 
-        forecast = self.conn.get_forecast_for_site(self.kingslynn.id, "3hourly")
+        forecast = self.conn.get_forecast_for_site(self.kingslynn.location_id, "3hourly")
         now = forecast.now()
 
-        self.assertEqual(self.kingslynn.id, '322380')
+        self.assertEqual(self.kingslynn.location_id, '322380')
         self.assertEqual(self.kingslynn.name, "King's Lynn")
 
         self.assertEqual(now.date.strftime(DATETIME_FORMAT), '2020-04-25 12:00:00+0000')

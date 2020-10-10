@@ -21,7 +21,7 @@ site = conn.get_nearest_forecast_site(latitude, longitude)
 print(site.name)
 
 # Get a forecast for the nearest site
-forecast = conn.get_forecast_for_site(site.id, "3hourly")
+forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
 
 # Get the current timestep using now() and print out some info
 now = forecast.now()

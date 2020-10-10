@@ -3,9 +3,7 @@ from datapoint.exceptions import APIException
 
 
 class Forecast():
-    def __init__(self, api_key="", frequency=""):
-        self.api_key = api_key
-
+    def __init__(self, frequency=""):
         self.frequency = frequency
         self.data_date = None
         self.continent = None
@@ -13,7 +11,7 @@ class Forecast():
         self.name = None
         self.longitude = None
         self.latitude = None
-        self.id = None
+        self.location_id = None
         self.elevation = None
         self.days = []
 

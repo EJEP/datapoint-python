@@ -247,7 +247,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
@@ -359,7 +359,7 @@ class Manager():
             forecast.latitude = data['SiteRep']['DV']['Location']['lat']
 
         if 'i' in data['SiteRep']['DV']['Location']:
-            forecast.id = data['SiteRep']['DV']['Location']['i']
+            forecast.location_id = data['SiteRep']['DV']['Location']['i']
 
         if 'elevation' in data['SiteRep']['DV']['Location']:
             forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
@@ -467,7 +467,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
@@ -553,7 +553,7 @@ class Manager():
                     observation.latitude = data['SiteRep']['DV']['Location']['lat']
 
                 if 'i' in data['SiteRep']['DV']['Location']:
-                    observation.id = data['SiteRep']['DV']['Location']['i']
+                    observation.location_id = data['SiteRep']['DV']['Location']['i']
 
                 if 'elevation' in data['SiteRep']['DV']['Location']:
                     observation.elevation = data['SiteRep']['DV']['Location']['elevation']
