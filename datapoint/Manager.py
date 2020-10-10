@@ -509,7 +509,7 @@ class Manager():
                     float(longitude),
                     float(latitude))
 
-            if ((distance == None) or (new_distance < distance)):
+            if ((distance is None) or (new_distance < distance)):
                 distance = new_distance
                 nearest = site
 
@@ -519,167 +519,166 @@ class Manager():
 
         return nearest
 
+    def get_observations_for_site(self, site_id):
+        """
+        Get observations for the provided site
 
-    def get_observations_for_site(self, site_id, frequency='hourly'):
-            """
-            Get observations for the provided site
+        Returns hourly observations for the previous 24 hours
+        """
 
-            Returns hourly observations for the previous 24 hours
-            """
+        data = self.__call_api(site_id, {"res": "hourly"}, OBSERVATION_URL)
 
-            data = self.__call_api(site_id,{"res": frequency}, OBSERVATION_URL)
+        params = data['SiteRep']['Wx']['Param']
+        observation = Observation()
 
-            params = data['SiteRep']['Wx']['Param']
-            observation = Observation()
+        # Check if keys are in data returned before using them.
+        if 'dataDate' in data['SiteRep']['DV']:
+            observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-            # Check if keys are in data returned before using them.
-            if 'dataDate' in data['SiteRep']['DV']:
-                observation.data_date = datetime.strptime(data['SiteRep']['DV']['dataDate'], DATA_DATE_FORMAT).replace(tzinfo=pytz.UTC)
+        if 'Location' in data['SiteRep']['DV']:
+            if 'continent' in data['SiteRep']['DV']['Location']:
+                observation.continent = data['SiteRep']['DV']['Location']['continent']
 
-            if 'Location' in data['SiteRep']['DV']:
-                if 'continent' in data['SiteRep']['DV']['Location']:
-                    observation.continent = data['SiteRep']['DV']['Location']['continent']
+            if 'country' in data['SiteRep']['DV']['Location']:
+                observation.country = data['SiteRep']['DV']['Location']['country']
 
-                if 'country' in data['SiteRep']['DV']['Location']:
-                    observation.country = data['SiteRep']['DV']['Location']['country']
+            if 'name' in data['SiteRep']['DV']['Location']:
+                observation.name = data['SiteRep']['DV']['Location']['name']
 
-                if 'name' in data['SiteRep']['DV']['Location']:
-                    observation.name = data['SiteRep']['DV']['Location']['name']
+            if 'lon' in data['SiteRep']['DV']['Location']:
+                observation.longitude = data['SiteRep']['DV']['Location']['lon']
 
-                if 'lon' in data['SiteRep']['DV']['Location']:
-                    observation.longitude = data['SiteRep']['DV']['Location']['lon']
+            if 'lat' in data['SiteRep']['DV']['Location']:
+                observation.latitude = data['SiteRep']['DV']['Location']['lat']
 
-                if 'lat' in data['SiteRep']['DV']['Location']:
-                    observation.latitude = data['SiteRep']['DV']['Location']['lat']
+            if 'i' in data['SiteRep']['DV']['Location']:
+                observation.location_id = data['SiteRep']['DV']['Location']['i']
 
-                if 'i' in data['SiteRep']['DV']['Location']:
-                    observation.location_id = data['SiteRep']['DV']['Location']['i']
+            if 'elevation' in data['SiteRep']['DV']['Location']:
+                observation.elevation = data['SiteRep']['DV']['Location']['elevation']
 
-                if 'elevation' in data['SiteRep']['DV']['Location']:
-                    observation.elevation = data['SiteRep']['DV']['Location']['elevation']
+        for day in data['SiteRep']['DV']['Location']['Period']:
+            new_day = Day()
+            new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
 
-            for day in data['SiteRep']['DV']['Location']['Period']:
-                new_day = Day()
-                new_day.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC)
+            # If the day only has 1 timestep, put it into a list by itself
+            # so it can be treated the same as a day with multiple timesteps
+            if type(day['Rep']) is not list:
+                day['Rep'] = [day['Rep']]
 
-                # If the day only has 1 timestep, put it into a list by itself
-                # so it can be treated the same as a day with multiple timesteps
-                if type(day['Rep']) is not list:
-                        day['Rep'] = [day['Rep']]
+            for timestep in day['Rep']:
+                # As stated in
+                # https://www.metoffice.gov.uk/datapoint/product/uk-hourly-site-specific-observations,
+                # some sites do not have all parameters available for
+                # observations. The documentation does not state which
+                # fields may be absent. If the parameter is not available,
+                # nothing is returned from the API. If this happens the
+                # value of the element is set to 'Not reported'. This may
+                # change to the element not being assigned to the timestep.
 
-                for timestep in day['Rep']:
-                    # As stated in
-                    # https://www.metoffice.gov.uk/datapoint/product/uk-hourly-site-specific-observations,
-                    # some sites do not have all parameters available for
-                    # observations. The documentation does not state which
-                    # fields may be absent. If the parameter is not available,
-                    # nothing is returned from the API. If this happens the
-                    # value of the element is set to 'Not reported'. This may
-                    # change to the element not being assigned to the timestep.
+                new_timestep = Timestep()
+                # Assume the '$' field is always present.
+                new_timestep.name = int(timestep['$'])
 
-                    new_timestep = Timestep()
-                    # Assume the '$' field is always present.
-                    new_timestep.name = int(timestep['$'])
+                cur_elements = ELEMENTS['Observation']
 
-                    cur_elements = ELEMENTS['Observation']
+                new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
 
-                    new_timestep.date = datetime.strptime(day['value'], DATE_FORMAT).replace(tzinfo=pytz.UTC) + timedelta(minutes=int(timestep['$']))
+                if cur_elements['W'] in timestep:
+                    new_timestep.weather = \
+                        Element(cur_elements['W'],
+                                timestep[cur_elements['W']],
+                                self._get_wx_units(params, cur_elements['W']))
+                    new_timestep.weather.text = \
+                        self._weather_to_text(int(timestep[cur_elements['W']]))
+                else:
+                    new_timestep.weather = \
+                        Element(cur_elements['W'],
+                                'Not reported')
 
-                    if cur_elements['W'] in timestep:
-                        new_timestep.weather = \
-                            Element(cur_elements['W'],
-                                    timestep[cur_elements['W']],
-                                    self._get_wx_units(params, cur_elements['W']))
-                        new_timestep.weather.text = \
-                            self._weather_to_text(int(timestep[cur_elements['W']]))
-                    else:
-                        new_timestep.weather = \
-                            Element(cur_elements['W'],
-                                    'Not reported')
+                if cur_elements['T'] in timestep:
+                    new_timestep.temperature = \
+                        Element(cur_elements['T'],
+                                float(timestep[cur_elements['T']]),
+                                self._get_wx_units(params, cur_elements['T']))
+                else:
+                    new_timestep.temperature = \
+                        Element(cur_elements['T'],
+                                'Not reported')
 
-                    if cur_elements['T'] in timestep:
-                        new_timestep.temperature = \
-                            Element(cur_elements['T'],
-                                    float(timestep[cur_elements['T']]),
-                                    self._get_wx_units(params, cur_elements['T']))
-                    else:
-                        new_timestep.temperature = \
-                            Element(cur_elements['T'],
-                                    'Not reported')
+                if 'S' in timestep:
+                    new_timestep.wind_speed = \
+                        Element(cur_elements['S'],
+                                int(timestep[cur_elements['S']]),
+                                self._get_wx_units(params, cur_elements['S']))
+                else:
+                    new_timestep.wind_speed = \
+                        Element(cur_elements['S'],
+                                'Not reported')
 
-                    if 'S' in timestep:
-                        new_timestep.wind_speed = \
-                            Element(cur_elements['S'],
-                                    int(timestep[cur_elements['S']]),
-                                    self._get_wx_units(params, cur_elements['S']))
-                    else:
-                        new_timestep.wind_speed = \
-                            Element(cur_elements['S'],
-                                    'Not reported')
+                if 'D' in timestep:
+                    new_timestep.wind_direction = \
+                        Element(cur_elements['D'],
+                                timestep[cur_elements['D']],
+                                self._get_wx_units(params, cur_elements['D']))
+                else:
+                    new_timestep.wind_direction = \
+                        Element(cur_elements['D'],
+                                'Not reported')
 
-                    if 'D' in timestep:
-                        new_timestep.wind_direction = \
-                            Element(cur_elements['D'],
-                                    timestep[cur_elements['D']],
-                                    self._get_wx_units(params, cur_elements['D']))
-                    else:
-                        new_timestep.wind_direction = \
-                            Element(cur_elements['D'],
-                                    'Not reported')
+                if cur_elements['V'] in timestep:
+                    new_timestep.visibility = \
+                        Element(cur_elements['V'],
+                                int(timestep[cur_elements['V']]),
+                                self._get_wx_units(params, cur_elements['V']))
+                    new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
+                else:
+                    new_timestep.visibility = \
+                        Element(cur_elements['V'],
+                                'Not reported')
 
-                    if cur_elements['V'] in timestep:
-                        new_timestep.visibility = \
-                            Element(cur_elements['V'],
-                                    int(timestep[cur_elements['V']]),
-                                    self._get_wx_units(params, cur_elements['V']))
-                        new_timestep.visibility.text = self._visibility_to_text(int(timestep[cur_elements['V']]))
-                    else:
-                        new_timestep.visibility = \
-                            Element(cur_elements['V'],
-                                    'Not reported')
+                if cur_elements['H'] in timestep:
+                    new_timestep.humidity = \
+                        Element(cur_elements['H'],
+                                float(timestep[cur_elements['H']]),
+                                self._get_wx_units(params, cur_elements['H']))
+                else:
+                    new_timestep.humidity = \
+                        Element(cur_elements['H'],
+                                'Not reported')
 
-                    if cur_elements['H'] in timestep:
-                        new_timestep.humidity = \
-                            Element(cur_elements['H'],
-                                    float(timestep[cur_elements['H']]),
-                                    self._get_wx_units(params, cur_elements['H']))
-                    else:
-                        new_timestep.humidity = \
-                            Element(cur_elements['H'],
-                                    'Not reported')
+                if cur_elements['Dp'] in timestep:
+                    new_timestep.dew_point = \
+                        Element(cur_elements['Dp'],
+                                float(timestep[cur_elements['Dp']]),
+                                self._get_wx_units(params,
+                                                   cur_elements['Dp']))
+                else:
+                    new_timestep.dew_point = \
+                        Element(cur_elements['Dp'],
+                                'Not reported')
 
-                    if cur_elements['Dp'] in timestep:
-                        new_timestep.dew_point = \
-                            Element(cur_elements['Dp'],
-                                    float(timestep[cur_elements['Dp']]),
-                                    self._get_wx_units(params,
-                                                       cur_elements['Dp']))
-                    else:
-                        new_timestep.dew_point = \
-                            Element(cur_elements['Dp'],
-                                    'Not reported')
+                if cur_elements['P'] in timestep:
+                    new_timestep.pressure = \
+                        Element(cur_elements['P'],
+                                float(timestep[cur_elements['P']]),
+                                self._get_wx_units(params, cur_elements['P']))
+                else:
+                    new_timestep.pressure = \
+                        Element(cur_elements['P'],
+                                'Not reported')
 
-                    if cur_elements['P'] in timestep:
-                        new_timestep.pressure = \
-                            Element(cur_elements['P'],
-                                    float(timestep[cur_elements['P']]),
-                                    self._get_wx_units(params, cur_elements['P']))
-                    else:
-                        new_timestep.pressure = \
-                            Element(cur_elements['P'],
-                                    'Not reported')
+                if cur_elements['Pt'] in timestep:
+                    new_timestep.pressure_tendency = \
+                        Element(cur_elements['Pt'],
+                                timestep[cur_elements['Pt']],
+                                self._get_wx_units(params, cur_elements['Pt']))
+                else:
+                    new_timestep.pressure_tendency = \
+                        Element(cur_elements['Pt'],
+                                'Not reported')
 
-                    if cur_elements['Pt'] in timestep:
-                        new_timestep.pressure_tendency = \
-                            Element(cur_elements['Pt'],
-                                    timestep[cur_elements['Pt']],
-                                    self._get_wx_units(params, cur_elements['Pt']))
-                    else:
-                        new_timestep.pressure_tendency = \
-                            Element(cur_elements['Pt'],
-                                    'Not reported')
+                new_day.timesteps.append(new_timestep)
+            observation.days.append(new_day)
 
-                    new_day.timesteps.append(new_timestep)
-                observation.days.append(new_day)
-
-            return observation
+        return observation
