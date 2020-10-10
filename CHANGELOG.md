@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 + Remove deprecated `new_old` and `future_old` functions.
 + Add `__str__` functions to `Timestep`, `Element`, `Day`, `Site`
++ Add element to `Forecast` to track if forecast is daily or 3 hourly
 
 ## [0.9.8] - 2020-07-03
 
