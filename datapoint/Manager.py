@@ -247,7 +247,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
@@ -325,7 +325,7 @@ class Manager():
         A frequency of "3hourly" will return 8 timesteps:
         0, 180, 360 ... 1260 (minutes since midnight UTC)
         """
-        data = self.__call_api(site_id, {"res":frequency})
+        data = self.__call_api(site_id, {"res": frequency})
         params = data['SiteRep']['Wx']['Param']
         forecast = Forecast()
 
@@ -468,7 +468,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
