@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Remove deprecated `new_old` and `future_old` functions.
+
 ## [0.9.8] - 2020-07-03
 
 + Remove f-string in test
