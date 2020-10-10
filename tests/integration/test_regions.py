@@ -24,14 +24,14 @@ class RegionsIntegrationTestCase(unittest.TestCase):
         all_regions = self.regions.get_all_regions()
         sample_region = next(
             region for region in all_regions
-            if region.id == '515')
+            if region.location_id == '515')
         self.assertEqual(sample_region.name, 'UK')
         self.assertEqual(sample_region.region, 'uk')
 
     def test_get_raw_forecast(self):
         sample_region = self.regions.get_all_regions()[0]
         response = self.regions.get_raw_forecast(
-            sample_region.id)['RegionalFcst']
+            sample_region.location_id)['RegionalFcst']
         self.assertEqual(response['regionId'], sample_region.region)
 
         # Based on what Datapoint serves at time of writing...
