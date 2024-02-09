@@ -1,6 +1,6 @@
 language: python
 sudo: false
-dist: xenial
+dist: jammy
 python:
   - '3.8'
   - '3.9'
