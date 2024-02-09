@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.9.9] - 2024-02-09
+
 + Update versioneer
 + Add pythons 3.9, 3.10, 3.11, 3.12 to tests and setup.py.
 + Remove support for python < 3.8
