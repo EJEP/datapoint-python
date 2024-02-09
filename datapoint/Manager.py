@@ -247,7 +247,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
@@ -304,7 +304,7 @@ class Manager():
                     float(longitude),
                     float(latitude))
 
-            if ((distance == None) or (new_distance < distance)):
+            if ((distance is None) or (new_distance < distance)):
                 distance = new_distance
                 nearest = site
 
@@ -325,15 +325,15 @@ class Manager():
         A frequency of "3hourly" will return 8 timesteps:
         0, 180, 360 ... 1260 (minutes since midnight UTC)
         """
-        data = self.__call_api(site_id, {"res":frequency})
+        data = self.__call_api(site_id, {"res": frequency})
         params = data['SiteRep']['Wx']['Param']
-        forecast = Forecast()
+        forecast = Forecast(frequency=frequency)
 
         # If the 'Location' key is missing, there is no data for the site,
         # raise an error.
         if 'Location' not in data['SiteRep']['DV']:
             err_string = ('DataPoint has not returned any data for the'
-                          'requested site.' )
+                          'requested site.')
             raise APIException(err_string)
 
         # Check if the other keys we need are in the data returned from the
@@ -359,7 +359,7 @@ class Manager():
             forecast.latitude = data['SiteRep']['DV']['Location']['lat']
 
         if 'i' in data['SiteRep']['DV']['Location']:
-            forecast.id = data['SiteRep']['DV']['Location']['i']
+            forecast.location_id = data['SiteRep']['DV']['Location']['i']
 
         if 'elevation' in data['SiteRep']['DV']['Location']:
             forecast.elevation = data['SiteRep']['DV']['Location']['elevation']
@@ -456,7 +456,6 @@ class Manager():
 
         return forecast
 
-
     def get_observation_sites(self):
         """
         This function returns a list of Site objects for which observations are available.
@@ -468,7 +467,7 @@ class Manager():
             for jsoned in data['Locations']['Location']:
                 site = Site()
                 site.name = jsoned['name']
-                site.id = jsoned['id']
+                site.location_id = jsoned['id']
                 site.latitude = jsoned['latitude']
                 site.longitude = jsoned['longitude']
 
@@ -528,7 +527,7 @@ class Manager():
             Returns hourly observations for the previous 24 hours
             """
 
-            data = self.__call_api(site_id,{"res":frequency}, OBSERVATION_URL)
+            data = self.__call_api(site_id,{"res": frequency}, OBSERVATION_URL)
 
             params = data['SiteRep']['Wx']['Param']
             observation = Observation()
@@ -554,7 +553,7 @@ class Manager():
                     observation.latitude = data['SiteRep']['DV']['Location']['lat']
 
                 if 'i' in data['SiteRep']['DV']['Location']:
-                    observation.id = data['SiteRep']['DV']['Location']['i']
+                    observation.location_id = data['SiteRep']['DV']['Location']['i']
 
                 if 'elevation' in data['SiteRep']['DV']['Location']:
                     observation.elevation = data['SiteRep']['DV']['Location']['elevation']

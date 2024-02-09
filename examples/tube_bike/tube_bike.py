@@ -16,8 +16,8 @@ my_house = conn.get_nearest_forecast_site(51.5016730, 0.0057500)
 work = conn.get_nearest_forecast_site(51.5031650, -0.1123050)
 
 # Get a forecast for my house and work
-my_house_forecast = conn.get_forecast_for_site(my_house.id, "3hourly")
-work_forecast = conn.get_forecast_for_site(work.id, "3hourly")
+my_house_forecast = conn.get_forecast_for_site(my_house.location_id, "3hourly")
+work_forecast = conn.get_forecast_for_site(work.location_id, "3hourly")
 
 # Get the current timestep for both locations
 my_house_now = my_house_forecast.now()

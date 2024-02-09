@@ -28,7 +28,7 @@ print(site.name)
 
 
 # Get a forecast for the nearest site
-forecast = conn.get_forecast_for_site(site.id, "daily")
+forecast = conn.get_forecast_for_site(site.location_id, "daily")
 
 # Loop through days
 for day in forecast.days:

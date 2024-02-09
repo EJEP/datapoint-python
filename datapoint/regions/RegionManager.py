@@ -50,7 +50,7 @@ class RegionManager():
         regions = []
         for location in response['Locations']['Location']:
             region = Site()
-            region.id = location['@id']
+            region.location_id = location['@id']
             region.region = location['@name']
             region.name = REGION_NAMES[location['@name']]
             regions.append(region)

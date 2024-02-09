@@ -46,7 +46,7 @@ conn = datapoint.connection(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 site = conn.get_nearest_forecast_site(51.500728, -0.124626)
 
 # Get a forecast for my nearest site with 3 hourly timesteps
-forecast = conn.get_forecast_for_site(site.id, "3hourly")
+forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
 
 # Get the current timestep from the forecast
 current_timestep = forecast.now()
