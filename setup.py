@@ -78,9 +78,10 @@ GPLv3.
       packages=['datapoint', 'datapoint.regions'],
       classifiers=[
           'Development Status :: 3 - Alpha',
-          'Programming Language :: Python :: 3.5',
-          'Programming Language :: Python :: 3.6',
-          'Programming Language :: Python :: 3.7',
           'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: 3.9',
+          'Programming Language :: Python :: 3.10',
+          'Programming Language :: Python :: 3.11',
+          'Programming Language :: Python :: 3.12',
       ]
      )

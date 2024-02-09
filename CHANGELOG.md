@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Update versioneer
++ Add pythons 3.9, 3.10, 3.11, 3.12 to tests and setup.py.
++ Remove support for python < 3.8
 + Remove deprecated `new_old` and `future_old` functions.
 + Add `__str__` functions to `Timestep`, `Element`, `Day`, `Site`
 + Add element to `Forecast` to track if forecast is daily or 3 hourly
