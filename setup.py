@@ -4,8 +4,8 @@ from setuptools import setup
 import versioneer
 
 setup(name='datapoint',
-      version=versioneer.get_version(),
-      cmdclass=versioneer.get_cmdclass(),
+      version='0.9.9',
+      #cmdclass=versioneer.get_cmdclass(),
       install_requires=[
           "requests >= 2.20.0,<3",
           "appdirs >=1,<2",
