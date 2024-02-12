@@ -1,6 +1,8 @@
 import os
-from requests import HTTPError
 import unittest
+
+from requests import HTTPError
+
 import datapoint
 
 

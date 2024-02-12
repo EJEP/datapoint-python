@@ -1,6 +1,6 @@
 import datetime
+
 from datapoint.exceptions import APIException
-from datapoint.Timestep import Timestep
 from datapoint.weather_codes import WEATHER_CODES
 
 

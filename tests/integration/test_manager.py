@@ -1,7 +1,9 @@
 import datetime
 import os
 import unittest
+
 import datapoint
+
 
 class ManagerIntegrationTestCase(unittest.TestCase):
 

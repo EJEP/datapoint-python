@@ -4,8 +4,9 @@ This example will print out a simple forecast for the next 5 days.
 It will allow us to explore the day, timestep and element objects.
 """
 
-import datapoint
 import datetime
+
+import datapoint
 
 # Create datapoint connection
 manager = datapoint.Manager(

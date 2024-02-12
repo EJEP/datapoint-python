@@ -41,3 +41,7 @@ exclude = [
 
 [tool.hatch.version]
 source = "versioningit"
+
+[tool.isort]
+profile = "black"
+src_paths = ["src", "tests"]

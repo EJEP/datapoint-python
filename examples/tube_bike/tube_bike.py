@@ -5,8 +5,9 @@ for your usual line. Then use that information to decide whether you're better o
 cycling or catching the tube.
 """
 
-import datapoint
 import tubestatus
+
+import datapoint
 
 # Create datapoint connection
 conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")

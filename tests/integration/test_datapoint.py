@@ -1,10 +1,11 @@
-from datetime import datetime, date
 import json
 import pathlib
+import unittest
+from datetime import date, datetime
+from unittest.mock import patch
+
 import requests
 from requests_mock import Mocker
-import unittest
-from unittest.mock import patch
 
 import datapoint
 

@@ -1,5 +1,7 @@
 import unittest
+
 import datapoint
+
 
 class ManagerTestCase(unittest.TestCase):
 

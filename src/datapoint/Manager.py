@@ -2,14 +2,13 @@
 Datapoint python module
 """
 
+import geojson
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-import geojson
 
 from datapoint.exceptions import APIException
 from datapoint.Forecast import Forecast
-
 
 API_URL = "https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/"
 DATE_FORMAT = "%Y-%m-%dZ"

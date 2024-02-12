@@ -1,6 +1,8 @@
-import unittest
 import datetime
+import unittest
+
 import datapoint
+
 
 class ObservationTestCase(unittest.TestCase):
 

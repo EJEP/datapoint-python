@@ -2,8 +2,8 @@
 
 import os.path
 
-from datapoint.Manager import Manager
 import datapoint.profile
+from datapoint.Manager import Manager
 
 
 def connection(profile_name="default", api_key=None):
