@@ -19,8 +19,3 @@ def connection(profile_name="default", api_key=None):
         with open(profile_fname) as fh:
             api_key = fh.readlines()
     return Manager(api_key=api_key)
-
-
-from . import _version
-
-__version__ = _version.get_versions()["version"]
