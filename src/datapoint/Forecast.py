@@ -36,7 +36,10 @@ class Forecast:
         timesteps = []
         for forecast in forecasts:
             night_step = {"time": datetime.datetime.fromisoformat(forecast["time"])}
-            day_step = {"time": datetime.datetime.fromisoformat( forecast["time"] ) + datetime.timedelta(hours=12)}
+            day_step = {
+                "time": datetime.datetime.fromisoformat(forecast["time"])
+                + datetime.timedelta(hours=12)
+            }
 
             for element, value in forecast.items():
                 if element.startswith("midday"):

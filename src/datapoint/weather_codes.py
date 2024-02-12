@@ -33,4 +33,3 @@ WEATHER_CODES = {
     "29": "Thunder shower",
     "30": "Thunder",
 }
-

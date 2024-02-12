@@ -140,9 +140,11 @@ class Manager:
         0, 180, 360 ... 1260 (minutes since midnight UTC)
         """
         if frequency not in ["hourly", "three-hourly", "daily"]:
-            raise ValueError("frequency must be set to one of 'hourly', 'three-hourly', 'daily'")
+            raise ValueError(
+                "frequency must be set to one of 'hourly', 'three-hourly', 'daily'"
+            )
         data = self.__call_api(latitude, longitude, frequency)
-        #print(data)
+        # print(data)
         forecast = Forecast(frequency=frequency, api_data=data)
 
         return forecast
