@@ -25,6 +25,7 @@ classifiers=[
 dependencies = [
   "requests >= 2.20.0,<3",
   "appdirs >=1,<2",
+  "geojson >= 3.0.0,<4",
 ]
 license = {file = "LICENSE"}
 keywords = ["weather", "weather forecast", "Met Office", "DataHub"]
@@ -45,3 +46,8 @@ source = "versioningit"
 [tool.isort]
 profile = "black"
 src_paths = ["src", "tests"]
+
+[tool.versioningit.format]
+distance = "{base_version}"
+dirty = "{base_version}"
+distance-dirty = "{base_version}"
