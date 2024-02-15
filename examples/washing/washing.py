@@ -13,12 +13,12 @@ from datetime import datetime
 import datapoint
 
 # Set thresholds
-MAX_WIND = 31 # in mph. We don't want the washing to blow away
-MAX_PRECIPITATION = 20 # Max chance of rain we will accept
+MAX_WIND = 31  # in mph. We don't want the washing to blow away
+MAX_PRECIPITATION = 20  # Max chance of rain we will accept
 
 # Variables for later
 best_day = None
-best_day_score = 0 # For simplicity the score will be temperature + wind speed
+best_day_score = 0  # For simplicity the score will be temperature + wind speed
 
 # Create datapoint connection
 conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
@@ -33,16 +33,16 @@ forecast = conn.get_forecast_for_site(site.location_id, "daily")
 
 # Loop through days
 for day in forecast.days:
-
     # Get the 'Day' timestep
-    if day.timesteps[0].name == 'Day':
+    if day.timesteps[0].name == "Day":
         timestep = day.timesteps[0]
 
         # If precipitation, wind speed and gust are less than their threshold
-        if timestep.precipitation.value < MAX_PRECIPITATION and \
-           timestep.wind_speed.value < MAX_WIND and \
-           timestep.wind_gust.value < MAX_WIND:
-
+        if (
+            timestep.precipitation.value < MAX_PRECIPITATION
+            and timestep.wind_speed.value < MAX_WIND
+            and timestep.wind_gust.value < MAX_WIND
+        ):
             # Calculate the score for this timestep
             timestep_score = timestep.wind_speed.value + timestep.temperature.value
 
@@ -59,4 +59,6 @@ if best_day is None:
 else:
     # Get the day of the week from the datetime object
     best_day_formatted = datetime.strftime(best_day, "%A")
-    print("%s is the best day with a score of %s" % (best_day_formatted, best_day_score))
+    print(
+        "%s is the best day with a score of %s" % (best_day_formatted, best_day_score)
+    )

@@ -9,9 +9,7 @@ import datetime
 import datapoint
 
 # Create datapoint connection
-manager = datapoint.Manager(
-    api_key="api key goes here"
-)
+manager = datapoint.Manager(api_key="api key goes here")
 
 
 forecast = manager.get_forecast(51.500728, -0.124626, frequency="hourly")

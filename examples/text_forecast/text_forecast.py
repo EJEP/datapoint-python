@@ -15,15 +15,15 @@ for region in regions:
 
 # Get all forecasts for a specific region
 my_region = regions[0]
-forecast = conn.regions.get_raw_forecast(my_region.location_id)['RegionalFcst']
+forecast = conn.regions.get_raw_forecast(my_region.location_id)["RegionalFcst"]
 
 # Print the forecast details
-print('Forecast for {} (issued at {}):'.format(my_region.name, forecast['issuedAt']))
+print("Forecast for {} (issued at {}):".format(my_region.name, forecast["issuedAt"]))
 
-sections = forecast['FcstPeriods']['Period']
-for section in forecast['FcstPeriods']['Period']:
+sections = forecast["FcstPeriods"]["Period"]
+for section in forecast["FcstPeriods"]["Period"]:
     paragraph = []
-    content = section['Paragraph']
+    content = section["Paragraph"]
 
     # Some paragraphs have multiple sections
     if isinstance(content, dict):
@@ -32,4 +32,4 @@ for section in forecast['FcstPeriods']['Period']:
         paragraph = content
 
     for line in paragraph:
-            print('{}\n{}\n'.format(line['title'], line['$']))
+        print("{}\n{}\n".format(line["title"], line["$"]))
