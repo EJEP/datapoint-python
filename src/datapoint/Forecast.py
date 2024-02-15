@@ -106,15 +106,7 @@ class Forecast:
 
         return timestep
 
-    def at_datetime(self, target):
-        """Return the timestep closest to the target datetime"""
-
-        # Convert target to offset aware datetime
-        if target.tzinfo is None:
-            target = datetime.datetime.combine(
-                target.date(), target.time(), self.timesteps[0]["time"].tzinfo
-            )
-
+    def __check_requested_time(self, target):
         # Check that there is a forecast for the requested time.
         # If we have an hourly forecast, check that the requested time is at
         # most 30 minutes before the first datetime we have a forecast for.
@@ -177,10 +169,22 @@ class Forecast:
 
             raise APIException(err_str)
 
+    def at_datetime(self, target):
+        """Return the timestep closest to the target datetime"""
+
+        # Convert target to offset aware datetime
+        if target.tzinfo is None:
+            target = datetime.datetime.combine(
+                target.date(), target.time(), self.timesteps[0]["time"].tzinfo
+            )
+
+        self.__check_requested_time(target)
+
         # Loop over all timesteps
         # Calculate the first time difference
         prev_td = target - self.timesteps[0]["time"]
         prev_ts = self.timesteps[0]
+        to_return = None
 
         for i, timestep in enumerate(self.timesteps, start=1):
             # Calculate the difference between the target time and the
@@ -191,12 +195,13 @@ class Forecast:
             # previous one. Return the previous timestep
             if abs(td.total_seconds()) > abs(prev_td.total_seconds()):
                 # We are further from the target
-                return prev_ts
+                to_return = prev_ts
             if i == len(self.timesteps):
-                return timestep
+                to_return = timestep
 
             prev_ts = timestep
             prev_td = td
+        return to_return
 
     def now(self):
         """Function to return the closest timestep to the current time"""

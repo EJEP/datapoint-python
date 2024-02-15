@@ -3,3 +3,4 @@ max-complexity = 10
 max-line-length = 80
 extend-select = B950
 extend-ignore = E203,E501,E701
+exclude = .git,__pycache__,build,dist
