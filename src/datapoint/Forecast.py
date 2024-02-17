@@ -7,18 +7,70 @@ from datapoint.weather_codes import WEATHER_CODES
 class Forecast:
     """Forecast data returned from DataPoint
 
-    Provides access to forecasts as far ahead as provided by DataPoint:
-    + x for hourly forecasts
-    + y for three-hourly forecasts
-    + z for daily forecasts
+       Provides access to forecasts as far ahead as provided by DataPoint:
+       + x for hourly forecasts
+       + y for three-hourly forecasts
+       + z for daily forecasts
 
-    Basic Usage::
+       Basic Usage::
 
-    >>> import datapoint
-    >>> m = datapoint.Manager(api_key = "blah")
-    >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
-    >>> f.now()
-    <TBD>
+       >>> import datapoint
+       >>> m = datapoint.Manager(api_key = "blah")
+       >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
+       >>> f.now()
+       {'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
+    'screenTemperature': {'value': 10.09,
+     'description': 'Screen Air Temperature',
+     'unit_name': 'degrees Celsius',
+     'unit_symbol': 'Cel'},
+    'screenDewPointTemperature': {'value': 8.08,
+     'description': 'Screen Dew Point Temperature',
+     'unit_name': 'degrees Celsius',
+     'unit_symbol': 'Cel'},
+    'feelsLikeTemperature': {'value': 6.85,
+     'description': 'Feels Like Temperature',
+     'unit_name': 'degrees Celsius',
+     'unit_symbol': 'Cel'},
+    'windSpeed10m': {'value': 7.57,
+     'description': '10m Wind Speed',
+     'unit_name': 'metres per second',
+     'unit_symbol': 'm/s'},
+    'windDirectionFrom10m': {'value': 263,
+     'description': '10m Wind From Direction',
+     'unit_name': 'degrees',
+     'unit_symbol': 'deg'},
+    'windGustSpeed10m': {'value': 12.31,
+     'description': '10m Wind Gust Speed',
+     'unit_name': 'metres per second',
+     'unit_symbol': 'm/s'},
+    'visibility': {'value': 21201,
+     'description': 'Visibility',
+     'unit_name': 'metres',
+     'unit_symbol': 'm'},
+    'screenRelativeHumidity': {'value': 87.81,
+     'description': 'Screen Relative Humidity',
+     'unit_name': 'percentage',
+     'unit_symbol': '%'},
+    'mslp': {'value': 103080,
+     'description': 'Mean Sea Level Pressure',
+     'unit_name': 'pascals',
+     'unit_symbol': 'Pa'},
+    'uvIndex': {'value': 1,
+     'description': 'UV Index',
+     'unit_name': 'dimensionless',
+     'unit_symbol': '1'},
+    'significantWeatherCode': {'value': 'Cloudy',
+     'description': 'Significant Weather Code',
+     'unit_name': 'dimensionless',
+     'unit_symbol': '1'},
+    'precipitationRate': {'value': 0.0,
+     'description': 'Precipitation Rate',
+     'unit_name': 'millimetres per hour',
+     'unit_symbol': 'mm/h'},
+    'probOfPrecipitation': {'value': 21,
+     'description': 'Probability of Precipitation',
+     'unit_name': 'percentage',
+     'unit_symbol': '%'}}
     """
 
     def __init__(self, frequency, api_data):
@@ -48,13 +100,13 @@ class Forecast:
         forecasts = api_data["features"][0]["properties"]["timeSeries"]
         parameters = api_data["parameters"][0]
         if frequency == "daily":
-            self.timesteps = self.__build_timesteps_from_daily(forecasts, parameters)
+            self.timesteps = self._build_timesteps_from_daily(forecasts, parameters)
         else:
             self.timesteps = []
             for forecast in forecasts:
-                self.timesteps.append(self.__build_timestep(forecast, parameters))
+                self.timesteps.append(self._build_timestep(forecast, parameters))
 
-    def __build_timesteps_from_daily(self, forecasts, parameters):
+    def _build_timesteps_from_daily(self, forecasts, parameters):
         """Build individual timesteps from forecasts and metadata
 
         Take the forecast data from DataHub and combine with unit information
@@ -119,7 +171,7 @@ class Forecast:
         timesteps = sorted(timesteps, key=lambda t: t["time"])
         return timesteps
 
-    def __build_timestep(self, forecast, parameters):
+    def _build_timestep(self, forecast, parameters):
         """Build individual timestep from forecast and metadata
 
         Take the forecast data from DataHub for a single time and combine with
@@ -154,7 +206,7 @@ class Forecast:
 
         return timestep
 
-    def __check_requested_time(self, target):
+    def _check_requested_time(self, target):
         """Check that a forecast for the requested time can be provided
 
         :parameter target: The requested time for the forecast
@@ -239,7 +291,7 @@ class Forecast:
                 target.date(), target.time(), self.timesteps[0]["time"].tzinfo
             )
 
-        self.__check_requested_time(target)
+        self._check_requested_time(target)
 
         # Loop over all timesteps
         # Calculate the first time difference
@@ -257,6 +309,7 @@ class Forecast:
             if abs(td.total_seconds()) > abs(prev_td.total_seconds()):
                 # We are further from the target
                 to_return = prev_ts
+                break
             if i == len(self.timesteps):
                 to_return = timestep
 

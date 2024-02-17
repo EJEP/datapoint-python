@@ -24,7 +24,59 @@ class Manager:
     >>> m = datapoint.Manager(api_key = "blah")
     >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
     >>> f.now()
-    <TBD>
+    {'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
+ 'screenTemperature': {'value': 10.09,
+  'description': 'Screen Air Temperature',
+  'unit_name': 'degrees Celsius',
+  'unit_symbol': 'Cel'},
+ 'screenDewPointTemperature': {'value': 8.08,
+  'description': 'Screen Dew Point Temperature',
+  'unit_name': 'degrees Celsius',
+  'unit_symbol': 'Cel'},
+ 'feelsLikeTemperature': {'value': 6.85,
+  'description': 'Feels Like Temperature',
+  'unit_name': 'degrees Celsius',
+  'unit_symbol': 'Cel'},
+ 'windSpeed10m': {'value': 7.57,
+  'description': '10m Wind Speed',
+  'unit_name': 'metres per second',
+  'unit_symbol': 'm/s'},
+ 'windDirectionFrom10m': {'value': 263,
+  'description': '10m Wind From Direction',
+  'unit_name': 'degrees',
+  'unit_symbol': 'deg'},
+ 'windGustSpeed10m': {'value': 12.31,
+  'description': '10m Wind Gust Speed',
+  'unit_name': 'metres per second',
+  'unit_symbol': 'm/s'},
+ 'visibility': {'value': 21201,
+  'description': 'Visibility',
+  'unit_name': 'metres',
+  'unit_symbol': 'm'},
+ 'screenRelativeHumidity': {'value': 87.81,
+  'description': 'Screen Relative Humidity',
+  'unit_name': 'percentage',
+  'unit_symbol': '%'},
+ 'mslp': {'value': 103080,
+  'description': 'Mean Sea Level Pressure',
+  'unit_name': 'pascals',
+  'unit_symbol': 'Pa'},
+ 'uvIndex': {'value': 1,
+  'description': 'UV Index',
+  'unit_name': 'dimensionless',
+  'unit_symbol': '1'},
+ 'significantWeatherCode': {'value': 'Cloudy',
+  'description': 'Significant Weather Code',
+  'unit_name': 'dimensionless',
+  'unit_symbol': '1'},
+ 'precipitationRate': {'value': 0.0,
+  'description': 'Precipitation Rate',
+  'unit_name': 'millimetres per hour',
+  'unit_symbol': 'mm/h'},
+ 'probOfPrecipitation': {'value': 21,
+  'description': 'Probability of Precipitation',
+  'unit_name': 'percentage',
+  'unit_symbol': '%'}}
     """
 
     def __init__(self, api_key=""):
@@ -49,7 +101,7 @@ class Manager:
         :parameter session: Existing session to use
 
         :return: Session object
-        :rtype: TBD
+        :rtype: <class 'requests.sessions.Session'>
         """
 
         # requests.Session allows finer control, which is needed to use the
@@ -111,6 +163,9 @@ class Manager:
         print(params)
         print(headers)
         sess = self.__get_retry_session()
+        print("get_retry_session returns a :")
+        print(type(sess))
+        print("----------------")
         req = sess.get(
             request_url,
             params=params,
@@ -146,7 +201,7 @@ class Manager:
                 "frequency must be set to one of 'hourly', 'three-hourly', 'daily'"
             )
         data = self.__call_api(latitude, longitude, frequency)
-        #with open('./hourly_api_data.json', 'w') as f:
+        #with open('./three_hourly_api_data.json', 'w') as f:
         #    geojson.dump(data, f)
         forecast = Forecast(frequency=frequency, api_data=data)
 
