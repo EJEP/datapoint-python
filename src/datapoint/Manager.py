@@ -159,13 +159,7 @@ class Manager:
         # object. This has a .get() function like requests.get(), so the use
         # doesn't change here.
 
-        print(request_url)
-        print(params)
-        print(headers)
         sess = self.__get_retry_session()
-        print("get_retry_session returns a :")
-        print(type(sess))
-        print("----------------")
         req = sess.get(
             request_url,
             params=params,
@@ -201,8 +195,6 @@ class Manager:
                 "frequency must be set to one of 'hourly', 'three-hourly', 'daily'"
             )
         data = self.__call_api(latitude, longitude, frequency)
-        #with open('./three_hourly_api_data.json', 'w') as f:
-        #    geojson.dump(data, f)
         forecast = Forecast(frequency=frequency, api_data=data)
 
         return forecast
