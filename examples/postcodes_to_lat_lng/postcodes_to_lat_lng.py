@@ -3,8 +3,9 @@
 A variation on current_weather.py which uses postcodes rather than lon lat.
 """
 
-import datapoint
 import postcodes_io_api
+
+import datapoint
 
 # Create datapoint connection
 conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")

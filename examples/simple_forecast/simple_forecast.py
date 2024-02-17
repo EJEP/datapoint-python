@@ -4,27 +4,29 @@ This example will print out a simple forecast for the next 5 days.
 It will allow us to explore the day, timestep and element objects.
 """
 
+import datetime
+
 import datapoint
 
 # Create datapoint connection
-conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
+manager = datapoint.Manager(
+    api_key="api key goes here"
+)
 
-# Get nearest site and print out its name
 
-site = conn.get_nearest_forecast_site(51.500728, -0.124626)
-print(site.name)
+forecast = manager.get_forecast(51.500728, -0.124626, frequency="hourly")
 
-# Get a forecast for the nearest site
-forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
+# Loop through timesteps and print information
+for timestep in forecast.timesteps:
+    print(timestep["time"])
+    print(timestep["significantWeatherCode"]["value"])
+    print(
+        "{temp} {temp_units}".format(
+            temp=timestep["screenTemperature"]["value"],
+            temp_units=timestep["screenTemperature"]["unit_symbol"],
+        )
+    )
 
-# Loop through days and print date
-for day in forecast.days:
-    print("\n%s" % day.date)
+print(forecast.now())
 
-    # Loop through time steps and print out info
-    for timestep in day.timesteps:
-        print(timestep.date)
-        print(timestep.weather.text)
-        print("%s%s%s" % (timestep.temperature.value,
-                          '\xb0', #Unicode character for degree symbol
-                          timestep.temperature.units))
+print(forecast.at_datetime(datetime.datetime(2024, 2, 11, 14, 0)))

@@ -1,6 +1,7 @@
 import datetime
-import datapoint
 import unittest
+
+import datapoint
 
 
 class TestForecast(unittest.TestCase):

@@ -8,8 +8,9 @@ ok to hang out the washing. Then for the good days we will rank
 them and print out the best.
 """
 
-import datapoint
 from datetime import datetime
+
+import datapoint
 
 # Set thresholds
 MAX_WIND = 31 # in mph. We don't want the washing to blow away
