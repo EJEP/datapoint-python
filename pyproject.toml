@@ -48,9 +48,9 @@ profile = "black"
 src_paths = ["src", "tests"]
 
 [tool.versioningit.format]
-distance = "{base_version}.post{distance}+{vcs}{rev}"
-dirty = "{base_version}+d{build_date:%Y%m%d}"
-distance-dirty = "{base_version}.post{distance}+{vcs}{rev}.d{build_date:%Y%m%d}"
+distance = "{base_version}"
+dirty = "{base_version}"
+distance-dirty = "{base_version}"
 
 [tool.pytest.ini_options]
 addopts = [
