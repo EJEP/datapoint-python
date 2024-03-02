@@ -3,7 +3,7 @@ import datetime
 import geojson
 import pytest
 
-import tests.unit.reference_data_test_forecast as reference_data_test_forecast
+import tests.reference_data.reference_data_test_forecast as reference_data_test_forecast
 from datapoint import Forecast
 from datapoint.exceptions import APIException
 
@@ -12,21 +12,21 @@ from datapoint.exceptions import APIException
 
 @pytest.fixture
 def load_hourly_json():
-    with open("./tests/unit/hourly_api_data.json") as f:
+    with open("./tests/reference_data/hourly_api_data.json") as f:
         my_json = geojson.load(f)
     return my_json
 
 
 @pytest.fixture
 def load_daily_json():
-    with open("./tests/unit/daily_api_data.json") as f:
+    with open("./tests/reference_data/daily_api_data.json") as f:
         my_json = geojson.load(f)
     return my_json
 
 
 @pytest.fixture
 def load_three_hourly_json():
-    with open("./tests/unit/three_hourly_api_data.json") as f:
+    with open("./tests/reference_data/three_hourly_api_data.json") as f:
         my_json = geojson.load(f)
     return my_json
 
@@ -88,10 +88,6 @@ def expected_at_datetime_daily_timestep():
 @pytest.fixture
 def expected_at_datetime_daily_final_timestep():
     return reference_data_test_forecast.EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP
-
-@pytest.fixture
-def expected_first_three_hourly_timestep():
-    return reference_data_test_forecast.EXPECTED_FIRST_THREE_HOURLY_TIMESTEP
 
 @pytest.fixture
 def expected_first_three_hourly_timestep():
