@@ -28,29 +28,32 @@ work_now = work_forecast.now()
 current_status = tubestatus.Status()
 
 # Get the status of the Waterloo and City line
-waterloo_status = current_status.get_status('Waterloo and City')
+waterloo_status = current_status.get_status("Waterloo and City")
 
 # Check whether there are any problems with rain or the tube
-if (my_house_now.precipitation.value < 40 and \
-        work_now.precipitation.value < 40 and \
-        waterloo_status.description == "Good Service"):
-
+if (
+    my_house_now.precipitation.value < 40
+    and work_now.precipitation.value < 40
+    and waterloo_status.description == "Good Service"
+):
     print("Rain is unlikely and tube service is good, the decision is yours.")
 
 # If it is going to rain then suggest the tube
-elif ((my_house_now.precipitation.value >= 40 or \
-        work_now.precipitation.value >= 40) and \
-        waterloo_status.description == "Good Service"):
-
+elif (
+    my_house_now.precipitation.value >= 40 or work_now.precipitation.value >= 40
+) and waterloo_status.description == "Good Service":
     print("Looks like rain, better get the tube")
 
 # If the tube isn't running then suggest cycling
-elif (my_house_now.precipitation.value < 40 and \
-        work_now.precipitation.value < 40 and \
-        waterloo_status.description != "Good Service"):
-
+elif (
+    my_house_now.precipitation.value < 40
+    and work_now.precipitation.value < 40
+    and waterloo_status.description != "Good Service"
+):
     print("Bad service on the tube, cycling it is!")
 
 # Else if both are bad then suggest cycling in the rain
 else:
-    print("The tube has poor service so you'll have to cycle, but it's raining so take your waterproofs.")
+    print(
+        "The tube has poor service so you'll have to cycle, but it's raining so take your waterproofs."
+    )

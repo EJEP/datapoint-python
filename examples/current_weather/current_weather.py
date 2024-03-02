@@ -20,6 +20,11 @@ forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
 # Get the current timestep using now() and print out some info
 now = forecast.now()
 print(now.weather.text)
-print("%s%s%s" % (now.temperature.value,
-                  '\xb0', #Unicode character for degree symbol
-                  now.temperature.units))
+print(
+    "%s%s%s"
+    % (
+        now.temperature.value,
+        "\xb0",  # Unicode character for degree symbol
+        now.temperature.units,
+    )
+)

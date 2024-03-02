@@ -51,3 +51,8 @@ src_paths = ["src", "tests"]
 distance = "{base_version}"
 dirty = "{base_version}"
 distance-dirty = "{base_version}"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
