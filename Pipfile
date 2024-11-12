@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "==2.31.0"
+appdirs = "==1.4.4"
+requests-mock = "==1.11.0"
+geojson = "==3.1.0"
+datapoint = {file = ".", editable = true}
+
+[dev-packages]
+
+[documentation]
+sphinx = "*"
+
+[requires]
+python_version = "3.11"

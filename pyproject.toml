@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "datapoint"
 dynamic = ["version"]
 authors = [
-  {name="Emlyn Price", email="emlyn.je.price@gmail.com"},
+  {name="Emily Price", email="emily.j.price.nth@gmail.com"},
   { name="Jacob Tomlinson"},
 ]
 description = "Python interface to the Met Office's Datapoint API"

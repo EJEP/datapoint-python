@@ -29,19 +29,6 @@ and to upgrade it in the future:
 
    pip install git+git://github.com/ejep/datapoint-python.git@master --upgrade
 
-Easy Install
-------------
-
-Or if you really feel the need then you can use
-`easy_install <http://pypi.python.org/pypi/setuptools>`__.
-
-::
-
-   easy_install datapoint
-
-But you `probably
-shouldn’t <https://stackoverflow.com/questions/3220404/why-use-pip-over-easy-install>`__.
-
 Source
 ------
 
@@ -66,26 +53,3 @@ Then run the setup
 ::
 
    python setup.py install
-
-Windows
--------
-
--  Install `python <https://www.python.org/downloads/>`__ - you can see
-   supported versions in the
-   `readme <https://github.com/ejep/datapoint-python/blob/master/README.md>`__
--  Install the appropriate
-   `setuptools <http://www.lfd.uci.edu/~gohlke/pythonlibs/#setuptools>`__
-   python extension for your machine
--  Install the appropriate
-   `pip <http://www.lfd.uci.edu/~gohlke/pythonlibs/#pip>`__ python
-   extension for your machine
--  Add pip to your environment variables:
-
-   -  Run **Start** > **Edit the environment variables for your
-      account**
-   -  Create a new variable:
-   -  **name** pip
-   -  **value** the path to **pip.exe** (this should be something like
-      :code:`C:\Python27\Scripts`)
-
--  From the command line run **pip install datapoint**
