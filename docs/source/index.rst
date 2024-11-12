@@ -12,5 +12,4 @@ datapoint-python documentation
 
    install
    getting-started
-   locations
-   objects
+   migration

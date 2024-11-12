@@ -116,10 +116,13 @@ class Forecast:
 
         :parameter forecasts: Forecast data from DataHub
         :parameter parameters: Unit information from DataHub
+        :type forecasts: list
+        :type parameters: dict
 
         :return: List of timesteps
         :rtype: list
         """
+
         timesteps = []
         for forecast in forecasts:
             night_step = {"time": datetime.datetime.fromisoformat(forecast["time"])}
@@ -177,8 +180,10 @@ class Forecast:
         Take the forecast data from DataHub for a single time and combine with
         unit information in each timestep.
 
-        :parameter forecasts: Forecast data from DataHub
+        :parameter forecast: Forecast data from DataHub
         :parameter parameters: Unit information from DataHub
+        :type forecast: dict
+        :type parameters:dict
 
         :return: Individual forecast timestep
         :rtype: dict

@@ -4,13 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "==2.31.0"
-appdirs = "==1.4.4"
-requests-mock = "==1.11.0"
-geojson = "==3.1.0"
+requests = "*"
+appdirs = "*"
+requests-mock = "*"
+geojson = "*"
 datapoint = {file = ".", editable = true}
 
 [dev-packages]
+black = "*"
+isort = "*"
+flake8 = "*"
+flake8-bugbear = "*"
+pytest = "*"
+flake8-pytest-style = "*"
 
 [documentation]
 sphinx = "*"
