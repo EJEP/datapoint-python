@@ -1,0 +1,21 @@
+name: Run tests
+on: pull_request
+jobs:
+  run-tests:
+    name: Build distribution 📦
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: |
+          3.9
+          3.10
+          3.11
+          3.12
+          3.13
+    - name: Install requirements
+      run: pip install -r requirements-dev.txt
+    - name: Run tests
+      run: python -m pytest tests
