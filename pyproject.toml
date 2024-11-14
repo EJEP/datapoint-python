@@ -53,7 +53,7 @@ dirty = "{base_version}"
 distance-dirty = "{base_version}"
 
 [tool.versioningit.vcs]
-default-tag = "test"
+default-tag = "0.0.1"
 
 [tool.pytest.ini_options]
 addopts = [
