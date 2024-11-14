@@ -111,21 +111,26 @@ class Forecast:
         self.frequency = frequency
         self.data_date = datetime.datetime.fromisoformat(
             api_data["features"][0]["properties"]["modelRunDate"]
-        )
+        )  #: The date the provided forecast was generated.
 
-        self.forecast_longitude = api_data["features"][0]["geometry"]["coordinates"][0]
-        self.forecast_latitude = api_data["features"][0]["geometry"]["coordinates"][1]
+        self.forecast_longitude = api_data["features"][0]["geometry"]["coordinates"][
+            0
+        ]  #: The longitude of the provided forecast.
+        self.forecast_latitude = api_data["features"][0]["geometry"]["coordinates"][
+            1
+        ]  #: The latitude of the provided forecast.
         self.distance_from_requested_location = api_data["features"][0]["properties"][
             "requestPointDistance"
-        ]
-        self.name = api_data["features"][0]["properties"]["location"]["name"]
+        ]  #: The distance of the location of the provided forecast from the requested location
+        self.name = api_data["features"][0]["properties"]["location"][
+            "name"
+        ]  #:  The name of the location of the provided forecast
 
         # N.B. Elevation is in metres above or below the WGS 84 reference
         # ellipsoid as per GeoJSON spec.
-        self.elevation = api_data["features"][0]["geometry"]["coordinates"][2]
-
-        # Need different parsing to cope with daily vs. hourly/three-hourly
-        # forecasts. Do hourly first
+        self.elevation = api_data["features"][0]["geometry"]["coordinates"][
+            2
+        ]  #:  The elevation of the location of the provided forecast
 
         forecasts = api_data["features"][0]["properties"]["timeSeries"]
         parameters = api_data["parameters"][0]
