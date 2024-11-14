@@ -118,6 +118,8 @@ class Forecast:
         self.distance_from_requested_location = api_data["features"][0]["properties"][
             "requestPointDistance"
         ]
+        self.name = api_data["features"][0]["properties"]["location"]["name"]
+
         # N.B. Elevation is in metres above or below the WGS 84 reference
         # ellipsoid as per GeoJSON spec.
         self.elevation = api_data["features"][0]["geometry"]["coordinates"][2]
