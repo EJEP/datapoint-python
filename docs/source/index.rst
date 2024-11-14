@@ -13,3 +13,4 @@ datapoint-python documentation
    install
    getting-started
    migration
+   api-reference

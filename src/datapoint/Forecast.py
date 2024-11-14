@@ -5,72 +5,100 @@ from datapoint.weather_codes import WEATHER_CODES
 
 
 class Forecast:
-    """Forecast data returned from DataPoint
+    """Forecast data returned from DataHub
 
-       Provides access to forecasts as far ahead as provided by DataPoint:
-       + x for hourly forecasts
-       + y for three-hourly forecasts
-       + z for daily forecasts
+    Provides access to forecasts as far ahead as provided by DataHub. See the
+    DataHub documentation for the latest limits on the forecast range. The
+    values of data from DataHub are combined with the unit information and
+    description and returned as a dict.
 
-       Basic Usage::
+    Basic Usage::
 
-       >>> import datapoint
-       >>> m = datapoint.Manager(api_key = "blah")
-       >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
-       >>> f.now()
-       {'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
-    'screenTemperature': {'value': 10.09,
-     'description': 'Screen Air Temperature',
-     'unit_name': 'degrees Celsius',
-     'unit_symbol': 'Cel'},
-    'screenDewPointTemperature': {'value': 8.08,
-     'description': 'Screen Dew Point Temperature',
-     'unit_name': 'degrees Celsius',
-     'unit_symbol': 'Cel'},
-    'feelsLikeTemperature': {'value': 6.85,
-     'description': 'Feels Like Temperature',
-     'unit_name': 'degrees Celsius',
-     'unit_symbol': 'Cel'},
-    'windSpeed10m': {'value': 7.57,
-     'description': '10m Wind Speed',
-     'unit_name': 'metres per second',
-     'unit_symbol': 'm/s'},
-    'windDirectionFrom10m': {'value': 263,
-     'description': '10m Wind From Direction',
-     'unit_name': 'degrees',
-     'unit_symbol': 'deg'},
-    'windGustSpeed10m': {'value': 12.31,
-     'description': '10m Wind Gust Speed',
-     'unit_name': 'metres per second',
-     'unit_symbol': 'm/s'},
-    'visibility': {'value': 21201,
-     'description': 'Visibility',
-     'unit_name': 'metres',
-     'unit_symbol': 'm'},
-    'screenRelativeHumidity': {'value': 87.81,
-     'description': 'Screen Relative Humidity',
-     'unit_name': 'percentage',
-     'unit_symbol': '%'},
-    'mslp': {'value': 103080,
-     'description': 'Mean Sea Level Pressure',
-     'unit_name': 'pascals',
-     'unit_symbol': 'Pa'},
-    'uvIndex': {'value': 1,
-     'description': 'UV Index',
-     'unit_name': 'dimensionless',
-     'unit_symbol': '1'},
-    'significantWeatherCode': {'value': 'Cloudy',
-     'description': 'Significant Weather Code',
-     'unit_name': 'dimensionless',
-     'unit_symbol': '1'},
-    'precipitationRate': {'value': 0.0,
-     'description': 'Precipitation Rate',
-     'unit_name': 'millimetres per hour',
-     'unit_symbol': 'mm/h'},
-    'probOfPrecipitation': {'value': 21,
-     'description': 'Probability of Precipitation',
-     'unit_name': 'percentage',
-     'unit_symbol': '%'}}
+      >>> import datapoint
+      >>> m = datapoint.Manager(api_key = "blah")
+      >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
+      >>> f.now()
+      {
+          'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
+          'screenTemperature': {
+              'value': 10.09,
+              'description': 'Screen Air Temperature',
+              'unit_name': 'degrees Celsius',
+              'unit_symbol': 'Cel'
+          },
+          'screenDewPointTemperature': {
+              'value': 8.08,
+              'description': 'Screen Dew Point Temperature',
+              'unit_name': 'degrees Celsius',
+              'unit_symbol': 'Cel'
+          },
+          'feelsLikeTemperature': {
+              'value': 6.85,
+              'description': 'Feels Like Temperature',
+              'unit_name': 'degrees Celsius',
+              'unit_symbol': 'Cel'
+          },
+          'windSpeed10m': {
+              'value': 7.57,
+              'description': '10m Wind Speed',
+              'unit_name': 'metres per second',
+              'unit_symbol': 'm/s'
+          },
+          'windDirectionFrom10m': {
+              'value': 263,
+              'description': '10m Wind From Direction',
+              'unit_name': 'degrees',
+              'unit_symbol': 'deg'
+          },
+          'windGustSpeed10m': {
+              'value': 12.31,
+              'description': '10m Wind Gust Speed',
+              'unit_name': 'metres per second',
+              'unit_symbol': 'm/s'
+          },
+          'visibility': {
+              'value': 21201,
+              'description': 'Visibility',
+              'unit_name': 'metres',
+              'unit_symbol': 'm'
+          },
+          'screenRelativeHumidity': {
+              'value': 87.81,
+              'description': 'Screen Relative Humidity',
+              'unit_name': 'percentage',
+              'unit_symbol': '%'
+          },
+          'mslp': {
+              'value': 103080,
+              'description': 'Mean Sea Level Pressure',
+              'unit_name': 'pascals',
+              'unit_symbol': 'Pa'
+          },
+          'uvIndex': {
+              'value': 1,
+              'description': 'UV Index',
+              'unit_name': 'dimensionless',
+              'unit_symbol': '1'
+          },
+          'significantWeatherCode': {
+              'value': 'Cloudy',
+              'description': 'Significant Weather Code',
+              'unit_name': 'dimensionless',
+              'unit_symbol': '1'
+          },
+          'precipitationRate': {
+              'value': 0.0,
+              'description': 'Precipitation Rate',
+              'unit_name': 'millimetres per hour',
+              'unit_symbol': 'mm/h'
+          },
+          'probOfPrecipitation': {
+              'value': 21,
+              'description': 'Probability of Precipitation',
+              'unit_name': 'percentage',
+              'unit_symbol': '%'
+          }
+      }
     """
 
     def __init__(self, frequency, api_data):
@@ -84,7 +112,7 @@ class Forecast:
         self.data_date = datetime.datetime.fromisoformat(
             api_data["features"][0]["properties"]["modelRunDate"]
         )
-        self.name = api_data["features"][0]["properties"]["location"]["name"]
+
         self.forecast_longitude = api_data["features"][0]["geometry"]["coordinates"][0]
         self.forecast_latitude = api_data["features"][0]["geometry"]["coordinates"][1]
         self.distance_from_requested_location = api_data["features"][0]["properties"][
@@ -323,7 +351,7 @@ class Forecast:
         return to_return
 
     def now(self):
-        """Function to return the closest timestep to the current time
+        """Return the closest timestep to the current time
 
         :return: Individual forecast timestep
         :rtype: dict
