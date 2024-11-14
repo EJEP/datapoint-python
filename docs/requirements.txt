@@ -1,2 +1,2 @@
 sphinx
-datapoint-python
+-e .
