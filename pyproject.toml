@@ -52,6 +52,9 @@ distance = "{base_version}"
 dirty = "{base_version}"
 distance-dirty = "{base_version}"
 
+[tool.versioningit.vcs]
+default-tag = "test"
+
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
