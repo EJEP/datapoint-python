@@ -4,29 +4,30 @@ This example checks whether it is due to rain at any point
 today and then decides if we need to take an umbrella.
 """
 
+import datetime
+
 import datapoint
 
 # Create umbrella variable to use later
 umbrella = False
 
 # Create datapoint connection
-conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
-
-# Get nearest site and print out its name
-site = conn.get_nearest_forecast_site(51.500728, -0.124626)
-print(site.name)
+manager = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get a forecast for the nearest site
-forecast = conn.get_forecast_for_site(site.location_id, "3hourly")
+forecast = manager.get_forecast(51.500728, -0.124626, "hourly")
 
 # Loop through all the timesteps in day 0 (today)
-for timestep in forecast.days[0].timesteps:
+for timestep in forecast.timesteps:
     # Check to see if the chance of rain is more than 20% at any point
-    if timestep.precipitation.value > 20:
+    if (
+        timestep["probOfPrecipitation"]["value"] > 20
+        and timestep["time"].date == datetime.date.now()
+    ):
         umbrella = True
 
 # Print out the results
-if umbrella == True:
+if umbrella is True:
     print("Looks like rain! Better take an umbrella.")
 else:
     print("Don't worry you don't need an umbrella today.")

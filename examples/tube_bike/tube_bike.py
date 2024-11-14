@@ -10,15 +10,11 @@ import tubestatus
 import datapoint
 
 # Create datapoint connection
-conn = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
-
-# Get nearest site to my house and to work
-my_house = conn.get_nearest_forecast_site(51.5016730, 0.0057500)
-work = conn.get_nearest_forecast_site(51.5031650, -0.1123050)
+manager = datapoint.Manager(api_key="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
 
 # Get a forecast for my house and work
-my_house_forecast = conn.get_forecast_for_site(my_house.location_id, "3hourly")
-work_forecast = conn.get_forecast_for_site(work.location_id, "3hourly")
+my_house_forecast = manager.get_forecast(51.5016730, 0.0057500, "hourly")
+work_forecast = manager.get_forecast(51.5031650, -0.1123050, "hourly")
 
 # Get the current timestep for both locations
 my_house_now = my_house_forecast.now()
@@ -32,22 +28,22 @@ waterloo_status = current_status.get_status("Waterloo and City")
 
 # Check whether there are any problems with rain or the tube
 if (
-    my_house_now.precipitation.value < 40
-    and work_now.precipitation.value < 40
+    my_house_now['probOfPrecipitation']['value'] < 40
+    and work_now['probOfPrecipitation']['value'] < 40
     and waterloo_status.description == "Good Service"
 ):
     print("Rain is unlikely and tube service is good, the decision is yours.")
 
 # If it is going to rain then suggest the tube
 elif (
-    my_house_now.precipitation.value >= 40 or work_now.precipitation.value >= 40
+    my_house_now['probOfPrecipitation']['value'] >= 40 or work_now['probOfPrecipitation']['value'] >= 40
 ) and waterloo_status.description == "Good Service":
     print("Looks like rain, better get the tube")
 
 # If the tube isn't running then suggest cycling
 elif (
-    my_house_now.precipitation.value < 40
-    and work_now.precipitation.value < 40
+    my_house_now['probOfPrecipitation']['value'] < 40
+    and work_now['probOfPrecipitation']['value'] < 40
     and waterloo_status.description != "Good Service"
 ):
     print("Bad service on the tube, cycling it is!")
