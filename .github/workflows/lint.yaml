@@ -1,0 +1,45 @@
+name: Lint
+on:
+  pull_request:
+    branches:
+      - "master"
+jobs:
+  black:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install and run linter
+        run: |
+          pip install black==22.10.0
+          black --check --verbose --diff --color -S .
+  isort:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install and run linter
+        run: |
+          pip install isort==5.13.2
+          isort . --check-only --diff
+  flake8:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install and run linter
+        run: |
+          pip install flake8==7.1.0 flake8-bugbear
+          flake8
