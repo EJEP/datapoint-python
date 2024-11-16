@@ -17,7 +17,7 @@ class Manager:
     ::
 
       >>> import datapoint
-      >>> m = datapoint.Manager(api_key = "blah")
+      >>> m = datapoint.Manager.Manager(api_key = "blah")
       >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
       >>> f.now()
       {
