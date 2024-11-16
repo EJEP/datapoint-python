@@ -5,30 +5,28 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
-project = 'datapoint-python'
-copyright = '2024, Emily Price, Jacob Tomlinson'
-author = 'Emily Price, Jacob Tomlinson'
-
 import importlib
 
-import datapoint
+project = "datapoint-python"
+copyright = "2024, Emily Price, Jacob Tomlinson"
+author = "Emily Price, Jacob Tomlinson"
 
-release = importlib.metadata.version('datapoint')
-version = importlib.metadata.version('datapoint')
+release = importlib.metadata.version("datapoint")
+version = importlib.metadata.version("datapoint")
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc',]
+extensions = [
+    "sphinx.ext.autodoc",
+]
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+html_theme = "alabaster"
+html_static_path = ["_static"]

@@ -8,8 +8,6 @@ ok to hang out the washing. Then for the good days we will rank
 them and print out the best.
 """
 
-from datetime import datetime
-
 import datapoint
 
 # Set thresholds
@@ -42,8 +40,8 @@ for day in forecast.days:
             timestep_score = timestep.wind_speed.value + timestep.temperature.value
 
             # If this timestep scores better than the current best replace it
-            if timestep_score > best_day_score:
-                best_day_score = timestep_score
+            if timestep_score > best_score:
+                best_score = timestep_score
                 best_day = day.date
 
 for timestep in forecast.timesteps:
@@ -54,12 +52,14 @@ for timestep in forecast.timesteps:
         and timestep.wind_gust.value < MAX_WIND
     ):
         # Calculate the score for this timestep
-        timestep_score = timestep['windSpeed10m']['value'] + timestep['screenTemperature']['value']
+        timestep_score = (
+            timestep["windSpeed10m"]["value"] + timestep["screenTemperature"]["value"]
+        )
 
         # If this timestep scores better than the current best replace it
-        if timestep_score > best_day_score:
+        if timestep_score > best_score:
             best_score = timestep_score
-            best_time = timestep['time']
+            best_time = timestep["time"]
 
 
 # If best_day is still None then there are no good days
@@ -68,6 +68,4 @@ if best_time is None:
 
 # Otherwise print out the day
 else:
-    print(
-        f"{best_time} is the best day with a score of {best_score}"
-    )
+    print(f"{best_time} is the best day with a score of {best_score}")

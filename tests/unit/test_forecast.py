@@ -52,12 +52,12 @@ def hourly_first_forecast_and_parameters(load_hourly_json):
     forecast = load_hourly_json["features"][0]["properties"]["timeSeries"][0]
     return (forecast, parameters)
 
+
 @pytest.fixture
 def three_hourly_first_forecast_and_parameters(load_three_hourly_json):
     parameters = load_three_hourly_json["parameters"][0]
     forecast = load_three_hourly_json["features"][0]["properties"]["timeSeries"][0]
     return (forecast, parameters)
-
 
 
 @pytest.fixture
@@ -89,17 +89,21 @@ def expected_at_datetime_daily_timestep():
 def expected_at_datetime_daily_final_timestep():
     return reference_data_test_forecast.EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP
 
+
 @pytest.fixture
 def expected_first_three_hourly_timestep():
     return reference_data_test_forecast.EXPECTED_FIRST_THREE_HOURLY_TIMESTEP
+
 
 @pytest.fixture
 def expected_at_datetime_three_hourly_timestep():
     return reference_data_test_forecast.EXPECTED_AT_DATETIME_THREE_HOURLY_TIMESTEP
 
+
 @pytest.fixture
-def expected_at_datetime_three_hourly_final_timestep ():
-    return reference_data_test_forecast.EXPECTED_AT_DATETIME_THREE_HOURLY_FINAL_TIMESTEP 
+def expected_at_datetime_three_hourly_final_timestep():
+    return reference_data_test_forecast.EXPECTED_AT_DATETIME_THREE_HOURLY_FINAL_TIMESTEP
+
 
 class TestHourlyForecast:
     def test_forecast_frequency(self, hourly_forecast):
@@ -231,7 +235,9 @@ class TestThreeHourlyForecast:
     def test_forecast_first_timestep(
         self, three_hourly_forecast, expected_first_three_hourly_timestep
     ):
-        assert three_hourly_forecast.timesteps[0] == expected_first_three_hourly_timestep
+        assert (
+            three_hourly_forecast.timesteps[0] == expected_first_three_hourly_timestep
+        )
 
     def test_build_timestep(
         self,
@@ -246,17 +252,17 @@ class TestThreeHourlyForecast:
 
         assert built_timestep == expected_first_three_hourly_timestep
 
-    def test_at_datetime(self, three_hourly_forecast,
-                         expected_at_datetime_three_hourly_timestep
-                         ):
+    def test_at_datetime(
+        self, three_hourly_forecast, expected_at_datetime_three_hourly_timestep
+    ):
         ts = three_hourly_forecast.at_datetime(datetime.datetime(2024, 2, 22, 19, 15))
         assert ts == expected_at_datetime_three_hourly_timestep
 
     def test_at_datetime_final_timestamp(
         self, three_hourly_forecast, expected_at_datetime_three_hourly_final_timestep
     ):
-         ts = three_hourly_forecast.at_datetime(datetime.datetime(2024, 2, 24, 16))
-         assert ts == expected_at_datetime_three_hourly_final_timestep
+        ts = three_hourly_forecast.at_datetime(datetime.datetime(2024, 2, 24, 16))
+        assert ts == expected_at_datetime_three_hourly_final_timestep
 
     def test_requested_time_too_early(self, three_hourly_forecast):
         with pytest.raises(APIException):

@@ -124,13 +124,13 @@ class Forecast:
         ]  #: The distance of the location of the provided forecast from the requested location
         self.name = api_data["features"][0]["properties"]["location"][
             "name"
-        ]  #:  The name of the location of the provided forecast
+        ]  #: The name of the location of the provided forecast
 
         # N.B. Elevation is in metres above or below the WGS 84 reference
         # ellipsoid as per GeoJSON spec.
         self.elevation = api_data["features"][0]["geometry"]["coordinates"][
             2
-        ]  #:  The elevation of the location of the provided forecast
+        ]  #: The elevation of the location of the provided forecast
 
         forecasts = api_data["features"][0]["properties"]["timeSeries"]
         parameters = api_data["parameters"][0]
@@ -260,7 +260,8 @@ class Forecast:
         ] - datetime.timedelta(hours=0, minutes=30):
             err_str = (
                 "There is no forecast available for the requested time. "
-                + "The requested time is more than 30 minutes before the first available forecast"
+                "The requested time is more than 30 minutes before the "
+                "first available forecast."
             )
             raise APIException(err_str)
 
@@ -271,7 +272,8 @@ class Forecast:
         ] - datetime.timedelta(hours=1, minutes=30):
             err_str = (
                 "There is no forecast available for the requested time. "
-                + "The requested time is more than 1 hour and 30 minutes before the first available forecast"
+                "The requested time is more than 1 hour and 30 minutes "
+                "before the first available forecast."
             )
             raise APIException(err_str)
 
@@ -282,7 +284,8 @@ class Forecast:
         ] - datetime.timedelta(hours=6):
             err_str = (
                 "There is no forecast available for the requested time. "
-                + "The requested time is more than 6 hours before the first available forecast"
+                "The requested time is more than 6 hours before the first "
+                "available forecast."
             )
 
             raise APIException(err_str)
@@ -292,7 +295,11 @@ class Forecast:
         if self.frequency == "hourly" and target > (
             self.timesteps[-1]["time"] + datetime.timedelta(hours=0, minutes=30)
         ):
-            err_str = "There is no forecast available for the requested time. The requested time is more than 30 minutes after the first available forecast"
+            err_str = (
+                "There is no forecast available for the requested time. The "
+                "requested time is more than 30 minutes after the first "
+                "available forecast"
+            )
 
             raise APIException(err_str)
 
@@ -301,7 +308,11 @@ class Forecast:
         if self.frequency == "three-hourly" and target > (
             self.timesteps[-1]["time"] + datetime.timedelta(hours=1, minutes=30)
         ):
-            err_str = "There is no forecast available for the requested time. The requested time is more than 1.5 hours after the first available forecast"
+            err_str = (
+                "There is no forecast available for the requested time. The "
+                "requested time is more than 1.5 hours after the first "
+                "available forecast."
+            )
 
             raise APIException(err_str)
 
@@ -310,7 +321,11 @@ class Forecast:
         if self.frequency == "daily" and target > (
             self.timesteps[-1]["time"] + datetime.timedelta(hours=6)
         ):
-            err_str = "There is no forecast available for the requested time. The requested time is more than 6 hours after the first available forecast"
+            err_str = (
+                "There is no forecast available for the requested time. The "
+                "requested time is more than 6 hours after the first available "
+                "forecast."
+            )
 
             raise APIException(err_str)
 
