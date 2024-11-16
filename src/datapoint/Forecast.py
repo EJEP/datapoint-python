@@ -1,4 +1,5 @@
 import datetime
+from platform import python_version
 
 from datapoint.exceptions import APIException
 from datapoint.weather_codes import WEATHER_CODES
@@ -109,9 +110,21 @@ class Forecast:
         :type api_data: dict
         """
         self.frequency = frequency
-        self.data_date = datetime.datetime.fromisoformat(
-            api_data["features"][0]["properties"]["modelRunDate"]
-        )  #: The date the provided forecast was generated.
+        if python_version() < "3.11":
+            # Need to parse format like 2024-02-17T15:00Z. This can only be
+            # done with datetime.datetime.fromisoformat from python 3.11
+            # onwards. Using this if statement to remember to remove the
+            # explicit strptime in the future, and it annoyed me that
+            # fromisoformat couldn't handle all iso-formatted datetimes.
+            data_date = datetime.datetime.strptime(
+                api_data["features"][0]["properties"]["modelRunDate"],
+                "%Y-%m-%dT%H:%M%z",
+            )
+        else:
+            data_date = datetime.datetime.fromisoformat(
+                api_data["features"][0]["properties"]["modelRunDate"]
+            )
+        self.data_date = data_date  #: The date the provided forecast was generated.
 
         self.forecast_longitude = api_data["features"][0]["geometry"]["coordinates"][
             0
@@ -160,11 +173,28 @@ class Forecast:
 
         timesteps = []
         for forecast in forecasts:
-            night_step = {"time": datetime.datetime.fromisoformat(forecast["time"])}
-            day_step = {
-                "time": datetime.datetime.fromisoformat(forecast["time"])
-                + datetime.timedelta(hours=12)
-            }
+            if python_version() < "3.11":
+                # Need to parse format like 2024-02-17T15:00Z. This can only be
+                # done with datetime.datetime.fromisoformat from python 3.11
+                # onwards. Using this if statement to remember to remove the
+                # explicit strptime in the future, and it annoyed me that
+                # fromisoformat couldn't handle all iso-formatted datetimes.
+                night_step = datetime.datetime.strptime(
+                    forecast["time"], "%Y-%m-%dT%H:%M%z"
+                )
+                day_step = {
+                    "time": datetime.datetime.strptime(
+                        forecast["time"], "%Y-%m-%dT%H:%M%z"
+                    )
+                    + datetime.timedelta(hours=12)
+                }
+
+            else:
+                night_step = {"time": datetime.datetime.fromisoformat(forecast["time"])}
+                day_step = {
+                    "time": datetime.datetime.fromisoformat(forecast["time"])
+                    + datetime.timedelta(hours=12)
+                }
 
             for element, value in forecast.items():
                 if element.startswith("midday"):
@@ -228,7 +258,17 @@ class Forecast:
         timestep = {}
         for element, value in forecast.items():
             if element == "time":
-                timestep["time"] = datetime.datetime.fromisoformat(forecast["time"])
+                if python_version() < "3.11":
+                    # Need to parse format like 2024-02-17T15:00Z. This can only be
+                    # done with datetime.datetime.fromisoformat from python 3.11
+                    # onwards. Using this if statement to remember to remove the
+                    # explicit strptime in the future.
+                    timestep = datetime.datetime.strptime(
+                        forecast["time"], "%Y-%m-%dT%H:%M%z"
+                    )
+                else:
+                    timestep["time"] = datetime.datetime.fromisoformat(forecast["time"])
+
             elif element == "significantWeatherCode":
                 timestep[element] = {
                     "value": WEATHER_CODES[str(value)],
