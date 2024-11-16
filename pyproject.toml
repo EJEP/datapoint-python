@@ -47,11 +47,6 @@ source = "versioningit"
 profile = "black"
 src_paths = ["src", "tests"]
 
-[tool.versioningit.format]
-distance = "{base_version}"
-dirty = "{base_version}"
-distance-dirty = "{base_version}"
-
 [tool.versioningit.vcs]
 default-tag = "0.0.1"
 
