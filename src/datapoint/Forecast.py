@@ -179,9 +179,11 @@ class Forecast:
                 # onwards. Using this if statement to remember to remove the
                 # explicit strptime in the future, and it annoyed me that
                 # fromisoformat couldn't handle all iso-formatted datetimes.
-                night_step = datetime.datetime.strptime(
-                    forecast["time"], "%Y-%m-%dT%H:%M%z"
-                )
+                night_step = {
+                    "time": datetime.datetime.strptime(
+                        forecast["time"], "%Y-%m-%dT%H:%M%z"
+                    )
+                }
                 day_step = {
                     "time": datetime.datetime.strptime(
                         forecast["time"], "%Y-%m-%dT%H:%M%z"
