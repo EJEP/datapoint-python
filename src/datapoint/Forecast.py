@@ -262,8 +262,9 @@ class Forecast:
                     # Need to parse format like 2024-02-17T15:00Z. This can only be
                     # done with datetime.datetime.fromisoformat from python 3.11
                     # onwards. Using this if statement to remember to remove the
-                    # explicit strptime in the future.
-                    timestep = datetime.datetime.strptime(
+                    # explicit strptime in the future, and it annoyed me that
+                    # fromisoformat couldn't handle all iso-formatted datetimes.
+                    timestep["time"] = datetime.datetime.strptime(
                         forecast["time"], "%Y-%m-%dT%H:%M%z"
                     )
                 else:
