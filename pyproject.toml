@@ -1,4 +1,61 @@
 [build-system]
-requires = ["setuptools",
-"versioneer"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "versioningit"]
+build-backend = "hatchling.build"
+
+[project]
+name = "datapoint"
+dynamic = ["version"]
+authors = [
+  {name="Emily Price", email="emily.j.price.nth@gmail.com"},
+  { name="Jacob Tomlinson"},
+]
+description = "Python interface to the Met Office's Datapoint API"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers=[
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+]
+dependencies = [
+  "requests >= 2.20.0,<3",
+  "appdirs >=1,<2",
+  "geojson >= 3.0.0,<4",
+]
+license = {file = "LICENSE"}
+keywords = ["weather", "weather forecast", "Met Office", "DataHub"]
+
+[project.urls]
+Homepage = "https://github.com/ejep/datapoint-python"
+Documentation = "http://datapoint-python.readthedocs.org/en/latest"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "tests/",
+  "examples/",
+]
+
+[tool.hatch.version]
+source = "versioningit"
+
+[tool.isort]
+profile = "black"
+src_paths = ["src", "tests"]
+
+[tool.versioningit.format]
+
+distance = "{base_version}+post{distance}{vcs}{rev}"
+distance-dirty = "{base_version}+post{distance}{vcs}{rev}.d{build_date:%Y%m%d}"
+
+[tool.versioningit.vcs]
+default-tag = "0.0.1"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
