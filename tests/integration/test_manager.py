@@ -2,7 +2,7 @@ import pytest
 import requests
 
 import tests.reference_data.reference_data_test_forecast as reference_data_test_forecast
-from datapoint import Manager
+from datapoint.Manager import Manager
 
 
 class MockResponseHourly:
