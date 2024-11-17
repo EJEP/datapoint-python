@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.10.0] - 2024-11-17
+
++ Modernise packaging and build tooling and infrastructure.
++ Migrate to use new MetOffice DataHub. This required many changes, for more
+  details see the 'migration' page of the documentation.
+
 ## [0.9.9] - 2024-02-09
 
 + Update versioneer
