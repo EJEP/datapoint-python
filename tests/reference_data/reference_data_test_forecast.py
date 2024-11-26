@@ -325,103 +325,103 @@ EXPECTED_FIRST_DAILY_TIMESTEP = {
         "unit_name": "metres per second",
         "unit_symbol": "m/s",
     },
-    "Visibility": {
+    "visibility": {
         "value": 27712,
         "description": "Visibility at Local Midnight",
         "unit_name": "metres",
         "unit_symbol": "m",
     },
-    "RelativeHumidity": {
+    "relativeHumidity": {
         "value": 80.91,
         "description": "Relative Humidity at Local Midnight",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "Mslp": {
+    "mslp": {
         "value": 102640,
         "description": "Mean Sea Level Pressure at Local Midnight",
         "unit_name": "pascals",
         "unit_symbol": "Pa",
     },
-    "SignificantWeatherCode": {
+    "significantWeatherCode": {
         "value": 7,
         "description": "Night Significant Weather Code",
         "unit_name": "dimensionless",
         "unit_symbol": "1",
     },
-    "MinScreenTemperature": {
+    "minScreenTemperature": {
         "value": 5.32,
         "description": "Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMinTemp": {
+    "upperBoundMinTemp": {
         "value": 9.17,
         "description": "Upper Bound on Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMinTemp": {
+    "lowerBoundMinTemp": {
         "value": 3.56,
         "description": "Lower Bound on Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "MinFeelsLikeTemp": {
+    "minFeelsLikeTemp": {
         "value": 6.27,
         "description": "Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMinFeelsLikeTemp": {
+    "upperBoundMinFeelsLikeTemp": {
         "value": 8.74,
         "description": "Upper Bound on Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMinFeelsLikeTemp": {
+    "lowerBoundMinFeelsLikeTemp": {
         "value": 2.75,
         "description": "Lower Bound on Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "ProbabilityOfPrecipitation": {
+    "probabilityOfPrecipitation": {
         "value": 11,
         "description": "Probability of Precipitation During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSnow": {
+    "probabilityOfSnow": {
         "value": 0,
         "description": "Probability of Snow During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavySnow": {
+    "probabilityOfHeavySnow": {
         "value": 0,
         "description": "Probability of Heavy Snow During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfRain": {
+    "probabilityOfRain": {
         "value": 10,
         "description": "Probability of Rain During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavyRain": {
+    "probabilityOfHeavyRain": {
         "value": 0,
         "description": "Probability of Heavy Rain During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHail": {
+    "probabilityOfHail": {
         "value": 0,
         "description": "Probability of Hail During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSferics": {
+    "probabilityOfSferics": {
         "value": 0,
         "description": "Probability of Sferics During The Night",
         "unit_name": "percentage",
@@ -449,103 +449,103 @@ EXPECTED_AT_DATETIME_DAILY_TIMESTEP = {
         "unit_name": "metres per second",
         "unit_symbol": "m/s",
     },
-    "Visibility": {
+    "visibility": {
         "value": 5915,
         "description": "Visibility at Local Midnight",
         "unit_name": "metres",
         "unit_symbol": "m",
     },
-    "RelativeHumidity": {
+    "relativeHumidity": {
         "value": 93.62,
         "description": "Relative Humidity at Local Midnight",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "Mslp": {
+    "mslp": {
         "value": 102800,
         "description": "Mean Sea Level Pressure at Local Midnight",
         "unit_name": "pascals",
         "unit_symbol": "Pa",
     },
-    "SignificantWeatherCode": {
+    "significantWeatherCode": {
         "value": 15,
         "description": "Night Significant Weather Code",
         "unit_name": "dimensionless",
         "unit_symbol": "1",
     },
-    "MinScreenTemperature": {
+    "minScreenTemperature": {
         "value": 9.96,
         "description": "Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMinTemp": {
+    "upperBoundMinTemp": {
         "value": 10.71,
         "description": "Upper Bound on Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMinTemp": {
+    "lowerBoundMinTemp": {
         "value": 9.04,
         "description": "Lower Bound on Night Minimum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "MinFeelsLikeTemp": {
+    "minFeelsLikeTemp": {
         "value": 7.76,
         "description": "Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMinFeelsLikeTemp": {
+    "upperBoundMinFeelsLikeTemp": {
         "value": 8.28,
         "description": "Upper Bound on Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMinFeelsLikeTemp": {
+    "lowerBoundMinFeelsLikeTemp": {
         "value": 7.04,
         "description": "Lower Bound on Night Minimum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "ProbabilityOfPrecipitation": {
+    "probabilityOfPrecipitation": {
         "value": 97,
         "description": "Probability of Precipitation During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSnow": {
+    "probabilityOfSnow": {
         "value": 0,
         "description": "Probability of Snow During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavySnow": {
+    "probabilityOfHeavySnow": {
         "value": 0,
         "description": "Probability of Heavy Snow During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfRain": {
+    "probabilityOfRain": {
         "value": 97,
         "description": "Probability of Rain During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavyRain": {
+    "probabilityOfHeavyRain": {
         "value": 96,
         "description": "Probability of Heavy Rain During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHail": {
+    "probabilityOfHail": {
         "value": 20,
         "description": "Probability of Hail During The Night",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSferics": {
+    "probabilityOfSferics": {
         "value": 10,
         "description": "Probability of Sferics During The Night",
         "unit_name": "percentage",
@@ -572,19 +572,19 @@ EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP = {
         "unit_name": "metres per second",
         "unit_symbol": "m/s",
     },
-    "Visibility": {
+    "visibility": {
         "value": 23049,
         "description": "Visibility at Local Midday",
         "unit_name": "metres",
         "unit_symbol": "m",
     },
-    "RelativeHumidity": {
+    "relativeHumidity": {
         "value": 73.25,
         "description": "Relative Humidity at Local Midday",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "Mslp": {
+    "mslp": {
         "value": 98974,
         "description": "Mean Sea Level Pressure at Local Midday",
         "unit_name": "pascals",
@@ -596,85 +596,85 @@ EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP = {
         "unit_name": "dimensionless",
         "unit_symbol": "1",
     },
-    "SignificantWeatherCode": {
+    "significantWeatherCode": {
         "value": 10,
         "description": "Day Significant Weather Code",
         "unit_name": "dimensionless",
         "unit_symbol": "1",
     },
-    "MaxScreenTemperature": {
+    "maxScreenTemperature": {
         "value": 8.57,
         "description": "Day Maximum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMaxTemp": {
+    "upperBoundMaxTemp": {
         "value": 10.67,
         "description": "Upper Bound on Day Maximum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMaxTemp": {
+    "lowerBoundMaxTemp": {
         "value": 6.67,
         "description": "Lower Bound on Day Maximum Screen Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "MaxFeelsLikeTemp": {
+    "maxFeelsLikeTemp": {
         "value": 4.42,
         "description": "Day Maximum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "UpperBoundMaxFeelsLikeTemp": {
+    "upperBoundMaxFeelsLikeTemp": {
         "value": 7.38,
         "description": "Upper Bound on Day Maximum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "LowerBoundMaxFeelsLikeTemp": {
+    "lowerBoundMaxFeelsLikeTemp": {
         "value": 3.89,
         "description": "Lower Bound on Day Maximum Feels Like Air Temperature",
         "unit_name": "degrees Celsius",
         "unit_symbol": "Cel",
     },
-    "ProbabilityOfPrecipitation": {
+    "probabilityOfPrecipitation": {
         "value": 52,
         "description": "Probability of Precipitation During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSnow": {
+    "probabilityOfSnow": {
         "value": 0,
         "description": "Probability of Snow During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavySnow": {
+    "probabilityOfHeavySnow": {
         "value": 0,
         "description": "Probability of Heavy Snow During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfRain": {
+    "probabilityOfRain": {
         "value": 52,
         "description": "Probability of Rain During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHeavyRain": {
+    "probabilityOfHeavyRain": {
         "value": 48,
         "description": "Probability of Heavy Rain During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfHail": {
+    "probabilityOfHail": {
         "value": 10,
         "description": "Probability of Hail During The Day",
         "unit_name": "percentage",
         "unit_symbol": "%",
     },
-    "ProbabilityOfSferics": {
+    "probabilityOfSferics": {
         "value": 11,
         "description": "Probability of Sferics During The Day",
         "unit_name": "percentage",
