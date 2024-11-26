@@ -18,6 +18,7 @@ repos:
       - id: flake8
         additional_dependencies:
           - flake8-bugbear==24.2.6
+          - flake8-pytest-style==2.0.0
   - repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:

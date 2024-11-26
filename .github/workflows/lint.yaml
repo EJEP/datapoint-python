@@ -41,5 +41,5 @@ jobs:
           python-version: "3.12"
       - name: Install and run linter
         run: |
-          pip install flake8==7.1.0 flake8-bugbear
+          pip install flake8==7.1.0 flake8-bugbear flake8-pytest-style
           flake8
