@@ -38,11 +38,12 @@ request some data. To do this, use the `manager` object:
 
 ::
 
-   forecast = manager.get_forecast(51, 0, "hourly")
+   forecast = manager.get_forecast(51, 0, "hourly", convert_weather_code=True)
 
-This takes three parameters: the latitude and longitude of the location you want
-a forecast for and also a forecast type of “hourly”. We’ll discuss the forecast
-types later on.
+This takes four parameters: the latitude and longitude of the location you want
+a forecast for, a forecast type of “hourly” and an instruction to convert the
+numeric weather code to a string description. We’ll discuss the forecast types
+later on.
 
 This Forecast Object which has been returned to us contains lots of information
 which we will cover in a later section, right now we’re just going to get the

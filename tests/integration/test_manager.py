@@ -28,7 +28,7 @@ def mock_response_hourly(monkeypatch):
 @pytest.fixture
 def hourly_forecast(mock_response_hourly):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
-    f = m.get_forecast(50.9992, 0.0154, frequency="hourly")
+    f = m.get_forecast(50.9992, 0.0154, frequency="hourly", convert_weather_code=True)
     return f
 
 
@@ -60,7 +60,9 @@ def mock_response_three_hourly(monkeypatch):
 @pytest.fixture
 def three_hourly_forecast(mock_response_three_hourly):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
-    f = m.get_forecast(50.9992, 0.0154, frequency="three-hourly")
+    f = m.get_forecast(
+        50.9992, 0.0154, frequency="three-hourly", convert_weather_code=True
+    )
     return f
 
 
@@ -92,7 +94,7 @@ def mock_response_daily(monkeypatch):
 @pytest.fixture
 def daily_forecast(mock_response_daily):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
-    f = m.get_forecast(50.9992, 0.0154, frequency="daily")
+    f = m.get_forecast(50.9992, 0.0154, frequency="daily", convert_weather_code=True)
     return f
 
 

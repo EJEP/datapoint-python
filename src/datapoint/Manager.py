@@ -18,7 +18,12 @@ class Manager:
 
       >>> import datapoint
       >>> m = datapoint.Manager.Manager(api_key = "blah")
-      >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
+      >>> f = m.get_forecast(
+                  latitude=50,
+                  longitude=0,
+                  frequency="hourly",
+                  convert_weather_code=True
+              )
       >>> f.now()
       {
           'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
@@ -201,16 +206,20 @@ class Manager:
 
         return data
 
-    def get_forecast(self, latitude, longitude, frequency="daily"):
+    def get_forecast(
+        self, latitude, longitude, frequency="daily", convert_weather_code=True
+    ):
         """
         Get a forecast for the provided site
 
         :parameter latitude: Latitude of forecast location
         :parameter longitude: Longitude of forecast location
         :parameter frequency: Forecast frequency. One of 'hourly', 'three-hourly, 'daily'
+        :parameter convert_weather_code: Convert numeric weather codes to string description
         :type latitude: float
         :type longitude: float
         :type frequency: string
+        :type convert_weather_code: bool
 
         :return: :class: `Forecast <Forecast>` object
         :rtype: datapoint.Forecast
@@ -220,6 +229,10 @@ class Manager:
                 "frequency must be set to one of 'hourly', 'three-hourly', 'daily'"
             )
         data = self.__call_api(latitude, longitude, frequency)
-        forecast = Forecast(frequency=frequency, api_data=data)
+        forecast = Forecast(
+            frequency=frequency,
+            api_data=data,
+            convert_weather_code=convert_weather_code,
+        )
 
         return forecast

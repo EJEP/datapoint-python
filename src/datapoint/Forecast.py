@@ -16,7 +16,12 @@ class Forecast:
 
       >>> import datapoint
       >>> m = datapoint.Manager.Manager(api_key = "blah")
-      >>> f = m.get_forecast(latitude=50, longitude=0, frequency="hourly")
+      >>> f = m.get_forecast(
+                  latitude=50,
+                  longitude=0,
+                  frequency="hourly",
+                  convert_weather_code=True,
+              )
       >>> f.now()
       {
           'time': datetime.datetime(2024, 2, 19, 13, 0, tzinfo=datetime.timezone.utc),
@@ -101,12 +106,14 @@ class Forecast:
       }
     """
 
-    def __init__(self, frequency, api_data):
+    def __init__(self, frequency, api_data, convert_weather_code):
         """
         :param frequency: Frequency of forecast: 'hourly', 'three-hourly' or 'daily'
         :param api_data: Data returned from API call
+        :param: convert_weather_code: Convert numeric weather codes to string description
         :type frequency: string
         :type api_data: dict
+        :type convert_weather_code: bool
         """
         self.frequency = frequency
         # Need to parse format like 2024-02-17T15:00Z. This can only be
@@ -135,6 +142,10 @@ class Forecast:
         self.elevation = api_data["features"][0]["geometry"]["coordinates"][
             2
         ]  #: The elevation of the location of the provided forecast
+
+        self.convert_weather_code = (
+            convert_weather_code  #: Convert numeric weather codes to string description
+        )
 
         forecasts = api_data["features"][0]["properties"]["timeSeries"]
         parameters = api_data["parameters"][0]
@@ -203,23 +214,57 @@ class Forecast:
                     case_corrected_element = (
                         trimmed_element[0].lower() + trimmed_element[1:]
                     )
-                    day_step[case_corrected_element] = {
-                        "value": value,
-                        "description": parameters[element]["description"],
-                        "unit_name": parameters[element]["unit"]["label"],
-                        "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
-                    }
+
+                    if (
+                        case_corrected_element == "significantWeatherCode"
+                        and self.convert_weather_code
+                    ):
+                        day_step[case_corrected_element] = {
+                            "value": WEATHER_CODES[str(value)],
+                            "description": parameters[element]["description"],
+                            "unit_name": parameters[element]["unit"]["label"],
+                            "unit_symbol": parameters[element]["unit"]["symbol"][
+                                "type"
+                            ],
+                        }
+
+                    else:
+                        day_step[case_corrected_element] = {
+                            "value": value,
+                            "description": parameters[element]["description"],
+                            "unit_name": parameters[element]["unit"]["label"],
+                            "unit_symbol": parameters[element]["unit"]["symbol"][
+                                "type"
+                            ],
+                        }
                 elif element.startswith("night"):
                     trimmed_element = element.replace("night", "")
                     case_corrected_element = (
                         trimmed_element[0].lower() + trimmed_element[1:]
                     )
-                    night_step[case_corrected_element] = {
-                        "value": value,
-                        "description": parameters[element]["description"],
-                        "unit_name": parameters[element]["unit"]["label"],
-                        "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
-                    }
+
+                    if (
+                        case_corrected_element == "significantWeatherCode"
+                        and self.convert_weather_code
+                    ):
+                        night_step[case_corrected_element] = {
+                            "value": WEATHER_CODES[str(value)],
+                            "description": parameters[element]["description"],
+                            "unit_name": parameters[element]["unit"]["label"],
+                            "unit_symbol": parameters[element]["unit"]["symbol"][
+                                "type"
+                            ],
+                        }
+
+                    else:
+                        night_step[case_corrected_element] = {
+                            "value": value,
+                            "description": parameters[element]["description"],
+                            "unit_name": parameters[element]["unit"]["label"],
+                            "unit_symbol": parameters[element]["unit"]["symbol"][
+                                "type"
+                            ],
+                        }
                 elif element == "maxUvIndex":
                     day_step[element] = {
                         "value": value,
@@ -260,7 +305,7 @@ class Forecast:
                     forecast["time"], "%Y-%m-%dT%H:%M%z"
                 )
 
-            elif element == "significantWeatherCode":
+            elif element == "significantWeatherCode" and self.convert_weather_code:
                 timestep[element] = {
                     "value": WEATHER_CODES[str(value)],
                     "description": parameters[element]["description"],
