@@ -1,6 +1,6 @@
-# See https://www.metoffice.gov.uk/services/data/datapoint/code-definitions for definitions
+# See https://datahub.metoffice.gov.uk/support/faqs for definitions
 WEATHER_CODES = {
-    "-1": "Trace rain",
+    "NA": "Not available",
     "0": "Clear night",
     "1": "Sunny day",
     "2": "Partly cloudy",

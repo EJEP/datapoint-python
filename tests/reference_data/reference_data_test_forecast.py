@@ -112,6 +112,118 @@ EXPECTED_FIRST_HOURLY_TIMESTEP = {
     },
 }
 
+EXPECTED_FIRST_HOURLY_TIMESTEP_RAW_WEATHER_CODE = {
+    "time": datetime.datetime(2024, 2, 15, 19, 0, tzinfo=datetime.timezone.utc),
+    "screenTemperature": {
+        "value": 11.0,
+        "description": "Screen Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "maxScreenAirTemp": {
+        "value": 11.55,
+        "description": "Maximum Screen Air Temperature Over Previous Hour",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "minScreenAirTemp": {
+        "value": 10.98,
+        "description": "Minimum Screen Air Temperature Over Previous Hour",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "screenDewPointTemperature": {
+        "value": 8.94,
+        "description": "Screen Dew Point Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "feelsLikeTemperature": {
+        "value": 10.87,
+        "description": "Feels Like Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "windSpeed10m": {
+        "value": 1.18,
+        "description": "10m Wind Speed",
+        "unit_name": "metres per second",
+        "unit_symbol": "m/s",
+    },
+    "windDirectionFrom10m": {
+        "value": 180,
+        "description": "10m Wind From Direction",
+        "unit_name": "degrees",
+        "unit_symbol": "deg",
+    },
+    "windGustSpeed10m": {
+        "value": 6.69,
+        "description": "10m Wind Gust Speed",
+        "unit_name": "metres per second",
+        "unit_symbol": "m/s",
+    },
+    "max10mWindGust": {
+        "value": 8.92,
+        "description": "Maximum 10m Wind Gust Speed Over Previous Hour",
+        "unit_name": "metres per second",
+        "unit_symbol": "m/s",
+    },
+    "visibility": {
+        "value": 19174,
+        "description": "Visibility",
+        "unit_name": "metres",
+        "unit_symbol": "m",
+    },
+    "screenRelativeHumidity": {
+        "value": 86.99,
+        "description": "Screen Relative Humidity",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "mslp": {
+        "value": 100660,
+        "description": "Mean Sea Level Pressure",
+        "unit_name": "pascals",
+        "unit_symbol": "Pa",
+    },
+    "uvIndex": {
+        "value": 0,
+        "description": "UV Index",
+        "unit_name": "dimensionless",
+        "unit_symbol": "1",
+    },
+    "significantWeatherCode": {
+        "value": 2,
+        "description": "Significant Weather Code",
+        "unit_name": "dimensionless",
+        "unit_symbol": "1",
+    },
+    "precipitationRate": {
+        "value": 0.0,
+        "description": "Precipitation Rate",
+        "unit_name": "millimetres per hour",
+        "unit_symbol": "mm/h",
+    },
+    "totalPrecipAmount": {
+        "value": 0.0,
+        "description": "Total Precipitation Amount Over Previous Hour",
+        "unit_name": "millimetres",
+        "unit_symbol": "mm",
+    },
+    "totalSnowAmount": {
+        "value": 0,
+        "description": "Total Snow Amount Over Previous Hour",
+        "unit_name": "millimetres",
+        "unit_symbol": "mm",
+    },
+    "probOfPrecipitation": {
+        "value": 4,
+        "description": "Probability of Precipitation",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+}
+
 EXPECTED_AT_DATETIME_HOURLY_TIMESTEP = {
     "time": datetime.datetime(2024, 2, 16, 19, 0, tzinfo=datetime.timezone.utc),
     "screenTemperature": {
@@ -344,6 +456,130 @@ EXPECTED_FIRST_DAILY_TIMESTEP = {
         "unit_symbol": "Pa",
     },
     "significantWeatherCode": {
+        "value": "Cloudy",
+        "description": "Night Significant Weather Code",
+        "unit_name": "dimensionless",
+        "unit_symbol": "1",
+    },
+    "minScreenTemperature": {
+        "value": 5.32,
+        "description": "Night Minimum Screen Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "upperBoundMinTemp": {
+        "value": 9.17,
+        "description": "Upper Bound on Night Minimum Screen Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "lowerBoundMinTemp": {
+        "value": 3.56,
+        "description": "Lower Bound on Night Minimum Screen Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "minFeelsLikeTemp": {
+        "value": 6.27,
+        "description": "Night Minimum Feels Like Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "upperBoundMinFeelsLikeTemp": {
+        "value": 8.74,
+        "description": "Upper Bound on Night Minimum Feels Like Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "lowerBoundMinFeelsLikeTemp": {
+        "value": 2.75,
+        "description": "Lower Bound on Night Minimum Feels Like Air Temperature",
+        "unit_name": "degrees Celsius",
+        "unit_symbol": "Cel",
+    },
+    "probabilityOfPrecipitation": {
+        "value": 11,
+        "description": "Probability of Precipitation During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfSnow": {
+        "value": 0,
+        "description": "Probability of Snow During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfHeavySnow": {
+        "value": 0,
+        "description": "Probability of Heavy Snow During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfRain": {
+        "value": 10,
+        "description": "Probability of Rain During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfHeavyRain": {
+        "value": 0,
+        "description": "Probability of Heavy Rain During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfHail": {
+        "value": 0,
+        "description": "Probability of Hail During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "probabilityOfSferics": {
+        "value": 0,
+        "description": "Probability of Sferics During The Night",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+}
+
+EXPECTED_FIRST_DAILY_TIMESTEP_RAW_WEATHER_CODE = {
+    "time": datetime.datetime(2024, 2, 16, 0, 0, tzinfo=datetime.timezone.utc),
+    "10MWindSpeed": {
+        "value": 1.39,
+        "description": "10m Wind Speed at Local Midnight",
+        "unit_name": "metres per second",
+        "unit_symbol": "m/s",
+    },
+    "10MWindDirection": {
+        "value": 243,
+        "description": "10m Wind Direction at Local Midnight",
+        "unit_name": "degrees",
+        "unit_symbol": "deg",
+    },
+    "10MWindGust": {
+        "value": 7.2,
+        "description": "10m Wind Gust Speed at Local Midnight",
+        "unit_name": "metres per second",
+        "unit_symbol": "m/s",
+    },
+    "visibility": {
+        "value": 27712,
+        "description": "Visibility at Local Midnight",
+        "unit_name": "metres",
+        "unit_symbol": "m",
+    },
+    "relativeHumidity": {
+        "value": 80.91,
+        "description": "Relative Humidity at Local Midnight",
+        "unit_name": "percentage",
+        "unit_symbol": "%",
+    },
+    "mslp": {
+        "value": 102640,
+        "description": "Mean Sea Level Pressure at Local Midnight",
+        "unit_name": "pascals",
+        "unit_symbol": "Pa",
+    },
+    "significantWeatherCode": {
         "value": 7,
         "description": "Night Significant Weather Code",
         "unit_name": "dimensionless",
@@ -468,7 +704,7 @@ EXPECTED_AT_DATETIME_DAILY_TIMESTEP = {
         "unit_symbol": "Pa",
     },
     "significantWeatherCode": {
-        "value": 15,
+        "value": "Heavy rain",
         "description": "Night Significant Weather Code",
         "unit_name": "dimensionless",
         "unit_symbol": "1",
@@ -597,7 +833,7 @@ EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP = {
         "unit_symbol": "1",
     },
     "significantWeatherCode": {
-        "value": 10,
+        "value": "Light rain shower",
         "description": "Day Significant Weather Code",
         "unit_name": "dimensionless",
         "unit_symbol": "1",

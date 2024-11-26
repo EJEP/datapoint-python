@@ -33,17 +33,29 @@ def load_three_hourly_json():
 
 @pytest.fixture
 def daily_forecast(load_daily_json):
-    return Forecast.Forecast("daily", load_daily_json)
+    return Forecast.Forecast("daily", load_daily_json, convert_weather_code=True)
+
+
+@pytest.fixture
+def daily_forecast_raw_weather_code(load_daily_json):
+    return Forecast.Forecast("daily", load_daily_json, convert_weather_code=False)
 
 
 @pytest.fixture
 def hourly_forecast(load_hourly_json):
-    return Forecast.Forecast("hourly", load_hourly_json)
+    return Forecast.Forecast("hourly", load_hourly_json, convert_weather_code=True)
+
+
+@pytest.fixture
+def hourly_forecast_raw_weather_code(load_hourly_json):
+    return Forecast.Forecast("hourly", load_hourly_json, convert_weather_code=False)
 
 
 @pytest.fixture
 def three_hourly_forecast(load_three_hourly_json):
-    return Forecast.Forecast("three-hourly", load_three_hourly_json)
+    return Forecast.Forecast(
+        "three-hourly", load_three_hourly_json, convert_weather_code=True
+    )
 
 
 @pytest.fixture
@@ -66,6 +78,11 @@ def expected_first_hourly_timestep():
 
 
 @pytest.fixture
+def expected_first_hourly_timestep_raw_weather_code():
+    return reference_data_test_forecast.EXPECTED_FIRST_HOURLY_TIMESTEP_RAW_WEATHER_CODE
+
+
+@pytest.fixture
 def expected_at_datetime_hourly_timestep():
     return reference_data_test_forecast.EXPECTED_AT_DATETIME_HOURLY_TIMESTEP
 
@@ -78,6 +95,11 @@ def expected_at_datetime_hourly_final_timestep():
 @pytest.fixture
 def expected_first_daily_timestep():
     return reference_data_test_forecast.EXPECTED_FIRST_DAILY_TIMESTEP
+
+
+@pytest.fixture
+def expected_first_daily_timestep_raw_weather_code():
+    return reference_data_test_forecast.EXPECTED_FIRST_DAILY_TIMESTEP_RAW_WEATHER_CODE
 
 
 @pytest.fixture
@@ -160,6 +182,16 @@ class TestHourlyForecast:
         with pytest.raises(APIException):
             hourly_forecast.at_datetime(datetime.datetime(2024, 2, 17, 19, 35))
 
+    def test_forecast_first_timestep_raw_weather_code(
+        self,
+        hourly_forecast_raw_weather_code,
+        expected_first_hourly_timestep_raw_weather_code,
+    ):
+        assert (
+            hourly_forecast_raw_weather_code.timesteps[0]
+            == expected_first_hourly_timestep_raw_weather_code
+        )
+
 
 class TestDailyForecast:
     def test_forecast_frequency(self, daily_forecast):
@@ -211,6 +243,16 @@ class TestDailyForecast:
     def test_requested_time_too_late(self, daily_forecast):
         with pytest.raises(APIException):
             daily_forecast.at_datetime(datetime.datetime(2024, 2, 23, 19))
+
+    def test_forecast_fist_timestep__raw_weather_code(
+        self,
+        daily_forecast_raw_weather_code,
+        expected_first_daily_timestep_raw_weather_code,
+    ):
+        assert (
+            daily_forecast_raw_weather_code.timesteps[0]
+            == expected_first_daily_timestep_raw_weather_code
+        )
 
 
 class TestThreeHourlyForecast:
