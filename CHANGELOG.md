@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Correct elements to camelCase for daily forecasts.
+
 ## [0.10.0] - 2024-11-17
 
 + Modernise packaging and build tooling and infrastructure.
