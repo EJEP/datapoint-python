@@ -18,7 +18,7 @@ class MockResponseHourly:
 
 
 @pytest.fixture
-def mock_response_hourly(monkeypatch):
+def _mock_response_hourly(monkeypatch):
     def mock_get(*args, **kwargs):
         return MockResponseHourly()
 
@@ -26,7 +26,7 @@ def mock_response_hourly(monkeypatch):
 
 
 @pytest.fixture
-def hourly_forecast(mock_response_hourly):
+def hourly_forecast(_mock_response_hourly):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
     f = m.get_forecast(50.9992, 0.0154, frequency="hourly", convert_weather_code=True)
     return f
@@ -50,7 +50,7 @@ class MockResponseThreeHourly:
 
 
 @pytest.fixture
-def mock_response_three_hourly(monkeypatch):
+def _mock_response_three_hourly(monkeypatch):
     def mock_get(*args, **kwargs):
         return MockResponseThreeHourly()
 
@@ -58,7 +58,7 @@ def mock_response_three_hourly(monkeypatch):
 
 
 @pytest.fixture
-def three_hourly_forecast(mock_response_three_hourly):
+def three_hourly_forecast(_mock_response_three_hourly):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
     f = m.get_forecast(
         50.9992, 0.0154, frequency="three-hourly", convert_weather_code=True
@@ -84,7 +84,7 @@ class MockResponseDaily:
 
 
 @pytest.fixture
-def mock_response_daily(monkeypatch):
+def _mock_response_daily(monkeypatch):
     def mock_get(*args, **kwargs):
         return MockResponseDaily()
 
@@ -92,7 +92,7 @@ def mock_response_daily(monkeypatch):
 
 
 @pytest.fixture
-def daily_forecast(mock_response_daily):
+def daily_forecast(_mock_response_daily):
     m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
     f = m.get_forecast(50.9992, 0.0154, frequency="daily", convert_weather_code=True)
     return f
