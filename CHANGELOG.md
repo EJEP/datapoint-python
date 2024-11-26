@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.11.0] - 2024-11-26
+
 + Correct elements to camelCase for daily forecasts.
 + Add option to convert numeric significant weather code to string description
 
