@@ -177,28 +177,44 @@ class Forecast:
 
             for element, value in forecast.items():
                 if element.startswith("midday"):
-                    day_step[element.replace("midday", "")] = {
+                    trimmed_element = element.replace("midday", "")
+                    case_corrected_element = (
+                        trimmed_element[0].lower() + trimmed_element[1:]
+                    )
+                    day_step[case_corrected_element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
                         "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
                     }
                 elif element.startswith("midnight"):
-                    night_step[element.replace("midnight", "")] = {
+                    trimmed_element = element.replace("midnight", "")
+                    case_corrected_element = (
+                        trimmed_element[0].lower() + trimmed_element[1:]
+                    )
+                    night_step[case_corrected_element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
                         "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
                     }
                 elif element.startswith("day"):
-                    day_step[element.replace("day", "")] = {
+                    trimmed_element = element.replace("day", "")
+                    case_corrected_element = (
+                        trimmed_element[0].lower() + trimmed_element[1:]
+                    )
+                    day_step[case_corrected_element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
                         "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
                     }
                 elif element.startswith("night"):
-                    night_step[element.replace("night", "")] = {
+                    trimmed_element = element.replace("night", "")
+                    case_corrected_element = (
+                        trimmed_element[0].lower() + trimmed_element[1:]
+                    )
+                    night_step[case_corrected_element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
