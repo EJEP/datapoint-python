@@ -4,8 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.12.0] - 2024-11-27
+
 + Use one timestep per day for daily forecasts.
-+ Add twice-daily forecast option to split daily forecasts into day and night
++ Add twice-daily forecast option to split daily forecasts into day and night.
++ No longer strip 'day', 'night', 'midday', 'midnight' from element names in daily and twice-daily forecasts.
 
 ## [0.11.0] - 2024-11-26
 
