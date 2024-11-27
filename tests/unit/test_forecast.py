@@ -42,6 +42,16 @@ def daily_forecast_raw_weather_code(load_daily_json):
 
 
 @pytest.fixture
+def twice_daily_forecast(load_daily_json):
+    return Forecast.Forecast("twice-daily", load_daily_json, convert_weather_code=True)
+
+
+@pytest.fixture
+def twice_daily_forecast_raw_weather_code(load_daily_json):
+    return Forecast.Forecast("twice-daily", load_daily_json, convert_weather_code=False)
+
+
+@pytest.fixture
 def hourly_forecast(load_hourly_json):
     return Forecast.Forecast("hourly", load_hourly_json, convert_weather_code=True)
 
@@ -110,6 +120,28 @@ def expected_at_datetime_daily_timestep():
 @pytest.fixture
 def expected_at_datetime_daily_final_timestep():
     return reference_data_test_forecast.EXPECTED_AT_DATETIME_DAILY_FINAL_TIMESTEP
+
+
+@pytest.fixture
+def expected_first_twice_daily_timestep():
+    return reference_data_test_forecast.EXPECTED_FIRST_TWICE_DAILY_TIMESTEP
+
+
+@pytest.fixture
+def expected_first_twice_daily_timestep_raw_weather_code():
+    return (
+        reference_data_test_forecast.EXPECTED_FIRST_TWICE_DAILY_TIMESTEP_RAW_WEATHER_CODE
+    )
+
+
+@pytest.fixture
+def expected_at_datetime_twice_daily_timestep():
+    return reference_data_test_forecast.EXPECTED_AT_DATETIME_TWICE_DAILY_TIMESTEP
+
+
+@pytest.fixture
+def expected_at_datetime_twice_daily_final_timestep():
+    return reference_data_test_forecast.EXPECTED_AT_DATETIME_TWICE_DAILY_FINAL_TIMESTEP
 
 
 @pytest.fixture
@@ -217,14 +249,15 @@ class TestDailyForecast:
     ):
         assert daily_forecast.timesteps[0] == expected_first_daily_timestep
 
-    def test_build_timesteps_from_daily(
+    # Need a new test_build_timestep function here
+    def test_build_timesteps(
         self, daily_forecast, load_daily_json, expected_first_daily_timestep
     ):
-        timesteps = daily_forecast._build_timesteps_from_daily(
-            load_daily_json["features"][0]["properties"]["timeSeries"],
+        timestep = daily_forecast._build_timestep(
+            load_daily_json["features"][0]["properties"]["timeSeries"][0],
             load_daily_json["parameters"][0],
         )
-        assert timesteps[0] == expected_first_daily_timestep
+        assert timestep == expected_first_daily_timestep
 
     def test_at_datetime(self, daily_forecast, expected_at_datetime_daily_timestep):
         ts = daily_forecast.at_datetime(datetime.datetime(2024, 2, 16, 19, 15))
@@ -233,7 +266,7 @@ class TestDailyForecast:
     def test_at_datetime_final_timestamp(
         self, daily_forecast, expected_at_datetime_daily_final_timestep
     ):
-        ts = daily_forecast.at_datetime(datetime.datetime(2024, 2, 23, 17))
+        ts = daily_forecast.at_datetime(datetime.datetime(2024, 2, 17, 17))
         assert ts == expected_at_datetime_daily_final_timestep
 
     def test_requested_time_too_early(self, daily_forecast):
@@ -244,7 +277,7 @@ class TestDailyForecast:
         with pytest.raises(APIException):
             daily_forecast.at_datetime(datetime.datetime(2024, 2, 23, 19))
 
-    def test_forecast_fist_timestep__raw_weather_code(
+    def test_forecast_first_timestep_raw_weather_code(
         self,
         daily_forecast_raw_weather_code,
         expected_first_daily_timestep_raw_weather_code,
@@ -252,6 +285,72 @@ class TestDailyForecast:
         assert (
             daily_forecast_raw_weather_code.timesteps[0]
             == expected_first_daily_timestep_raw_weather_code
+        )
+
+
+class TestTwiceDailyForecast:
+    def test_forecast_frequency(self, twice_daily_forecast):
+        assert twice_daily_forecast.frequency == "twice-daily"
+
+    def test_forecast_location_name(self, twice_daily_forecast):
+        assert twice_daily_forecast.name == "Sheffield Park"
+
+    def test_forecast_location_latitude(self, twice_daily_forecast):
+        assert twice_daily_forecast.forecast_latitude == 50.9992
+
+    def test_forecast_location_longitude(self, twice_daily_forecast):
+        assert twice_daily_forecast.forecast_longitude == 0.0154
+
+    def test_forecast_distance_from_request(self, twice_daily_forecast):
+        assert twice_daily_forecast.distance_from_requested_location == 1081.5349
+
+    def test_forecast_elevation(self, twice_daily_forecast):
+        assert twice_daily_forecast.elevation == 37.0
+
+    def test_forecast_first_timestep(
+        self, twice_daily_forecast, expected_first_twice_daily_timestep
+    ):
+        assert twice_daily_forecast.timesteps[0] == expected_first_twice_daily_timestep
+
+    # twice-daily forecasts take daily data from DataHub
+    def test_build_twice_daily_timesteps(
+        self, twice_daily_forecast, load_daily_json, expected_first_twice_daily_timestep
+    ):
+        timesteps = twice_daily_forecast._build_twice_daily_timesteps(
+            load_daily_json["features"][0]["properties"]["timeSeries"],
+            load_daily_json["parameters"][0],
+        )
+        assert timesteps[0] == expected_first_twice_daily_timestep
+
+    def test_at_datetime(
+        self, twice_daily_forecast, expected_at_datetime_twice_daily_timestep
+    ):
+        ts = twice_daily_forecast.at_datetime(datetime.datetime(2024, 2, 16, 19, 15))
+        assert ts == expected_at_datetime_twice_daily_timestep
+
+    def test_at_datetime_final_timestep(
+        self, twice_daily_forecast, expected_at_datetime_twice_daily_final_timestep
+    ):
+        ts = twice_daily_forecast.at_datetime(datetime.datetime(2024, 2, 17, 17))
+        assert ts == expected_at_datetime_twice_daily_final_timestep
+
+    def test_requested_time_too_early(self, twice_daily_forecast):
+        with pytest.raises(APIException):
+            twice_daily_forecast.at_datetime(datetime.datetime(2024, 2, 15, 17))
+
+    def test_requested_time_too_late(self, twice_daily_forecast):
+        with pytest.raises(APIException):
+            twice_daily_forecast.at_datetime(datetime.datetime(2024, 2, 23, 19))
+
+    def test_forecast_first_timestep_raw_weather_code(
+        self,
+        twice_daily_forecast_raw_weather_code,
+        expected_first_twice_daily_timestep_raw_weather_code,
+    ):
+        print(twice_daily_forecast_raw_weather_code.timesteps[0])
+        assert (
+            twice_daily_forecast_raw_weather_code.timesteps[0]
+            == expected_first_twice_daily_timestep_raw_weather_code
         )
 
 

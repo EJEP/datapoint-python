@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Use one timestep per day for daily forecasts.
++ Add twice-daily forecast option to split daily forecasts into day and night
+
 ## [0.11.0] - 2024-11-26
 
 + Correct elements to camelCase for daily forecasts.

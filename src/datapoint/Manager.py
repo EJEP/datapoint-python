@@ -210,11 +210,15 @@ class Manager:
         self, latitude, longitude, frequency="daily", convert_weather_code=True
     ):
         """
-        Get a forecast for the provided site
+        Get a forecast for the provided site. Three frequencies are supported
+        by DataHub: hourly, three-hourly and daily. The 'twice-daily' option is
+        for convenience and splits a daily forecast into two steps, one for day
+        and one for night.
 
         :parameter latitude: Latitude of forecast location
         :parameter longitude: Longitude of forecast location
-        :parameter frequency: Forecast frequency. One of 'hourly', 'three-hourly, 'daily'
+        :parameter frequency: Forecast frequency. One of 'hourly',
+            'three-hourly,'twice-daily', 'daily'
         :parameter convert_weather_code: Convert numeric weather codes to string description
         :type latitude: float
         :type longitude: float
@@ -224,9 +228,10 @@ class Manager:
         :return: :class: `Forecast <Forecast>` object
         :rtype: datapoint.Forecast
         """
-        if frequency not in ["hourly", "three-hourly", "daily"]:
+        if frequency not in ["hourly", "three-hourly", "twice-daily", "daily"]:
             raise ValueError(
-                "frequency must be set to one of 'hourly', 'three-hourly', 'daily'"
+                "frequency must be set to one of 'hourly', 'three-hourly', "
+                "'twice-daily', 'daily'"
             )
         data = self.__call_api(latitude, longitude, frequency)
         forecast = Forecast(
