@@ -99,8 +99,22 @@ def daily_forecast(_mock_response_daily):
 
 
 @pytest.fixture
+def twice_daily_forecast(_mock_response_daily):
+    m = Manager(api_key="aaaaaaaaaaaaaaaaaaaaaaaaa")
+    f = m.get_forecast(
+        50.9992, 0.0154, frequency="twice-daily", convert_weather_code=True
+    )
+    return f
+
+
+@pytest.fixture
 def expected_first_daily_timestep():
     return reference_data_test_forecast.EXPECTED_FIRST_DAILY_TIMESTEP
+
+
+@pytest.fixture
+def expected_first_twice_daily_timestep():
+    return reference_data_test_forecast.EXPECTED_FIRST_TWICE_DAILY_TIMESTEP
 
 
 class TestHourly:
@@ -178,3 +192,28 @@ class TestDaily:
         self, daily_forecast, expected_first_daily_timestep
     ):
         assert daily_forecast.timesteps[0] == expected_first_daily_timestep
+
+
+class TestTwiceDaily:
+    def test_forecast_frequency(self, twice_daily_forecast):
+        assert twice_daily_forecast.frequency == "twice-daily"
+
+    def test_forecast_location_name(self, twice_daily_forecast):
+        assert twice_daily_forecast.name == "Sheffield Park"
+
+    def test_forecast_location_latitude(self, twice_daily_forecast):
+        assert twice_daily_forecast.forecast_latitude == 50.9992
+
+    def test_forecast_location_longitude(self, twice_daily_forecast):
+        assert twice_daily_forecast.forecast_longitude == 0.0154
+
+    def test_forecast_distance_from_request(self, twice_daily_forecast):
+        assert twice_daily_forecast.distance_from_requested_location == 1081.5349
+
+    def test_forecast_elevation(self, twice_daily_forecast):
+        assert twice_daily_forecast.elevation == 37.0
+
+    def test_forecast_first_timestep(
+        self, twice_daily_forecast, expected_first_twice_daily_timestep
+    ):
+        assert twice_daily_forecast.timesteps[0] == expected_first_twice_daily_timestep

@@ -108,7 +108,8 @@ class Forecast:
 
     def __init__(self, frequency, api_data, convert_weather_code):
         """
-        :param frequency: Frequency of forecast: 'hourly', 'three-hourly' or 'daily'
+        :param frequency: Frequency of forecast: 'hourly', 'three-hourly',
+            'twice-daily', 'daily'
         :param api_data: Data returned from API call
         :param: convert_weather_code: Convert numeric weather codes to string description
         :type frequency: string
@@ -149,14 +150,14 @@ class Forecast:
 
         forecasts = api_data["features"][0]["properties"]["timeSeries"]
         parameters = api_data["parameters"][0]
-        if frequency == "daily":
-            self.timesteps = self._build_timesteps_from_daily(forecasts, parameters)
+        if frequency == "twice-daily":
+            self.timesteps = self._build_twice_daily_timesteps(forecasts, parameters)
         else:
             self.timesteps = []
             for forecast in forecasts:
                 self.timesteps.append(self._build_timestep(forecast, parameters))
 
-    def _build_timesteps_from_daily(self, forecasts, parameters):
+    def _build_twice_daily_timesteps(self, forecasts, parameters):
         """Build individual timesteps from forecasts and metadata
 
         Take the forecast data from DataHub and combine with unit information
@@ -188,38 +189,25 @@ class Forecast:
 
             for element, value in forecast.items():
                 if element.startswith("midday"):
-                    trimmed_element = element.replace("midday", "")
-                    case_corrected_element = (
-                        trimmed_element[0].lower() + trimmed_element[1:]
-                    )
-                    day_step[case_corrected_element] = {
+                    day_step[element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
                         "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
                     }
                 elif element.startswith("midnight"):
-                    trimmed_element = element.replace("midnight", "")
-                    case_corrected_element = (
-                        trimmed_element[0].lower() + trimmed_element[1:]
-                    )
-                    night_step[case_corrected_element] = {
+                    night_step[element] = {
                         "value": value,
                         "description": parameters[element]["description"],
                         "unit_name": parameters[element]["unit"]["label"],
                         "unit_symbol": parameters[element]["unit"]["symbol"]["type"],
                     }
                 elif element.startswith("day"):
-                    trimmed_element = element.replace("day", "")
-                    case_corrected_element = (
-                        trimmed_element[0].lower() + trimmed_element[1:]
-                    )
-
                     if (
-                        case_corrected_element == "significantWeatherCode"
+                        element == "daySignificantWeatherCode"
                         and self.convert_weather_code
                     ):
-                        day_step[case_corrected_element] = {
+                        day_step[element] = {
                             "value": WEATHER_CODES[str(value)],
                             "description": parameters[element]["description"],
                             "unit_name": parameters[element]["unit"]["label"],
@@ -229,7 +217,7 @@ class Forecast:
                         }
 
                     else:
-                        day_step[case_corrected_element] = {
+                        day_step[element] = {
                             "value": value,
                             "description": parameters[element]["description"],
                             "unit_name": parameters[element]["unit"]["label"],
@@ -238,16 +226,11 @@ class Forecast:
                             ],
                         }
                 elif element.startswith("night"):
-                    trimmed_element = element.replace("night", "")
-                    case_corrected_element = (
-                        trimmed_element[0].lower() + trimmed_element[1:]
-                    )
-
                     if (
-                        case_corrected_element == "significantWeatherCode"
+                        element == "nightSignificantWeatherCode"
                         and self.convert_weather_code
                     ):
-                        night_step[case_corrected_element] = {
+                        night_step[element] = {
                             "value": WEATHER_CODES[str(value)],
                             "description": parameters[element]["description"],
                             "unit_name": parameters[element]["unit"]["label"],
@@ -257,7 +240,7 @@ class Forecast:
                         }
 
                     else:
-                        night_step[case_corrected_element] = {
+                        night_step[element] = {
                             "value": value,
                             "description": parameters[element]["description"],
                             "unit_name": parameters[element]["unit"]["label"],
@@ -305,7 +288,14 @@ class Forecast:
                     forecast["time"], "%Y-%m-%dT%H:%M%z"
                 )
 
-            elif element == "significantWeatherCode" and self.convert_weather_code:
+            elif (
+                element
+                in (
+                    "significantWeatherCode",
+                    "daySignificantWeatherCode",
+                    "nightSignificantWeatherCode",
+                )
+            ) and self.convert_weather_code:
                 timestep[element] = {
                     "value": WEATHER_CODES[str(value)],
                     "description": parameters[element]["description"],
@@ -366,6 +356,19 @@ class Forecast:
 
             raise APIException(err_str)
 
+        # If we have a twice-daily forecast, check that the requested time is
+        # at most 6 hours before the first datetime we have a forecast for.
+        if self.frequency == "twice-daily" and target < self.timesteps[0][
+            "time"
+        ] - datetime.timedelta(hours=6):
+            err_str = (
+                "There is no forecast available for the requested time. "
+                "The requested time is more than 6 hours before the first "
+                "available forecast."
+            )
+
+            raise APIException(err_str)
+
         # If we have an hourly forecast, check that the requested time is at
         # most 30 minutes after the final datetime we have a forecast for
         if self.frequency == "hourly" and target > (
@@ -395,6 +398,19 @@ class Forecast:
         # If we have a daily forecast, then the target must be within 6 hours
         # of the last timestep
         if self.frequency == "daily" and target > (
+            self.timesteps[-1]["time"] + datetime.timedelta(hours=6)
+        ):
+            err_str = (
+                "There is no forecast available for the requested time. The "
+                "requested time is more than 6 hours after the first available "
+                "forecast."
+            )
+
+            raise APIException(err_str)
+
+        # If we have a twice-daily forecast, then the target must be within 6 hours
+        # of the last timestep
+        if self.frequency == "twice-daily" and target > (
             self.timesteps[-1]["time"] + datetime.timedelta(hours=6)
         ):
             err_str = (
