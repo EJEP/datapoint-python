@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
++ Fix bug in API request when twice-daily forecast was used.
+
 ## [0.12.0] - 2024-11-27
 
 + Use one timestep per day for daily forecasts.

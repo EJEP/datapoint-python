@@ -178,7 +178,11 @@ class Manager:
             "accept": "application/json",
             "apikey": self.api_key,
         }
-        request_url = API_URL + frequency
+
+        if frequency == "twice-daily":
+            request_url = API_URL + "daily"
+        else:
+            request_url = API_URL + frequency
 
         # Add a timeout to the request.
         # The value of 1 second is based on attempting 100 connections to
