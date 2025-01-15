@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## [0.12.1] - 2024-11-28
+## [0.13.0] - 2025-01-15
 
 + Remove python 3.8 support
 + Update GitHub location in docs
