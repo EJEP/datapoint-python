@@ -4,7 +4,7 @@ _This example checks the forecast for your current location to see if it is goin
 to rain at any stage today. If so it will suggest that you take an umbrella._
 
 ### Required Modules
- * [datapoint](https://github.com/ejep/datapoint-python)
+ * [datapoint](https://github.com/perseudonymous/datapoint-python)
 
 ## Learning Objective
 

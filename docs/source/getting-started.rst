@@ -67,5 +67,5 @@ Further Examples
 ----------------
 
 For more code examples please have a look in the `examples
-folder <https://github.com/ejep/datapoint-python/tree/master/examples>`__
+folder <https://github.com/perseudonymous/datapoint-python/tree/master/examples>`__
 in the GitHub project.

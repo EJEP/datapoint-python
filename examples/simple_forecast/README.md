@@ -4,7 +4,7 @@ _This example gets a 5 day forecast for your location and prints out
 some values from each timestep for each day._
 
 ### Required Modules
- * [datapoint](https://github.com/ejep/datapoint-python)
+ * [datapoint](https://github.com/perseudonymous/datapoint-python)
 
 ## Learning Objective
 

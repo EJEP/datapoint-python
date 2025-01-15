@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.12.1] - 2024-11-28
 
++ Remove python 3.8 support
++ Update GitHub location in docs
+
+## [0.12.1] - 2024-11-28
+
 + Fix bug in API request when twice-daily forecast was used.
 
 ## [0.12.0] - 2024-11-27

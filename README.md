@@ -7,6 +7,8 @@
 _A Python module for accessing weather data via the [Met Office](http://www.metoffice.gov.uk/)'s open data API
 known as [DataPoint](http://www.metoffice.gov.uk/datapoint)._
 
+__For personal reasons I have changed my GitHub username. The repository location has changed. The homepage link on PyPi is up-to-date__
+
 __Disclaimer: This module is in no way part of the DataPoint project/service.
 This module is intended to simplify the use of DataPoint for small Python projects (e.g school projects).
 No support for this module is provided by the Met Office and may break as the DataPoint service grows/evolves.
@@ -60,7 +62,7 @@ Example output
 London - Heavy rain
 ```
 
-See [examples directory](https://github.com/ejep/datapoint-python/tree/master/examples) for more in depth examples.
+See [examples directory](https://github.com/Perseudonymous/datapoint-python/tree/master/examples) for more in depth examples.
 
 ## Contributing changes
 
